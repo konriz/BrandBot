@@ -1,19 +1,12 @@
-/**
- * Copyright 2019-present, Facebook, Inc. All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * Messenger For Original Coast Clothing
- * https://developers.facebook.com/docs/messenger-platform/getting-started/sample-apps/original-coast-clothing
- */
+import { User } from "./user";
+import { GraphAPi } from "./graph-api";
 
-"use strict";
+export class Receive {
 
-const GraphAPi = require("./graph-api");
+  user: User;
+  webhookEvent: any;
 
-module.exports = class Receive {
-  constructor(user, webhookEvent) {
+  constructor(user: User, webhookEvent: any) {
     this.user = user;
     this.webhookEvent = webhookEvent;
   }
@@ -46,7 +39,7 @@ module.exports = class Receive {
     }
   }
 
-  handleEvent() {
+  handleEvent(event: any) {
     console.log(
       "Received event:",
       `${this.webhookEvent} for ${this.user.psid}`
@@ -59,7 +52,7 @@ module.exports = class Receive {
     return response;
   }
 
-  handlePayload(payload) {
+  handlePayload(payload: any) {
     console.log("Received Payload:", `${payload} for ${this.user.psid}`);
 
     // Log CTA event in FBA
@@ -72,7 +65,7 @@ module.exports = class Receive {
     return response;
   }
 
-  sendMessage(response, delay = 0) {
+  sendMessage(response: any, delay = 0) {
     // Check if there is delay in the response
     if ("delay" in response) {
       delay = response["delay"];
