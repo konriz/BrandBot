@@ -9,6 +9,7 @@ const config_1 = require("./services/config");
 const graph_api_1 = require("./services/graph-api");
 const user_1 = require("./services/user");
 const receive_1 = require("./services/receive");
+const profile_1 = require("./services/profile");
 const app = express_1.default();
 var users = {};
 app.use(body_parser_1.urlencoded({
@@ -74,15 +75,13 @@ app.post("/webhook", (req, res) => {
                 })
                     .finally(() => {
                     users[senderPsid] = user;
-                    i18n.setLocale(user.locale);
-                    console.log("New Profile PSID:", senderPsid, "with locale:", i18n.getLocale());
+                    console.log("New Profile PSID:", senderPsid);
                     let receiveMessage = new receive_1.Receive(users[senderPsid], webhookEvent);
                     return receiveMessage.handleMessage();
                 });
             }
             else {
-                i18n.setLocale(users[senderPsid].locale);
-                console.log("Profile already exists PSID:", senderPsid, "with locale:", i18n.getLocale());
+                console.log("Profile already exists PSID:", senderPsid);
                 let receiveMessage = new receive_1.Receive(users[senderPsid], webhookEvent);
                 return receiveMessage.handleMessage();
             }
@@ -100,17 +99,16 @@ app.get("/profile", (req, res) => {
     if (!config_1.config.webhookUrl.startsWith("https://")) {
         res.status(200).send("ERROR - Need a proper API_URL in the .env file");
     }
-    var Profile = require("./services/profile.js");
-    Profile = new Profile();
+    let profile = new profile_1.Profile();
     // Checks if a token and mode is in the query string of the request
     if (mode && token) {
         if (token === config_1.config.verifyToken) {
             if (mode == "webhook" || mode == "all") {
-                Profile.setWebhook();
+                profile.setWebhook();
                 res.write(`<p>Set app ${config_1.config.appId} call to ${config_1.config.webhookUrl}</p>`);
             }
             if (mode == "profile" || mode == "all") {
-                Profile.setThread();
+                profile.setThread();
                 res.write(`<p>Set Messenger Profile of Page ${config_1.config.pageId}</p>`);
             }
             res.status(200).end();

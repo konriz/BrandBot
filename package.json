@@ -4,8 +4,7 @@
   "description": "BrandBot",
   "main": "src/app.js",
   "scripts": {
-    "start": "node src/app.js",
-    "start-ts": "node dist/app.js",
+    "start": "node dist/app.js",
     "lint": "eslint app.js services/**",
     "build-ts": "tsc",
     "watch-ts": "tsc -w",

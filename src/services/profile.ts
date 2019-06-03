@@ -2,6 +2,11 @@ import { GraphAPi } from "./graph-api";
 import { config } from "./config";
 
 export class Profile {
+
+  constructor() {
+    
+  }
+
   setWebhook() {
     GraphAPi.callSubscriptionsAPI();
     GraphAPi.callSubscribedApps();
@@ -55,9 +60,7 @@ export class Profile {
   getGreetingText() {
     let greeting = {
       locale: "default",
-      text: i18n.__("profile.greeting", {
-        user_first_name: "{{user_first_name}}"
-      })
+      text: "Hello!"
     };
 
     console.log(greeting);
@@ -71,7 +74,7 @@ export class Profile {
       call_to_actions: [
         {
           type: "web_url",
-          title: i18n.__("menu.shop"),
+          title: "Main",
           url: config.shopUrl,
           webview_height_ratio: "full"
         }

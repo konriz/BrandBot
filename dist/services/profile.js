@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const graph_api_1 = require("./graph-api");
 const config_1 = require("./config");
 class Profile {
+    constructor() {
+    }
     setWebhook() {
         graph_api_1.GraphAPi.callSubscriptionsAPI();
         graph_api_1.GraphAPi.callSubscribedApps();
@@ -43,9 +45,7 @@ class Profile {
     getGreetingText() {
         let greeting = {
             locale: "default",
-            text: i18n.__("profile.greeting", {
-                user_first_name: "{{user_first_name}}"
-            })
+            text: "Hello!"
         };
         console.log(greeting);
         return greeting;
@@ -57,7 +57,7 @@ class Profile {
             call_to_actions: [
                 {
                     type: "web_url",
-                    title: i18n.__("menu.shop"),
+                    title: "Main",
                     url: config_1.config.shopUrl,
                     webview_height_ratio: "full"
                 }

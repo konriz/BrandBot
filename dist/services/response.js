@@ -95,17 +95,15 @@ class Response {
         return response;
     }
     static genNuxMessage(user) {
-        let welcome = this.genText(i18n.__("get_started.welcome", {
-            userFirstName: user.firstName
-        }));
-        let guide = this.genText(i18n.__("get_started.guidance"));
-        let curation = this.genQuickReply(i18n.__("get_started.help"), [
+        let welcome = this.genText("Welcome");
+        let guide = this.genText("Guide");
+        let curation = this.genQuickReply("Hi", [
             {
-                title: i18n.__("menu.suggestion"),
+                title: "Sig",
                 payload: "CURATION"
             },
             {
-                title: i18n.__("menu.help"),
+                title: "MNU",
                 payload: "CARE_HELP"
             }
         ]);

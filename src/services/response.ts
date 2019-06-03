@@ -114,20 +114,18 @@ export class Response {
 
   static genNuxMessage(user: User) {
     let welcome = this.genText(
-      i18n.__("get_started.welcome", {
-        userFirstName: user.firstName
-      })
+      "Welcome"
     );
 
-    let guide = this.genText(i18n.__("get_started.guidance"));
+    let guide = this.genText("Guide");
 
-    let curation = this.genQuickReply(i18n.__("get_started.help"), [
+    let curation = this.genQuickReply("Hi", [
       {
-        title: i18n.__("menu.suggestion"),
+        title: "Sig",
         payload: "CURATION"
       },
       {
-        title: i18n.__("menu.help"),
+        title: "MNU",
         payload: "CARE_HELP"
       }
     ]);

@@ -10,6 +10,7 @@ export class User {
   constructor(psid: string) {
     this.psid = psid;
   }
+  
   setProfile(profile: any) {
     this.firstName = profile.firstName;
     this.lastName = profile.lastName;

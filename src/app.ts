@@ -4,6 +4,7 @@ import { config } from "./services/config";
 import { GraphAPi } from "./services/graph-api";
 import { User } from "./services/user";
 import { Receive } from "./services/receive";
+import { Profile } from "./services/profile";
 
 const app = express();
 var users: any = {};
@@ -85,23 +86,17 @@ app.post("/webhook", (req, res) => {
             })
             .finally(() => {
               users[senderPsid] = user;
-              i18n.setLocale(user.locale);
               console.log(
                 "New Profile PSID:",
-                senderPsid,
-                "with locale:",
-                i18n.getLocale()
+                senderPsid
               );
               let receiveMessage = new Receive(users[senderPsid], webhookEvent);
               return receiveMessage.handleMessage();
             });
         } else {
-          i18n.setLocale(users[senderPsid].locale);
           console.log(
             "Profile already exists PSID:",
-            senderPsid,
-            "with locale:",
-            i18n.getLocale()
+            senderPsid
           );
           let receiveMessage = new Receive(users[senderPsid], webhookEvent);
           return receiveMessage.handleMessage();
@@ -121,20 +116,19 @@ app.get("/profile", (req, res) => {
   if (!config.webhookUrl.startsWith("https://")) {
     res.status(200).send("ERROR - Need a proper API_URL in the .env file");
   }
-  var Profile = require("./services/profile.js");
-  Profile = new Profile();
+  let profile = new Profile();
 
   // Checks if a token and mode is in the query string of the request
   if (mode && token) {
     if (token === config.verifyToken) {
       if (mode == "webhook" || mode == "all") {
-        Profile.setWebhook();
+        profile.setWebhook();
         res.write(
           `<p>Set app ${config.appId} call to ${config.webhookUrl}</p>`
         );
       }
       if (mode == "profile" || mode == "all") {
-        Profile.setThread();
+        profile.setThread();
         res.write(`<p>Set Messenger Profile of Page ${config.pageId}</p>`);
       }
       res.status(200).end();
