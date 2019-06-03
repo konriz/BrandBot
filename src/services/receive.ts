@@ -1,5 +1,6 @@
 import { User } from "./user";
 import { GraphAPi } from "./graph-api";
+import { EventHandler } from "./event-handler";
 
 export class Receive {
 
@@ -11,66 +12,31 @@ export class Receive {
     this.webhookEvent = webhookEvent;
   }
 
-  // Check if the event is a message or postback and
-  // call the appropriate handler function
   handleMessage() {
     let event = this.webhookEvent;
-
-    let responses;
+    let response;
 
     try {
-      responses = this.handleEvent(event);
+      response = this.handleEvent(event);
     } catch (error) {
       console.error(error);
-      responses = {
+      response = {
         text: `An error has occured: '${error}'. We have been notified and \
         will fix the issue shortly!`
       };
     }
-
-    if (Array.isArray(responses)) {
-      let delay = 0;
-      for (let response of responses) {
-        this.sendMessage(response, delay * 2000);
-        delay++;
-      }
-    } else {
-      this.sendMessage(responses);
-    }
+    this.sendMessage(response);
   }
 
   handleEvent(event: any) {
     console.log(
       "Received event:",
-      `${this.webhookEvent} for ${this.user.psid}`
+      `${JSON.stringify(event)} for ${this.user.psid}`
     );
-
-    let message = JSON.stringify(this.webhookEvent);
-
-    let response = this.handlePayload(message);
-
-    return response;
+    return EventHandler.handle(event);
   }
 
-  handlePayload(payload: any) {
-    console.log("Received Payload:", `${payload} for ${this.user.psid}`);
-
-    // Log CTA event in FBA
-    // GraphAPi.callFBAEventsAPI(this.user.psid, payload);
-
-    let response = {
-      text: `Payload: ${payload}`
-    };
-
-    return response;
-  }
-
-  sendMessage(response: any, delay = 0) {
-    // Check if there is delay in the response
-    if ("delay" in response) {
-      delay = response["delay"];
-      delete response["delay"];
-    }
+  sendMessage(response: any) {
 
     // Construct the message body
     let requestBody = {
@@ -79,7 +45,6 @@ export class Receive {
       },
       message: response
     };
-
-    setTimeout(() => GraphAPi.callSendAPI(requestBody), delay);
+    GraphAPi.callSendAPI(requestBody);
   }
 };

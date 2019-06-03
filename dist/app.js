@@ -124,6 +124,7 @@ app.get("/profile", (req, res) => {
     }
 });
 var listener = app.listen(config_1.config.port, function () {
-    console.log("Your app is listening: " + JSON.stringify(listener.address()));
+    let address = listener.address();
+    console.log(`Your app is listening on port: ${address.port}`);
 });
 //# sourceMappingURL=app.js.map

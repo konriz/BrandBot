@@ -5,6 +5,7 @@ import { GraphAPi } from "./services/graph-api";
 import { User } from "./services/user";
 import { Receive } from "./services/receive";
 import { Profile } from "./services/profile";
+import { AddressInfo } from "net";
 
 const app = express();
 var users: any = {};
@@ -143,7 +144,8 @@ app.get("/profile", (req, res) => {
 });
   
 var listener = app.listen(config.port, function() {
-    console.log("Your app is listening: " + JSON.stringify(listener.address()))
+  let address = <AddressInfo>listener.address();
+  console.log(`Your app is listening on port: ${address.port}`)
 });
 
 
