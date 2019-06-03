@@ -3,9 +3,10 @@ import { urlencoded, json } from "body-parser";
 import { config } from "./services/config";
 import { GraphAPi } from "./services/graph-api";
 import { User } from "./services/user";
+import { Receive } from "./services/receive";
 
 const app = express();
-var users = {};
+var users: any = {};
 
 app.use(
     urlencoded({
@@ -52,7 +53,7 @@ app.post("/webhook", (req, res) => {
       res.status(200).send("EVENT_RECEIVED");
   
       // Iterates over each entry - there may be multiple if batched
-      body.entry.forEach(function(entry) {
+      body.entry.forEach(function(entry: any) {
         // Gets the body of the webhook event
         let webhookEvent = entry.messaging[0];
         // console.log(webhookEvent);
@@ -111,6 +112,41 @@ app.post("/webhook", (req, res) => {
       res.sendStatus(404);
     }
   });
+
+  // Set up your App's Messenger Profile
+app.get("/profile", (req, res) => {
+  let token = req.query["verify_token"];
+  let mode = req.query["mode"];
+
+  if (!config.webhookUrl.startsWith("https://")) {
+    res.status(200).send("ERROR - Need a proper API_URL in the .env file");
+  }
+  var Profile = require("./services/profile.js");
+  Profile = new Profile();
+
+  // Checks if a token and mode is in the query string of the request
+  if (mode && token) {
+    if (token === config.verifyToken) {
+      if (mode == "webhook" || mode == "all") {
+        Profile.setWebhook();
+        res.write(
+          `<p>Set app ${config.appId} call to ${config.webhookUrl}</p>`
+        );
+      }
+      if (mode == "profile" || mode == "all") {
+        Profile.setThread();
+        res.write(`<p>Set Messenger Profile of Page ${config.pageId}</p>`);
+      }
+      res.status(200).end();
+    } else {
+      // Responds with '403 Forbidden' if verify tokens do not match
+      res.sendStatus(403);
+    }
+  } else {
+    // Returns a '404 Not Found' if mode or token are missing
+    res.sendStatus(404);
+  }
+});
   
 var listener = app.listen(config.port, function() {
     console.log("Your app is listening: " + JSON.stringify(listener.address()))

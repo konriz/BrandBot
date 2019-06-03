@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export class Response {
   static genQuickReply(text: string, quickReplies: any) {
     
@@ -17,7 +19,7 @@ export class Response {
     return response;
   }
 
-  static genGenericTemplate(image_url, title, subtitle, buttons) {
+  static genGenericTemplate(image_url: string, title: string, subtitle: string, buttons: string) {
     let response = {
       attachment: {
         type: "template",
@@ -38,7 +40,7 @@ export class Response {
     return response;
   }
 
-  static genImageTemplate(image_url, title, subtitle = "") {
+  static genImageTemplate(image_url: string, title: string, subtitle = "") {
     let response = {
       attachment: {
         type: "template",
@@ -58,7 +60,7 @@ export class Response {
     return response;
   }
 
-  static genButtonTemplate(title, buttons) {
+  static genButtonTemplate(title: string, buttons: string) {
     let response = {
       attachment: {
         type: "template",
@@ -73,7 +75,7 @@ export class Response {
     return response;
   }
 
-  static genText(text) {
+  static genText(text: string) {
     let response = {
       text: text
     };
@@ -81,7 +83,7 @@ export class Response {
     return response;
   }
 
-  static genTextWithPersona(text, persona_id) {
+  static genTextWithPersona(text: string, persona_id: string) {
     let response = {
       text: text,
       persona_id: persona_id
@@ -90,7 +92,7 @@ export class Response {
     return response;
   }
 
-  static genPostbackButton(title, payload) {
+  static genPostbackButton(title: string, payload: string) {
     let response = {
       type: "postback",
       title: title,
@@ -100,7 +102,7 @@ export class Response {
     return response;
   }
 
-  static genWebUrlButton(title, url) {
+  static genWebUrlButton(title: string, url: string) {
     let response = {
       type: "web_url",
       title: title,
@@ -110,7 +112,7 @@ export class Response {
     return response;
   }
 
-  static genNuxMessage(user) {
+  static genNuxMessage(user: User) {
     let welcome = this.genText(
       i18n.__("get_started.welcome", {
         userFirstName: user.firstName

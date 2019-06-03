@@ -1,9 +1,9 @@
-import { request } from "http";
 import { config } from "./config";
 import camelCase from "camelcase";
+import request = require("request");
 
 export class GraphAPi {
-  static callSendAPI(requestBody) {
+  static callSendAPI(requestBody: any) {
     // Send the HTTP request to the Messenger Platform
     request(
       {
@@ -22,7 +22,7 @@ export class GraphAPi {
     );
   }
 
-  static callMessengerProfileAPI(requestBody) {
+  static callMessengerProfileAPI(requestBody: any) {
     // Send the HTTP request to the Messenger Profile API
 
     console.log(`Setting Messenger Profile for app ${config.appId}`);
@@ -103,16 +103,16 @@ export class GraphAPi {
     );
   }
 
-  static async getUserProfile(senderPsid) {
+  static async getUserProfile(senderPsid: string) {
     try {
       const userProfile = await this.callUserProfileAPI(senderPsid);
-
-      for (const key in userProfile) {
-        const camelizedKey = camelCase(key);
-        const value = userProfile[key];
-        delete userProfile[key];
-        userProfile[camelizedKey] = value;
-      }
+      
+      // for (var key in userProfile) {
+      //   const camelizedKey = camelCase(key);
+      //   const value = userProfile[key];
+      //   delete userProfile[key];
+      //   userProfile[camelizedKey] = value;
+      // }
 
       return userProfile;
     } catch (err) {
@@ -120,9 +120,9 @@ export class GraphAPi {
     }
   }
 
-  static callUserProfileAPI(senderPsid) {
+  static callUserProfileAPI(senderPsid: string): Promise<JSON> {
     return new Promise(function(resolve, reject) {
-      let body = [];
+      let body: Uint8Array[] = [];
 
       // Send the HTTP request to the Graph API
       request({
@@ -137,10 +137,10 @@ export class GraphAPi {
           // console.log(response.statusCode);
 
           if (response.statusCode !== 200) {
-            reject(Error(response.statusCode));
+            reject(Error(response.statusCode.toString()));
           }
         })
-        .on("data", function(chunk) {
+        .on("data", function(chunk: Uint8Array) {
           body.push(chunk);
         })
         .on("error", function(error) {
@@ -148,96 +148,15 @@ export class GraphAPi {
           reject(Error("Network Error"));
         })
         .on("end", () => {
-          body = Buffer.concat(body).toString();
+          let result = Buffer.concat(body).toString();
           // console.log(JSON.parse(body));
 
-          resolve(JSON.parse(body));
+          resolve(JSON.parse(result));
         });
     });
   }
 
-  static getPersonaAPI() {
-    return new Promise(function(resolve, reject) {
-      let body = [];
-
-      // Send the POST request to the Personas API
-      console.log(`Fetching personas for app ${config.appId}`);
-
-      request({
-        uri: `${config.mPlatfom}/me/personas`,
-        qs: {
-          access_token: config.pageAccesToken
-        },
-        method: "GET"
-      })
-        .on("response", function(response) {
-          // console.log(response.statusCode);
-
-          if (response.statusCode !== 200) {
-            reject(Error(response.statusCode));
-          }
-        })
-        .on("data", function(chunk) {
-          body.push(chunk);
-        })
-        .on("error", function(error) {
-          console.error("Unable to fetch personas:" + error);
-          reject(Error("Network Error"));
-        })
-        .on("end", () => {
-          body = Buffer.concat(body).toString();
-          // console.log(JSON.parse(body));
-
-          resolve(JSON.parse(body).data);
-        });
-    });
-  }
-
-  static postPersonaAPI(name, profile_picture_url) {
-    let body = [];
-
-    return new Promise(function(resolve, reject) {
-      // Send the POST request to the Personas API
-      console.log(`Creating a Persona for app ${config.appId}`);
-
-      let requestBody = {
-        name: name,
-        profile_picture_url: profile_picture_url
-      };
-
-      request({
-        uri: `${config.mPlatfom}/me/personas`,
-        qs: {
-          access_token: config.pageAccesToken
-        },
-        method: "POST",
-        json: requestBody
-      })
-        .on("response", function(response) {
-          // console.log(response.statusCode);
-          if (response.statusCode !== 200) {
-            reject(Error(response.statusCode));
-          }
-        })
-        .on("data", function(chunk) {
-          body.push(chunk);
-        })
-        .on("error", function(error) {
-          console.error("Unable to create a persona:", error);
-          reject(Error("Network Error"));
-        })
-        .on("end", () => {
-          body = Buffer.concat(body).toString();
-          // console.log(JSON.parse(body));
-
-          resolve(JSON.parse(body).id);
-        });
-    }).catch(error => {
-      console.error("Unable to create a persona:", error, body);
-    });
-  }
-
-  static callFBAEventsAPI(senderPsid, eventName) {
+  static callFBAEventsAPI(senderPsid: string, eventName: string) {
     // Construct the message body
     let requestBody = {
       event: "CUSTOM_APP_EVENTS",
