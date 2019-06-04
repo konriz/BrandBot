@@ -6,27 +6,20 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const Nodes = __importStar(require("../services/node"));
-const nodes_json_1 = __importDefault(require("./nodes.json"));
+const Nodes = __importStar(require("./node"));
+const nodes_parser_1 = require("./nodes-parser");
 class NodesTable {
     constructor() {
-        this.nodes = new Map();
-    }
-    printNodes() {
-        return JSON.stringify(nodes_json_1.default);
+        this.nodes = nodes_parser_1.NodesParser.getNodes();
     }
     getNode(name) {
-        let node;
-        try {
+        let node = this.nodes.get(name);
+        if (node) {
             console.log(`Node named : '${name}' found`);
-            node = this.nodes.get(name);
         }
-        catch (error) {
-            console.log(`Node named : '${name}' not found, returning welcome`);
+        else {
+            console.log(`Node named : '${name}' not found`);
             node = new Nodes.WelcomeNode();
         }
         return node;

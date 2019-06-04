@@ -24,7 +24,8 @@ class Receive {
     }
     handleEvent(event) {
         console.log("Received event:", `${JSON.stringify(event)} for ${this.user.psid}`);
-        return event_handler_1.EventHandler.handle(event);
+        let eventHandler = new event_handler_1.EventHandler(event);
+        return eventHandler.handle();
     }
     sendMessage(response) {
         // Construct the message body

@@ -2,19 +2,23 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const response_builder_1 = require("./response-builder");
 class EventHandler {
-    static handle(event) {
+    constructor(event) {
+        this.event = event;
+        this.responseBuilder = new response_builder_1.ResponseBuilder();
+    }
+    handle() {
         try {
-            if (event.message) {
+            if (this.event.message) {
                 console.log("Handling message");
-                return this.handleMessage(event.message);
+                return this.handleMessage();
             }
-            else if (event.postback) {
+            else if (this.event.postback) {
                 console.log("Handling postback");
-                return this.handlePostback(event.postback);
+                return this.handlePostback();
             }
-            else if (event.referral) {
+            else if (this.event.referral) {
                 console.log("Handling referral");
-                return this.handleRefferal(event.refferal);
+                return this.handleRefferal();
             }
             else {
                 throw new Error("Event type error");
@@ -27,8 +31,9 @@ class EventHandler {
             };
         }
     }
-    static handleMessage(message) {
+    handleMessage() {
         let response;
+        let message = this.event.message;
         if (message.text) {
             console.log("Handling text");
             response = this.handleText(message);
@@ -43,20 +48,22 @@ class EventHandler {
         }
         return response;
     }
-    static handleText(message) {
-        return response_builder_1.ResponseBuilder.getSorryMessage();
+    handleText(message) {
+        return this.responseBuilder.getSorryMessage();
     }
-    static handleAttachment(attachment) {
-        return response_builder_1.ResponseBuilder.getSorryMessage();
+    handleAttachment(attachment) {
+        return this.responseBuilder.getSorryMessage();
     }
-    static handleQuickReply(quickReply) {
-        return response_builder_1.ResponseBuilder.getSorryMessage();
+    handleQuickReply(quickReply) {
+        return this.responseBuilder.getSorryMessage();
     }
-    static handlePostback(postback) {
-        return response_builder_1.ResponseBuilder.getSorryMessage();
+    handlePostback() {
+        let postback = this.event.postback;
+        return this.responseBuilder.getSorryMessage();
     }
-    static handleRefferal(referral) {
-        return response_builder_1.ResponseBuilder.getSorryMessage();
+    handleRefferal() {
+        let refferal = this.event.refferal;
+        return this.responseBuilder.getSorryMessage();
     }
 }
 exports.EventHandler = EventHandler;

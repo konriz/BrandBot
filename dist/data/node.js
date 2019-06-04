@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const quick_reply_1 = require("./quick-reply");
-const response_api_1 = require("./response-api");
+const quick_reply_1 = require("../services/quick-reply");
+const response_api_1 = require("../services/response-api");
 class SimpleNode {
     constructor(name, buttonText, message, parent, children) {
         this.name = name;
@@ -15,6 +15,12 @@ class SimpleNode {
     }
     getButtonText() {
         return this.buttonText;
+    }
+    setParent(parent) {
+        this.parent = parent;
+    }
+    setChildren(children) {
+        this.children = children;
     }
     getView() {
         let message = response_api_1.ResponseApi.getQuickReplyMessage(this.message, this.getQuickReplies());

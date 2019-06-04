@@ -1,25 +1,20 @@
-import * as Nodes from "../services/node";
-import data from "./nodes.json";
+import * as Nodes from "./node";
+import { NodesParser } from "./nodes-parser";
 
 export class NodesTable {
 
-    nodes: Map<string, Nodes.BotNode> = new Map();
+    nodes: Map<string, Nodes.BotNode>;
 
     constructor() {
-
-    }
-
-    printNodes() {
-        return JSON.stringify(data);
+        this.nodes = NodesParser.getNodes();
     }
 
     getNode(name: string) {
-        let node: Nodes.BotNode;
-        try {
-            console.log(`Node named : '${name}' found`)
-            node = this.nodes.get(name);
-        } catch (error) {
-            console.log(`Node named : '${name}' not found, returning welcome`)
+        let node: Nodes.BotNode = this.nodes.get(name);
+        if (node) {
+            console.log(`Node named : '${name}' found`);
+        } else {
+            console.log(`Node named : '${name}' not found`);
             node = new Nodes.WelcomeNode();
         }
         return node;

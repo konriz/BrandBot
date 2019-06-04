@@ -1,10 +1,7 @@
 import { NodesTable } from "../src/data/nodes";
 
-var nodesTable: NodesTable;
-
-describe('nodes', function() {
-    it('print nodes', function() {
-        new NodesTable();
-        console.log(nodesTable.printNodes());
+describe('graph-api', function() {
+    it('callUserProfileAPI', function() {
+        let nodesTable = new NodesTable();
     });
 });

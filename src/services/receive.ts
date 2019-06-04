@@ -33,7 +33,8 @@ export class Receive {
       "Received event:",
       `${JSON.stringify(event)} for ${this.user.psid}`
     );
-    return EventHandler.handle(event);
+    let eventHandler = new EventHandler(event);
+    return eventHandler.handle();
   }
 
   sendMessage(response: any) {

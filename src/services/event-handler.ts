@@ -1,19 +1,27 @@
 import { ResponseBuilder } from "./response-builder";
 
 export class EventHandler {
+
+    event: any;
+    responseBuilder : ResponseBuilder;
+
+    constructor(event: any) {
+        this.event = event;
+        this.responseBuilder = new ResponseBuilder();
+    }
     
-    static handle(event: any) {
+    handle() {
 
         try {
-            if(event.message) {
+            if(this.event.message) {
                 console.log("Handling message");
-                return this.handleMessage(event.message);
-            } else if (event.postback) {
+                return this.handleMessage();
+            } else if (this.event.postback) {
                 console.log("Handling postback");
-                return this.handlePostback(event.postback);
-            } else if (event.referral) {
+                return this.handlePostback();
+            } else if (this.event.referral) {
                 console.log("Handling referral");
-                return this.handleRefferal(event.refferal);
+                return this.handleRefferal();
             } else {
                 throw new Error("Event type error");
             }
@@ -25,8 +33,9 @@ export class EventHandler {
         }
     }
 
-    private static handleMessage(message: any) {
+    private handleMessage() {
         let response;
+        let message = this.event.message;
         if (message.text) {
             console.log("Handling text");
             response = this.handleText(message);
@@ -40,23 +49,27 @@ export class EventHandler {
         return response;
     }
 
-    private static handleText(message: any){
-        return ResponseBuilder.getSorryMessage();
+    private handleText(message: any){
+        return this.responseBuilder.getSorryMessage();
     }
 
-    private static handleAttachment(attachment: any){
-        return ResponseBuilder.getSorryMessage();
+    private handleAttachment(attachment: any){
+        return this.responseBuilder.getSorryMessage();
     }
 
-    private static handleQuickReply(quickReply: any){
-        return ResponseBuilder.getSorryMessage();
+    private handleQuickReply(quickReply: any){
+        return this.responseBuilder.getSorryMessage();
     }
 
-    private static handlePostback(postback: any) {
-        return ResponseBuilder.getSorryMessage();
+    private handlePostback() {
+        let postback = this.event.postback;
+
+        return this.responseBuilder.getSorryMessage();
     }
 
-    private static handleRefferal(referral: any) {
-        return ResponseBuilder.getSorryMessage();
+    private handleRefferal() {
+        let refferal = this.event.refferal;
+
+        return this.responseBuilder.getSorryMessage();
     }
 }
