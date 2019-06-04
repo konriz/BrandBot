@@ -1,7 +1,15 @@
 "use strict";
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const quick_reply_1 = require("../services/quick-reply");
 const response_api_1 = require("../services/response-api");
+const res = __importStar(require("../locales/resources.json"));
 class SimpleNode {
     constructor(name, buttonText, message, parent, children) {
         this.name = name;
@@ -34,14 +42,14 @@ class SimpleNode {
         }
         // Add "back" button leading to parent node
         if (this.parent) {
-            quickReplies.push(new quick_reply_1.QuickReply("Back", this.parent.getName()));
+            quickReplies.push(new quick_reply_1.QuickReply(res.nodes.back, this.parent.getName()));
         }
         // Add "home" button leading to home node
-        let homeReply = new quick_reply_1.QuickReply("Go home", "HOME");
+        let homeReply = new quick_reply_1.QuickReply(res.nodes.home, "HOME");
         quickReplies.push(homeReply);
         return quickReplies;
     }
 }
-SimpleNode.errorNode = new SimpleNode("ERROR", "Error", "There was an unknown error. Please go back.");
+SimpleNode.errorNode = new SimpleNode("ERROR", "Error", res.nodes.error);
 exports.SimpleNode = SimpleNode;
 //# sourceMappingURL=node.js.map

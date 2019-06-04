@@ -1,5 +1,6 @@
 import { QuickReply } from "../services/quick-reply";
 import { ResponseApi } from "../services/response-api";
+import * as res from "../locales/resources.json";
 
 export interface BotNode {
     getName(): string;
@@ -16,7 +17,7 @@ export class SimpleNode implements BotNode {
     private parent: BotNode;
     private children: BotNode[];
 
-    static errorNode = new SimpleNode("ERROR", "Error", "There was an unknown error. Please go back.");
+    static errorNode = new SimpleNode("ERROR", "Error", res.nodes.error);
 
     constructor(name: string, buttonText: string, message: string, parent?: BotNode, children?: BotNode[]){
         this.name = name;
@@ -63,11 +64,11 @@ export class SimpleNode implements BotNode {
             
         // Add "back" button leading to parent node
         if(this.parent) {
-            quickReplies.push(new QuickReply("Back", this.parent.getName()));
+            quickReplies.push(new QuickReply(res.nodes.back, this.parent.getName()));
         }
 
         // Add "home" button leading to home node
-        let homeReply = new QuickReply("Go home", "HOME");
+        let homeReply = new QuickReply(res.nodes.home, "HOME");
         quickReplies.push(homeReply);
         
         return quickReplies;

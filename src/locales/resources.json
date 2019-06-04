@@ -1,10 +1,14 @@
 {
-    "profile": {
-      "greeting": "Witaj!"
-    },
-    "menu": {
-      "shop": "Odwiedź sklep",
-      "home": "Włącz bota"
-    }
+  "profile": {
+    "greeting": "Witaj!"
+  },
+  "menu": {
+    "shop": "Odwiedź sklep",
+    "home": "Włącz bota"
+  },
+  "nodes": {
+    "error": "Wystąpił nieznany błąd, zajmiemy się tym wkrótce.",
+    "back": "Wróć",
+    "home": "Początek"
   }
-  
+}
