@@ -67,9 +67,11 @@ export class SimpleNode implements BotNode {
             quickReplies.push(new QuickReply(res.nodes.back, this.parent.getName()));
         }
 
-        // Add "home" button leading to home node
-        let homeReply = new QuickReply(res.nodes.home, "HOME");
-        quickReplies.push(homeReply);
+        // Add "home" button leading to home node if this is not home node.
+        if(this.getName() != "HOME"){
+            let homeReply = new QuickReply(res.nodes.home, "HOME");
+            quickReplies.push(homeReply);
+        }
         
         return quickReplies;
     }

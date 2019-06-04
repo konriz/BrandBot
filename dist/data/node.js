@@ -44,9 +44,11 @@ class SimpleNode {
         if (this.parent) {
             quickReplies.push(new quick_reply_1.QuickReply(res.nodes.back, this.parent.getName()));
         }
-        // Add "home" button leading to home node
-        let homeReply = new quick_reply_1.QuickReply(res.nodes.home, "HOME");
-        quickReplies.push(homeReply);
+        // Add "home" button leading to home node if this is not home node.
+        if (this.getName() != "HOME") {
+            let homeReply = new quick_reply_1.QuickReply(res.nodes.home, "HOME");
+            quickReplies.push(homeReply);
+        }
         return quickReplies;
     }
 }
