@@ -39,11 +39,6 @@ class SimpleNode {
         return quickReplies;
     }
 }
+SimpleNode.errorNode = new SimpleNode("ERROR", "Error", "There was an unknown error. Please go back.");
 exports.SimpleNode = SimpleNode;
-class WelcomeNode extends SimpleNode {
-    constructor(name = "WELCOME", buttonText = "Start", message = "Welcome", children) {
-        super(name, buttonText, message, null, children);
-    }
-}
-exports.WelcomeNode = WelcomeNode;
 //# sourceMappingURL=node.js.map

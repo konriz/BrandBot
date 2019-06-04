@@ -2,11 +2,11 @@ import { QuickReply } from "../services/quick-reply";
 import { ResponseApi } from "../services/response-api";
 
 export interface BotNode {
-    getView(): any;
     getName(): string;
     getButtonText(): string;
     setParent(parent: BotNode): void;
     setChildren(children: BotNode[]): void;
+    getView(): any;
 }
 
 export class SimpleNode implements BotNode {
@@ -15,6 +15,8 @@ export class SimpleNode implements BotNode {
     private message: string;
     private parent: BotNode;
     private children: BotNode[];
+
+    static errorNode = new SimpleNode("ERROR", "Error", "There was an unknown error. Please go back.");
 
     constructor(name: string, buttonText: string, message: string, parent?: BotNode, children?: BotNode[]){
         this.name = name;
@@ -65,11 +67,5 @@ export class SimpleNode implements BotNode {
             quickReplies.push(new QuickReply("Back", this.parent.getName()));
         }
         return quickReplies;
-    }
-}
-
-export class WelcomeNode extends SimpleNode {
-    constructor(name = "WELCOME", buttonText = "Start", message= "Welcome", children?: BotNode[]) {
-        super(name, buttonText, message, null, children);
     }
 }

@@ -5,11 +5,14 @@ class ResponseBuilder {
     constructor() {
         this.nodes = new nodes_1.NodesTable();
     }
-    getSorryMessage() {
+    getErrorMessage() {
+        return this.getNodeView("ERROR");
+    }
+    getHomeNode() {
         return this.getNodeView("HOME");
     }
     getNodeView(name) {
-        return this.nodes.getNode(name).getView();
+        return this.nodes.getView(name);
     }
 }
 exports.ResponseBuilder = ResponseBuilder;

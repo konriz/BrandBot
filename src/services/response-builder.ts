@@ -1,6 +1,3 @@
-import { QuickReply } from "./quick-reply";
-import { config } from "./config";
-import { BotNode } from "../data/node";
 import { NodesTable } from "../data/nodes";
 
 export class ResponseBuilder {
@@ -11,12 +8,16 @@ export class ResponseBuilder {
         this.nodes = new NodesTable();
     }
     
-    getSorryMessage() {
+    getErrorMessage() {
+        return this.getNodeView("ERROR");
+    }
+
+    getHomeNode() {
         return this.getNodeView("HOME");
     }
 
     getNodeView(name: string) {
-        return this.nodes.getNode(name).getView();
+        return this.nodes.getView(name);
     }
 
     

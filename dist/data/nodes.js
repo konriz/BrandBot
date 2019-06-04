@@ -12,6 +12,10 @@ const nodes_parser_1 = require("./nodes-parser");
 class NodesTable {
     constructor() {
         this.nodes = nodes_parser_1.NodesParser.getNodes();
+        this.nodes.set("ERROR", Nodes.SimpleNode.errorNode);
+    }
+    getView(name) {
+        return this.getNode(name).getView();
     }
     getNode(name) {
         let node = this.nodes.get(name);
@@ -20,9 +24,12 @@ class NodesTable {
         }
         else {
             console.log(`Node named : '${name}' not found`);
-            node = new Nodes.WelcomeNode();
+            node = this.getError();
         }
         return node;
+    }
+    getError() {
+        return this.getNode("ERROR");
     }
 }
 exports.NodesTable = NodesTable;

@@ -36,40 +36,36 @@ export class EventHandler {
     private handleMessage() {
         let response;
         let message = this.event.message;
-        if (message.text) {
-            console.log("Handling text");
-            response = this.handleText(message);
+        if (message.quick_reply) {
+            console.log("Handling quick reply");
+            response = this.handleQuickReply(message);
         } else if (message.attachments) {
             console.log("Handling attachment");
             response = this.handleAttachment(message);
-        } else if (message.quick_reply) {
-            console.log("Handling quick reply");
-            response = this.handleQuickReply(message);
-        }
+        } else if (message.text) {
+            console.log("Handling text");
+            response = this.handleText(message);
+        } 
         return response;
     }
 
     private handleText(message: any){
-        return this.responseBuilder.getSorryMessage();
+        return this.responseBuilder.getErrorMessage();
     }
 
-    private handleAttachment(attachment: any){
-        return this.responseBuilder.getSorryMessage();
+    private handleAttachment(message: any){
+        return this.responseBuilder.getErrorMessage();
     }
 
-    private handleQuickReply(quickReply: any){
-        return this.responseBuilder.getSorryMessage();
+    private handleQuickReply(message: any){
+        return this.responseBuilder.getNodeView(message.quick_reply.payload);
     }
 
     private handlePostback() {
-        let postback = this.event.postback;
-
-        return this.responseBuilder.getSorryMessage();
+        return this.responseBuilder.getHomeNode();
     }
 
     private handleRefferal() {
-        let refferal = this.event.refferal;
-
-        return this.responseBuilder.getSorryMessage();
+        return this.responseBuilder.getErrorMessage();
     }
 }

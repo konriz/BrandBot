@@ -2,7 +2,6 @@ import { QuickReply } from "./quick-reply";
 
 export class ResponseApi {
 
-
     static getQuickReplyMessage(text: string, buttons: QuickReply[]) {
 
         let quickReplies: any[] = [];

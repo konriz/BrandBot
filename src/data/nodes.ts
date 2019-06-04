@@ -7,6 +7,11 @@ export class NodesTable {
 
     constructor() {
         this.nodes = NodesParser.getNodes();
+        this.nodes.set("ERROR", Nodes.SimpleNode.errorNode)
+    }
+
+    getView(name: string) {
+        return this.getNode(name).getView();
     }
 
     getNode(name: string) {
@@ -15,9 +20,13 @@ export class NodesTable {
             console.log(`Node named : '${name}' found`);
         } else {
             console.log(`Node named : '${name}' not found`);
-            node = new Nodes.WelcomeNode();
+            node = this.getError();
         }
         return node;
+    }
+
+    private getError(): Nodes.BotNode {
+        return this.getNode("ERROR");
     }
 
 }

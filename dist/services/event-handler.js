@@ -34,36 +34,34 @@ class EventHandler {
     handleMessage() {
         let response;
         let message = this.event.message;
-        if (message.text) {
-            console.log("Handling text");
-            response = this.handleText(message);
+        if (message.quick_reply) {
+            console.log("Handling quick reply");
+            response = this.handleQuickReply(message);
         }
         else if (message.attachments) {
             console.log("Handling attachment");
             response = this.handleAttachment(message);
         }
-        else if (message.quick_reply) {
-            console.log("Handling quick reply");
-            response = this.handleQuickReply(message);
+        else if (message.text) {
+            console.log("Handling text");
+            response = this.handleText(message);
         }
         return response;
     }
     handleText(message) {
-        return this.responseBuilder.getSorryMessage();
+        return this.responseBuilder.getErrorMessage();
     }
-    handleAttachment(attachment) {
-        return this.responseBuilder.getSorryMessage();
+    handleAttachment(message) {
+        return this.responseBuilder.getErrorMessage();
     }
-    handleQuickReply(quickReply) {
-        return this.responseBuilder.getSorryMessage();
+    handleQuickReply(message) {
+        return this.responseBuilder.getNodeView(message.quick_reply.payload);
     }
     handlePostback() {
-        let postback = this.event.postback;
-        return this.responseBuilder.getSorryMessage();
+        return this.responseBuilder.getHomeNode();
     }
     handleRefferal() {
-        let refferal = this.event.refferal;
-        return this.responseBuilder.getSorryMessage();
+        return this.responseBuilder.getErrorMessage();
     }
 }
 exports.EventHandler = EventHandler;
