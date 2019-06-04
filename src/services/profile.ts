@@ -1,5 +1,6 @@
 import { GraphAPi } from "./graph-api";
 import { config } from "./config";
+import * as res from "../../locales/resources.json"
 
 export class Profile {
 
@@ -60,7 +61,7 @@ export class Profile {
   getGreetingText() {
     let greeting = {
       locale: "default",
-      text: "Hello!"
+      text: res.profile.greeting
     };
 
     console.log(greeting);
@@ -73,8 +74,13 @@ export class Profile {
       composer_input_disabled: false,
       call_to_actions: [
         {
+          title: res.menu.home,
+          type:"postback",
+          payload:"HOME"
+        },
+        {
           type: "web_url",
-          title: "Main",
+          title: res.menu.shop,
           url: config.shopUrl,
           webview_height_ratio: "full"
         }

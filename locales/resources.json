@@ -1,0 +1,10 @@
+{
+    "profile": {
+      "greeting": "Witaj!"
+    },
+    "menu": {
+      "shop": "Odwiedź sklep",
+      "home": "Włącz bota"
+    }
+  }
+  
