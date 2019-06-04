@@ -123,16 +123,25 @@ app.get("/profile", (req, res) => {
     if (token === config.verifyToken) {
       
       profile.setWebhook();
-      res.write(
-        `<p>Set app ${config.appId} call to ${config.webhookUrl}</p>`
-      );
+      // res.write(
+      //   `<p>Set app ${config.appId} call to ${config.webhookUrl}</p>`
+      // );
       profile.setThread();
-      res.write(`<p>Set Messenger Profile of Page ${config.pageId}</p>`);
-      res.write(`<p>Set Get Started postback: ${JSON.stringify(profile.getGetStarted())}</p>`);
-      res.write(`<p>Set Greeting text: ${JSON.stringify(profile.getGreetingText())}</p>`);
-      res.write(`<p>Set Persistent Menu ${JSON.stringify(profile.getPersistentMenu())}</p>`);
-      
-      res.status(200).end();
+      // res.write(`<p>Set Messenger Profile of Page ${config.pageId}</p>`);
+      // res.write(`<p>Set Get Started postback: ${JSON.stringify(profile.getGetStarted())}</p>`);
+      // res.write(`<p>Set Greeting text: ${JSON.stringify(profile.getGreetingText())}</p>`);
+      // res.write(`<p>Set Persistent Menu ${JSON.stringify(profile.getPersistentMenu())}</p>`);
+
+      let pageId = config.pageId;
+      let getStarted = JSON.stringify(profile.getGetStarted());
+      let greeting = JSON.stringify(profile.getGreetingText());
+      let menu = JSON.stringify(profile.getPersistentMenu());
+      res.render("profile", {
+        pageId: pageId,
+        getStarted: getStarted,
+        greeting: greeting,
+        menu: menu
+      });
     } else {
       // Responds with '403 Forbidden' if verify tokens do not match
       res.sendStatus(403);

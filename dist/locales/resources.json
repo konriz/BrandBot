@@ -1,6 +1,6 @@
 {
     "profile": {
-        "greeting": "Witaj!"
+        "greeting": "Witaj! Naciśnij 'Rozpocznij' aby zacząć rozmowę. Skorzystaj z przycisków Bota albo napisz, aby skontaktować się z naszym pracownikiem."
     },
     "menu": {
         "shop": "Odwiedź sklep",

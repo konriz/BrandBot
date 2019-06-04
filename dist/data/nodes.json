@@ -3,13 +3,13 @@
         {
             "name": "HOME",
             "buttonText": "Go home",
-            "message": "Witaj na stronie naszego sklepu, wybierz kategorię poniżej aby przejrzeć produkty.",
+            "message": "Skorzystaj z przycisków Bota albo napisz, aby skontaktować się z naszym pracownikiem.",
             "children": ["KATEGORIA_1", "KATEGORIA_2"]
         },
         {
             "name": "KATEGORIA_1",
             "buttonText": "Szkła",
-            "message": "Aby dobrać szklo, wybierz markę telefonu:",
+            "message": "Aby dobrać szkło, wybierz markę telefonu:",
             "parent": "HOME",
             "children": ["KATEGORIA_1_SAMSUNG", "KATEGORIA_1_HUAWEI"]
         },
@@ -17,13 +17,39 @@
             "name": "KATEGORIA_1_SAMSUNG",
             "buttonText": "Samsung",
             "message": "Szkła Samsung",
-            "parent": "KATEGORIA_1"
+            "parent": "KATEGORIA_1",
+            "children": ["PRZELEW_KATEGORIA_1_SAMSUNG", "POBRANIE_KATEGORIA_1_SAMSUNG"]
+        },
+        {
+            "name": "PRZELEW_KATEGORIA_1_SAMSUNG",
+            "buttonText": "Przelew",
+            "message": "Wpłać na konto 12323534647",
+            "parent": "KATEGORIA_1_SAMSUNG"
+        },
+        {
+            "name": "POBRANIE_KATEGORIA_1_SAMSUNG",
+            "buttonText": "Pobranie",
+            "message": "Czekaj na przesyłkę",
+            "parent": "KATEGORIA_1_SAMSUNG"
         },
         {
             "name": "KATEGORIA_1_HUAWEI",
             "buttonText": "Huawei",
             "message": "Szkła Huawei",
-            "parent": "KATEGORIA_1"
+            "parent": "KATEGORIA_1",
+            "children": ["PRZELEW_KATEGORIA_1_HUAWEI", "POBRANIE_KATEGORIA_1_HUAWEI"]
+        },
+        {
+            "name": "PRZELEW_KATEGORIA_1_HUAWEI",
+            "buttonText": "Przelew",
+            "message": "Wpłać na konto 12323534647",
+            "parent": "KATEGORIA_1_HUAWEI"
+        },
+        {
+            "name": "POBRANIE_KATEGORIA_1_HUAWEI",
+            "buttonText": "Pobranie",
+            "message": "Czekaj na przesyłkę",
+            "parent": "KATEGORIA_1_HUAWEI"
         },
         {
             "name": "KATEGORIA_2",
@@ -36,13 +62,39 @@
             "name": "KATEGORIA_2_SAMSUNG",
             "buttonText": "Samsung",
             "message": "Etui Samsung",
-            "parent": "KATEGORIA_2"
+            "parent": "KATEGORIA_2",
+            "children": ["PRZELEW_KATEGORIA_2_SAMSUNG", "POBRANIE_KATEGORIA_2_SAMSUNG"]
+        },
+        {
+            "name": "PRZELEW_KATEGORIA_2_SAMSUNG",
+            "buttonText": "Przelew",
+            "message": "Wpłać na konto 12323534647",
+            "parent": "KATEGORIA_1_SAMSUNG"
+        },
+        {
+            "name": "POBRANIE_KATEGORIA_2_SAMSUNG",
+            "buttonText": "Pobranie",
+            "message": "Czekaj na przesyłkę",
+            "parent": "KATEGORIA_1_SAMSUNG"
         },
         {
             "name": "KATEGORIA_2_HUAWEI",
             "buttonText": "Huawei",
             "message": "Etui Huawei",
-            "parent": "KATEGORIA_2"
+            "parent": "KATEGORIA_2",
+            "children": ["PRZELEW_KATEGORIA_2_HUAWEI", "POBRANIE_KATEGORIA_2_HUAWEI"]
+        },
+        {
+            "name": "PRZELEW_KATEGORIA_2_HUAWEI",
+            "buttonText": "Przelew",
+            "message": "Wpłać na konto 12323534647",
+            "parent": "KATEGORIA_2_HUAWEI"
+        },
+        {
+            "name": "POBRANIE_KATEGORIA_2_HUAWEI",
+            "buttonText": "Pobranie",
+            "message": "Czekaj na przesyłkę",
+            "parent": "KATEGORIA_2_HUAWEI"
         }
     ]
 }
