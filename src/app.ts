@@ -112,7 +112,6 @@ app.post("/webhook", (req, res) => {
   // Set up your App's Messenger Profile
 app.get("/profile", (req, res) => {
   let token = req.query["verify_token"];
-  let mode = req.query["mode"];
 
   if (!config.webhookUrl.startsWith("https://")) {
     res.status(200).send("ERROR - Need a proper API_URL in the .env file");
@@ -120,25 +119,26 @@ app.get("/profile", (req, res) => {
   let profile = new Profile();
 
   // Checks if a token and mode is in the query string of the request
-  if (mode && token) {
+  if (token) {
     if (token === config.verifyToken) {
-      if (mode == "webhook" || mode == "all") {
-        profile.setWebhook();
-        res.write(
-          `<p>Set app ${config.appId} call to ${config.webhookUrl}</p>`
-        );
-      }
-      if (mode == "profile" || mode == "all") {
-        profile.setThread();
-        res.write(`<p>Set Messenger Profile of Page ${config.pageId}</p>`);
-      }
+      
+      profile.setWebhook();
+      res.write(
+        `<p>Set app ${config.appId} call to ${config.webhookUrl}</p>`
+      );
+      profile.setThread();
+      res.write(`<p>Set Messenger Profile of Page ${config.pageId}</p>`);
+      res.write(`<p>Set Get Started postback: ${JSON.stringify(profile.getGetStarted())}</p>`);
+      res.write(`<p>Set Greeting text: ${JSON.stringify(profile.getGreetingText())}</p>`);
+      res.write(`<p>Set Persistent Menu ${JSON.stringify(profile.getPersistentMenu())}</p>`);
+      
       res.status(200).end();
     } else {
       // Responds with '403 Forbidden' if verify tokens do not match
       res.sendStatus(403);
     }
   } else {
-    // Returns a '404 Not Found' if mode or token are missing
+    // Returns a '404 Not Found' if token are missing
     res.sendStatus(404);
   }
 });

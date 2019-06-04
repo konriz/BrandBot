@@ -1,6 +1,6 @@
 import { GraphAPi } from "./graph-api";
 import { config } from "./config";
-import * as res from "../../locales/resources.json"
+import * as res from "../locales/resources.json"
 
 export class Profile {
 
@@ -20,22 +20,8 @@ export class Profile {
       ...this.getPersistentMenu()
     };
 
+    console.log(JSON.stringify(profilePayload))
     GraphAPi.callMessengerProfileAPI(profilePayload);
-  }
-
-  setGetStarted() {
-    let getStartedPayload = this.getGetStarted();
-    GraphAPi.callMessengerProfileAPI(getStartedPayload);
-  }
-
-  setGreeting() {
-    let greetingPayload = this.getGreeting();
-    GraphAPi.callMessengerProfileAPI(greetingPayload);
-  }
-
-  setPersistentMenu() {
-    let menuPayload = this.getPersistentMenu();
-    GraphAPi.callMessengerProfileAPI(menuPayload);
   }
 
   getGetStarted() {
@@ -63,8 +49,6 @@ export class Profile {
       locale: "default",
       text: res.profile.greeting
     };
-
-    console.log(greeting);
     return greeting;
   }
 
@@ -74,9 +58,9 @@ export class Profile {
       composer_input_disabled: false,
       call_to_actions: [
         {
+          type: "postback",
           title: res.menu.home,
-          type:"postback",
-          payload:"HOME"
+          payload: "HOME"
         },
         {
           type: "web_url",
@@ -86,8 +70,6 @@ export class Profile {
         }
       ]
     };
-
-    console.log(menu);
     return menu;
   }
 };
