@@ -50,7 +50,7 @@ export class EventHandler {
     }
 
     private handleText(message: any){
-        return this.responseBuilder.getErrorMessage();
+        return;
     }
 
     private handleAttachment(message: any){

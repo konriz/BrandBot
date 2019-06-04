@@ -28,14 +28,17 @@ class SimpleNode {
     }
     getQuickReplies() {
         let quickReplies = [];
-        let homeReply = new quick_reply_1.QuickReply("Go home", "HOME");
-        quickReplies.push(homeReply);
+        // Add children buttons
         if (this.children) {
             this.children.forEach((child) => quickReplies.push(new quick_reply_1.QuickReply(child.getButtonText(), child.getName())));
         }
+        // Add "back" button leading to parent node
         if (this.parent) {
             quickReplies.push(new quick_reply_1.QuickReply("Back", this.parent.getName()));
         }
+        // Add "home" button leading to home node
+        let homeReply = new quick_reply_1.QuickReply("Go home", "HOME");
+        quickReplies.push(homeReply);
         return quickReplies;
     }
 }

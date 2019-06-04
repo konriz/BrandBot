@@ -19,7 +19,4 @@ export class ResponseBuilder {
     getNodeView(name: string) {
         return this.nodes.getView(name);
     }
-
-    
-    
 }

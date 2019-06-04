@@ -49,7 +49,7 @@ class EventHandler {
         return response;
     }
     handleText(message) {
-        return this.responseBuilder.getErrorMessage();
+        return;
     }
     handleAttachment(message) {
         return this.responseBuilder.getErrorMessage();
