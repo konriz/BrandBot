@@ -1,6 +1,8 @@
 import data from "./nodes.json";
 import { NodesFactory } from "./node-factory.js";
 import { BotNode } from "./nodes/abstract-node.js";
+import { BuyNode } from "./nodes/buy-node.js";
+import { ItemNode } from "./nodes/item-node.js";
 
 export interface NodesParser {
     getNodes(): Map<string, BotNode>;
@@ -42,16 +44,24 @@ export class NodesTreeParser implements NodesParser{
             console.log(`Node '${node.getName()}' - setting parent '${parent.getName()}'.`);
             node.setParent(parent);
         }
-        
+        let childrenNodes: BotNode[] = [];
+
+        if(nodeData["price"]) {
+            console.log(`Node '${node.getName()}' - setting buy node.`)
+            childrenNodes.push(new BuyNode(<ItemNode>node));
+        }
+
         if(nodeData["children"]) {
             console.log(`Node '${node.getName()}' - setting children.`)
-            let childrenNodes: BotNode[] = [];
+            
             let data = nodeData["children"];
             data.forEach( (childData: any) => {
                 childrenNodes.push(this.createNode(childData, node));
             } );
-            node.setChildren(childrenNodes);
+            
         }
+
+        node.setChildren(childrenNodes);
         return node;
     }
 

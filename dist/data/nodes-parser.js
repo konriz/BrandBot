@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const nodes_json_1 = __importDefault(require("./nodes.json"));
 const node_factory_js_1 = require("./node-factory.js");
+const buy_node_js_1 = require("./nodes/buy-node.js");
 class NodesTreeParser {
     getNodes() {
         if (!this.nodes) {
@@ -30,15 +31,19 @@ class NodesTreeParser {
             console.log(`Node '${node.getName()}' - setting parent '${parent.getName()}'.`);
             node.setParent(parent);
         }
+        let childrenNodes = [];
+        if (nodeData["price"]) {
+            console.log(`Node '${node.getName()}' - setting buy node.`);
+            childrenNodes.push(new buy_node_js_1.BuyNode(node));
+        }
         if (nodeData["children"]) {
             console.log(`Node '${node.getName()}' - setting children.`);
-            let childrenNodes = [];
             let data = nodeData["children"];
             data.forEach((childData) => {
                 childrenNodes.push(this.createNode(childData, node));
             });
-            node.setChildren(childrenNodes);
         }
+        node.setChildren(childrenNodes);
         return node;
     }
 }

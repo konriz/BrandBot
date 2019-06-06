@@ -16,6 +16,9 @@ class ItemNode extends abstract_node_1.AbstractNode {
         this.url = data["url"];
         this.price = data["price"];
     }
+    getPrice() {
+        return this.price;
+    }
     getMessage() {
         return `${super.getMessage()} - cena : ${this.price}`;
     }

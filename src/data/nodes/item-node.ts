@@ -15,6 +15,10 @@ export class ItemNode extends AbstractNode {
         this.price = data["price"];
     }
 
+    getPrice(): string {
+        return this.price;
+    }
+
     getMessage(): string {
         return `${super.getMessage()} - cena : ${this.price}`;
     }
