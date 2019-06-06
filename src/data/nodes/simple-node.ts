@@ -1,18 +1,17 @@
-import { ResponseApi } from "../../services/response-api";
 import { AbstractNode } from "./abstract-node";
 
 export class SimpleNode extends AbstractNode {
 
-    constructor(name: string, buttonText: string, message: string){
-        super(name, buttonText, message);
+    constructor(data: any){
+        super(data);
         this.setType("Simple");
     }
 
     getView() {
-        return ResponseApi.getQuickReplyMessage(
-            this.getMessage(), 
-            this.getQuickReplies()
-        );
+        return {
+            text: this.getMessage(),
+            quick_replies: this.getQuickReplies()
+        };
     }
     
 }

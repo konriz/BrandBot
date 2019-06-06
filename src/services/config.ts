@@ -26,5 +26,7 @@ export var config = {
   // URL of your webhook endpoint
   get webhookUrl() {
     return this.appUrl + "/webhook";
-  }
+  },
+
+  messageDebug: process.env.MESSAGE_DEBUG
 };

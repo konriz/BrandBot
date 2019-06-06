@@ -9,6 +9,7 @@
     "nodes": {
         "error": "Wystąpił nieznany błąd, zajmiemy się tym wkrótce.",
         "back": "Wróć",
-        "home": "Początek"
+        "home": "Początek",
+        "site": "Zobacz na stronie"
     }
 }

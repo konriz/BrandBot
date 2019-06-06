@@ -1,6 +1,7 @@
 import { User } from "./user";
 import { GraphAPI } from "./graph-api";
 import { EventHandler } from "./event-handler";
+import { config } from "./config";
 
 export class Receive {
 
@@ -25,7 +26,10 @@ export class Receive {
         will fix the issue shortly!`
       };
     }
-    this.sendMessage(response);
+    if(response){
+      this.sendMessage(response);
+    }
+    
   }
 
   handleEvent(event: any) {
@@ -46,6 +50,11 @@ export class Receive {
       },
       message: response
     };
+
+    if(config.messageDebug){
+      console.log(`Sending : ${JSON.stringify(requestBody)}`);
+    }
+    
     GraphAPI.callSendAPI(requestBody);
   }
 };

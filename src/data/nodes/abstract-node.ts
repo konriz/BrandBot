@@ -24,10 +24,10 @@ export abstract class AbstractNode implements BotNode {
     private children: BotNode[];
     private type: string;
 
-    constructor(name: string, buttonText: string, message: string){
-        this.name = name;
-        this.buttonText = buttonText;
-        this.message = message;
+    constructor(data: any){
+        this.name = data["name"];
+        this.buttonText = data["buttonText"];
+        this.message = data["message"];
     }
 
     getName() {

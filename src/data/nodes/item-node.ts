@@ -1,26 +1,31 @@
 import { AbstractNode } from "./abstract-node";
+import * as res from "../../locales/resources.json";
+
 
 export class ItemNode extends AbstractNode {
 
     private url: string;
     private price: string;
 
-    constructor(name: string, buttonText:string, message: string, url: string, price: string)
+    constructor(data: any)
     {
-        super(name, buttonText, message);
+        super(data);
         this.setType("Item");
-        this.url = url;
-        this.price = price;
+        this.url = data["url"];
+        this.price = data["price"];
+    }
+
+    getMessage(): string {
+        return `${super.getMessage()} - cena : ${this.price}`;
     }
 
     getView() {
 
         let message = {
-            text: this.getMessage(),
             quick_replies: this.getQuickReplies(),
             attachment: this.getAttachment()
         };
-        
+
         return message;
     }
 
@@ -33,7 +38,7 @@ export class ItemNode extends AbstractNode {
                 buttons: [
                     {
                         type: "web_url",
-                        title: "Strona",
+                        title: res.nodes.site,
                         url: this.url
                     }
                 ]

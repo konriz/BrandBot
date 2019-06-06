@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const graph_api_1 = require("./graph-api");
 const event_handler_1 = require("./event-handler");
+const config_1 = require("./config");
 class Receive {
     constructor(user, webhookEvent) {
         this.user = user;
@@ -20,7 +21,9 @@ class Receive {
         will fix the issue shortly!`
             };
         }
-        this.sendMessage(response);
+        if (response) {
+            this.sendMessage(response);
+        }
     }
     handleEvent(event) {
         console.log("Received event:", `${JSON.stringify(event)} for ${this.user.psid}`);
@@ -35,6 +38,9 @@ class Receive {
             },
             message: response
         };
+        if (config_1.config.messageDebug) {
+            console.log(`Sending : ${JSON.stringify(requestBody)}`);
+        }
         graph_api_1.GraphAPI.callSendAPI(requestBody);
     }
 }

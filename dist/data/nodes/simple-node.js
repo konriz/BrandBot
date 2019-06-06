@@ -1,14 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const response_api_1 = require("../../services/response-api");
 const abstract_node_1 = require("./abstract-node");
 class SimpleNode extends abstract_node_1.AbstractNode {
-    constructor(name, buttonText, message) {
-        super(name, buttonText, message);
+    constructor(data) {
+        super(data);
         this.setType("Simple");
     }
     getView() {
-        return response_api_1.ResponseApi.getQuickReplyMessage(this.getMessage(), this.getQuickReplies());
+        return {
+            text: this.getMessage(),
+            quick_replies: this.getQuickReplies()
+        };
     }
 }
 exports.SimpleNode = SimpleNode;

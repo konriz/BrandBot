@@ -33,6 +33,8 @@
                         "name": "KATEGORIA_1_HUAWEI",
                         "buttonText": "Huawei",
                         "message": "Szkła Huawei",
+                        "price": "10",
+                        "url": "https://smart-tel.pl/pl/c/Samsung/14",
                         "children": [
                             {
                                 "name": "PRZELEW_KATEGORIA_1_HUAWEI",
@@ -56,6 +58,8 @@
                         "name": "KATEGORIA_2_SAMSUNG",
                         "buttonText": "Samsung",
                         "message": "Etui Samsung",
+                        "price": "10",
+                        "url": "https://smart-tel.pl/pl/c/Samsung/14",
                         "children": [
                             {
                                 "name": "PRZELEW_KATEGORIA_2_SAMSUNG",
@@ -73,6 +77,8 @@
                         "name": "KATEGORIA_2_HUAWEI",
                         "buttonText": "Huawei",
                         "message": "Etui Huawei",
+                        "price": "10",
+                        "url": "https://smart-tel.pl/pl/c/Samsung/14",
                         "children": [
                             {
                                 "name": "PRZELEW_KATEGORIA_2_HUAWEI",

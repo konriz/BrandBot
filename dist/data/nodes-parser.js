@@ -17,7 +17,7 @@ class NodesTreeParser {
         for (let nodeData of nodes_json_1.default["nodes"]) {
             let node = this.createNode(nodeData);
             tree.push(node);
-            console.log(`Root node ${nodeData["name"]} created.`);
+            console.log(`Root node '${nodeData["name"]}' created.`);
         }
         this.nodes = new Map();
         tree.forEach((node) => node.getMap().forEach((value, key) => {
@@ -27,11 +27,11 @@ class NodesTreeParser {
     createNode(nodeData, parent) {
         let node = node_factory_js_1.NodesFactory.createNode(nodeData);
         if (parent) {
-            console.log(`Node ${node.getName()} - setting parent ${parent.getName()}.`);
+            console.log(`Node '${node.getName()}' - setting parent '${parent.getName()}'.`);
             node.setParent(parent);
         }
         if (nodeData["children"]) {
-            console.log(`Node ${node.getName()} - setting children.`);
+            console.log(`Node '${node.getName()}' - setting children.`);
             let childrenNodes = [];
             let data = nodeData["children"];
             data.forEach((childData) => {

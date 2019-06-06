@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const simple_node_1 = require("./nodes/simple-node");
+const item_node_1 = require("./nodes/item-node");
 class NodesFactory {
     static createNode(data) {
         let node;
-        if (true) {
-            node = this.createSimpleNode(data);
+        if (data["url"] && data["price"]) {
+            node = new item_node_1.ItemNode(data);
         }
-        return node;
-    }
-    static createSimpleNode(data) {
-        let node = new simple_node_1.SimpleNode(data["name"], data["buttonText"], data["message"]);
+        else {
+            node = new simple_node_1.SimpleNode(data);
+        }
         console.log(`Node '${node.getName()}' created as '${node.getType()}'.`);
         return node;
     }

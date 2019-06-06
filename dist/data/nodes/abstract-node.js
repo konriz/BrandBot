@@ -10,10 +10,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const quick_reply_1 = require("../../services/quick-reply");
 const res = __importStar(require("../../locales/resources.json"));
 class AbstractNode {
-    constructor(name, buttonText, message) {
-        this.name = name;
-        this.buttonText = buttonText;
-        this.message = message;
+    constructor(data) {
+        this.name = data["name"];
+        this.buttonText = data["buttonText"];
+        this.message = data["message"];
     }
     getName() {
         return this.name;

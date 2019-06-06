@@ -11,6 +11,10 @@ const simple_node_1 = require("./simple-node");
 const res = __importStar(require("../../locales/resources.json"));
 class DefinedNodes {
 }
-DefinedNodes.ERROR = new simple_node_1.SimpleNode("ERROR", "Error", res.nodes.error);
+DefinedNodes.ERROR = new simple_node_1.SimpleNode({
+    name: "ERROR",
+    buttonText: "Error",
+    message: res.nodes.error
+});
 exports.DefinedNodes = DefinedNodes;
 //# sourceMappingURL=defined-nodes.js.map

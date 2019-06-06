@@ -23,7 +23,7 @@ export class NodesTreeParser implements NodesParser{
         for(let nodeData of data["nodes"]) {
             let node = this.createNode(nodeData);
             tree.push(node);
-            console.log(`Root node ${nodeData["name"]} created.`)
+            console.log(`Root node '${nodeData["name"]}' created.`)
         }
 
         this.nodes = new Map();
@@ -39,12 +39,12 @@ export class NodesTreeParser implements NodesParser{
         let node = NodesFactory.createNode(nodeData);
 
         if(parent) {
-            console.log(`Node ${node.getName()} - setting parent ${parent.getName()}.`);
+            console.log(`Node '${node.getName()}' - setting parent '${parent.getName()}'.`);
             node.setParent(parent);
         }
         
         if(nodeData["children"]) {
-            console.log(`Node ${node.getName()} - setting children.`)
+            console.log(`Node '${node.getName()}' - setting children.`)
             let childrenNodes: BotNode[] = [];
             let data = nodeData["children"];
             data.forEach( (childData: any) => {
