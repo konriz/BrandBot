@@ -8,6 +8,7 @@ export class ItemNode extends AbstractNode {
     constructor(name: string, buttonText:string, message: string, url: string, price: string)
     {
         super(name, buttonText, message);
+        this.setType("Item");
         this.url = url;
         this.price = price;
     }

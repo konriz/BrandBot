@@ -5,6 +5,7 @@ const abstract_node_1 = require("./abstract-node");
 class SimpleNode extends abstract_node_1.AbstractNode {
     constructor(name, buttonText, message) {
         super(name, buttonText, message);
+        this.setType("Simple");
     }
     getView() {
         return response_api_1.ResponseApi.getQuickReplyMessage(this.getMessage(), this.getQuickReplies());

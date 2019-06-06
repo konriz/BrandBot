@@ -73,6 +73,9 @@ class AbstractNode {
         });
         return result;
     }
+    setType(type) {
+        this.type = type;
+    }
     getType() {
         return this.type;
     }

@@ -4,6 +4,7 @@ const abstract_node_1 = require("./abstract-node");
 class ItemNode extends abstract_node_1.AbstractNode {
     constructor(name, buttonText, message, url, price) {
         super(name, buttonText, message);
+        this.setType("Item");
         this.url = url;
         this.price = price;
     }

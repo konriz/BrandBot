@@ -10,6 +10,7 @@ export interface BotNode {
     getChildren(): BotNode[];
     setChildren(children: BotNode[]): void;
     getMap(): Map<string, BotNode>;
+    setType(type: string): any;
     getType(): string;
     getView(): any;
 }
@@ -105,6 +106,10 @@ export abstract class AbstractNode implements BotNode {
             })
         })
         return result;
+    }
+
+    setType(type: string) {
+        this.type = type;
     }
 
     getType() {

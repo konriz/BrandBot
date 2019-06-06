@@ -4,7 +4,8 @@ import { AbstractNode } from "./abstract-node";
 export class SimpleNode extends AbstractNode {
 
     constructor(name: string, buttonText: string, message: string){
-        super(name, buttonText, message)
+        super(name, buttonText, message);
+        this.setType("Simple");
     }
 
     getView() {
