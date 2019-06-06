@@ -14,18 +14,14 @@
                         "name": "KATEGORIA_1_SAMSUNG",
                         "buttonText": "Samsung",
                         "message": "Szkła Samsung",
-                        "price": "10",
                         "url": "https://smart-tel.pl/pl/c/Samsung/14",
                         "children": [
                             {
-                                "name": "PRZELEW_KATEGORIA_1_SAMSUNG",
-                                "buttonText": "Przelew",
-                                "message": "Wpłać na konto 12323534647"
-                            },
-                            {
-                                "name": "POBRANIE_KATEGORIA_1_SAMSUNG",
-                                "buttonText": "Pobranie",
-                                "message": "Czekaj na przesyłkę"
+                                "name": "S8_KATEGORIA_1_SAMSUNG",
+                                "buttonText": "S8",
+                                "message": "Smart-Glass® Szkło Hartowane Full Glue 5D 4D 3D - Samsung Galaxy S8 (5,8\")",
+                                "url": "https://smart-tel.pl/pl/p/Smart-Glass-Szklo-Hartowane-Full-Glue-5D-4D-3D-Samsung-Galaxy-S8-5%2C8-/1083",
+                                "price": "39,99"
                             }
                         ]
                     }, 
@@ -33,18 +29,14 @@
                         "name": "KATEGORIA_1_HUAWEI",
                         "buttonText": "Huawei",
                         "message": "Szkła Huawei",
-                        "price": "10",
-                        "url": "https://smart-tel.pl/pl/c/Samsung/14",
+                        "url": "https://smart-tel.pl/pl/c/Huawei/16",
                         "children": [
                             {
-                                "name": "PRZELEW_KATEGORIA_1_HUAWEI",
-                                "buttonText": "Przelew",
-                                "message": "Wpłać na konto 12323534647"
-                            },
-                            {
-                                "name": "POBRANIE_KATEGORIA_1_HUAWEI",
-                                "buttonText": "Pobranie",
-                                "message": "Czekaj na przesyłkę"
+                                "name": "P20_KATEGORIA_1_HUAWEI",
+                                "buttonText": "P20",
+                                "message": "SZKŁO HARTOWANE 3D NA CAŁY EKRAN HUAWEI P20",
+                                "url": "https://smart-tel.pl/pl/p/SZKLO-HARTOWANE-3D-NA-CALY-EKRAN-HUAWEI-P20/1119",
+                                "price": "19,99"
                             }
                         ]
                     }]
@@ -58,18 +50,14 @@
                         "name": "KATEGORIA_2_SAMSUNG",
                         "buttonText": "Samsung",
                         "message": "Etui Samsung",
-                        "price": "10",
-                        "url": "https://smart-tel.pl/pl/c/Samsung/14",
+                        "url": "https://smart-tel.pl/pl/c/Samsung/23",
                         "children": [
                             {
-                                "name": "PRZELEW_KATEGORIA_2_SAMSUNG",
-                                "buttonText": "Przelew",
-                                "message": "Wpłać na konto 12323534647"
-                            },
-                            {
-                                "name": "POBRANIE_KATEGORIA_2_SAMSUNG",
-                                "buttonText": "Pobranie",
-                                "message": "Czekaj na przesyłkę"
+                                "name": "A50_KATEGORIA_2_SAMSUNG",
+                                "buttonText": "A50",
+                                "message": "Etui Magnetyczne Magneto - Aluminium + Szklane Plecki - Samsung A50 (6,4\")",
+                                "url": "https://smart-tel.pl/pl/p/Etui-Magnetyczne-Magneto-Aluminium-Szklane-Plecki-Samsung-A50-6%2C4-/1538",
+                                "price": "44,99"
                             }
                         ]
                     },
@@ -77,18 +65,14 @@
                         "name": "KATEGORIA_2_HUAWEI",
                         "buttonText": "Huawei",
                         "message": "Etui Huawei",
-                        "price": "10",
-                        "url": "https://smart-tel.pl/pl/c/Samsung/14",
+                        "url": "https://smart-tel.pl/pl/c/Huawei/25",
                         "children": [
                             {
-                                "name": "PRZELEW_KATEGORIA_2_HUAWEI",
-                                "buttonText": "Przelew",
-                                "message": "Wpłać na konto 12323534647"
-                            },
-                            {
-                                "name": "POBRANIE_KATEGORIA_2_HUAWEI",
-                                "buttonText": "Pobranie",
-                                "message": "Czekaj na przesyłkę"
+                                "name": "P_Smart_KATEGORIA_2_HUAWEI",
+                                "buttonText": "P Smart",
+                                "message": "Etui Air Cushion - Huawei P Smart 2019 (6,2\")",
+                                "url": "https://smart-tel.pl/pl/p/Etui-Air-Cushion-Huawei-P-Smart-2019-6%2C2/1579",
+                                "price": "24,90"
                             }]
                     }
                 ]
