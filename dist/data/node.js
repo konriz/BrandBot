@@ -34,6 +34,26 @@ class SimpleNode {
         let message = response_api_1.ResponseApi.getQuickReplyMessage(this.message, this.getQuickReplies());
         return message;
     }
+    getMap() {
+        let maps = [];
+        // insert current node into map
+        let map = new Map();
+        map.set(this.getName(), this);
+        maps.push(map);
+        // insert children nodes into map
+        if (this.children) {
+            this.children.forEach((child) => {
+                maps.push(child.getMap());
+            });
+        }
+        let result = new Map();
+        maps.forEach((map) => {
+            map.forEach((value, key) => {
+                result.set(key, value);
+            });
+        });
+        return result;
+    }
     getQuickReplies() {
         let quickReplies = [];
         // Add children buttons

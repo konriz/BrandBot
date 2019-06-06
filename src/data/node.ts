@@ -8,6 +8,7 @@ export interface BotNode {
     setParent(parent: BotNode): void;
     setChildren(children: BotNode[]): void;
     getView(): any;
+    getMap(): Map<string, BotNode>;
 }
 
 export class SimpleNode implements BotNode {
@@ -49,6 +50,31 @@ export class SimpleNode implements BotNode {
             this.getQuickReplies()
         );
         return message;
+    }
+
+    getMap(): Map<string, BotNode> {
+
+        let maps: Map<string, BotNode>[] = [];
+
+        // insert current node into map
+        let map: Map<string, BotNode> = new Map();
+        map.set(this.getName(), this);
+        maps.push(map);
+
+        // insert children nodes into map
+        if(this.children){
+            this.children.forEach( (child) => {
+                maps.push(child.getMap());
+            })
+        }
+
+        let result: Map<string, BotNode> = new Map();
+        maps.forEach( (map) => {
+            map.forEach( (value, key) => {
+                result.set(key, value);
+            })
+        })
+        return result;
     }
 
     private getQuickReplies() {

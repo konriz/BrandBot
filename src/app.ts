@@ -154,7 +154,7 @@ app.get("/profile", (req, res) => {
   
 var listener = app.listen(config.port, function() {
   let address = <AddressInfo>listener.address();
-  console.log(`Your app is listening on port: ${address.port}`)
+  console.log(`Your app is listening on port: ${address.port}`);
 });
 
 
