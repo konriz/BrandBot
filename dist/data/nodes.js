@@ -8,11 +8,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Nodes = __importStar(require("./node"));
-const nodes_parser_tree_1 = require("./nodes-parser.tree");
 class NodesTable {
-    constructor() {
-        this.nodes = nodes_parser_tree_1.NodesTreeParser.getNodes();
-        this.nodes.set("ERROR", Nodes.SimpleNode.errorNode);
+    constructor(parser) {
+        this.nodes = parser.getNodes();
+        this.nodes.set(Nodes.SimpleNode.errorNode.getName(), Nodes.SimpleNode.errorNode);
     }
     getView(name) {
         return this.getNode(name).getView();

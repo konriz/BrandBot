@@ -1,5 +1,5 @@
 import { User } from "./user";
-import { GraphAPi } from "./graph-api";
+import { GraphAPI } from "./graph-api";
 import { EventHandler } from "./event-handler";
 
 export class Receive {
@@ -46,6 +46,6 @@ export class Receive {
       },
       message: response
     };
-    GraphAPi.callSendAPI(requestBody);
+    GraphAPI.callSendAPI(requestBody);
   }
 };

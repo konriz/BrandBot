@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const config_1 = require("./config");
 const request = require("request");
-class GraphAPi {
+class GraphAPI {
     static callSendAPI(requestBody) {
         // Send the HTTP request to the Messenger Platform
         request({
@@ -102,6 +102,7 @@ class GraphAPi {
                 //   delete userProfile[key];
                 //   userProfile[camelizedKey] = value;
                 // }
+                console.log(`User profile: ${JSON.stringify(userProfile)}`);
                 return userProfile;
             }
             catch (err) {
@@ -173,6 +174,6 @@ class GraphAPi {
         });
     }
 }
-exports.GraphAPi = GraphAPi;
+exports.GraphAPI = GraphAPI;
 ;
 //# sourceMappingURL=graph-api.js.map

@@ -1,8 +1,7 @@
 import { config } from "./config";
-import camelCase from "camelcase";
 import request = require("request");
 
-export class GraphAPi {
+export class GraphAPI {
   static callSendAPI(requestBody: any) {
     // Send the HTTP request to the Messenger Platform
     request(
@@ -113,7 +112,7 @@ export class GraphAPi {
       //   delete userProfile[key];
       //   userProfile[camelizedKey] = value;
       // }
-
+      console.log(`User profile: ${JSON.stringify(userProfile)}`);
       return userProfile;
     } catch (err) {
       console.log("Fetch failed:", err);

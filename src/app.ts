@@ -1,14 +1,17 @@
 import express from "express";
 import { urlencoded, json } from "body-parser";
 import { config } from "./services/config";
-import { GraphAPi } from "./services/graph-api";
+import { GraphAPI } from "./services/graph-api";
 import { User } from "./services/user";
 import { Receive } from "./services/receive";
 import { Profile } from "./services/profile";
 import { AddressInfo } from "net";
+import { NodesTreeParser } from "./data/nodes-parser";
+import { NodesTable } from "./data/nodes";
 
 const app = express();
 var users: any = {};
+export var nodesTable = new NodesTable(new NodesTreeParser());
 
 app.use(
     urlencoded({
@@ -77,7 +80,7 @@ app.post("/webhook", (req, res) => {
         if (!(senderPsid in users)) {
           let user = new User(senderPsid);
   
-          GraphAPi.getUserProfile(senderPsid)
+          GraphAPI.getUserProfile(senderPsid)
             .then(userProfile => {
               user.setProfile(userProfile);
             })
@@ -123,14 +126,7 @@ app.get("/profile", (req, res) => {
     if (token === config.verifyToken) {
       
       profile.setWebhook();
-      // res.write(
-      //   `<p>Set app ${config.appId} call to ${config.webhookUrl}</p>`
-      // );
       profile.setThread();
-      // res.write(`<p>Set Messenger Profile of Page ${config.pageId}</p>`);
-      // res.write(`<p>Set Get Started postback: ${JSON.stringify(profile.getGetStarted())}</p>`);
-      // res.write(`<p>Set Greeting text: ${JSON.stringify(profile.getGreetingText())}</p>`);
-      // res.write(`<p>Set Persistent Menu ${JSON.stringify(profile.getPersistentMenu())}</p>`);
 
       let pageId = config.pageId;
       let getStarted = JSON.stringify(profile.getGetStarted());

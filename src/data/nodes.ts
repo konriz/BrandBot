@@ -1,13 +1,13 @@
 import * as Nodes from "./node";
-import { NodesTreeParser } from "./nodes-parser.tree";
+import { NodesParser } from "./nodes-parser";
 
 export class NodesTable {
 
     nodes: Map<string, Nodes.BotNode>;
 
-    constructor() {
-        this.nodes = NodesTreeParser.getNodes();
-        this.nodes.set("ERROR", Nodes.SimpleNode.errorNode)
+    constructor(parser: NodesParser) {
+        this.nodes = parser.getNodes();
+        this.nodes.set(Nodes.SimpleNode.errorNode.getName(), Nodes.SimpleNode.errorNode)
     }
 
     getView(name: string) {

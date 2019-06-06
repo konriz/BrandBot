@@ -1,4 +1,4 @@
-import { GraphAPi } from "./graph-api";
+import { GraphAPI } from "./graph-api";
 import { config } from "./config";
 import * as res from "../locales/resources.json"
 
@@ -9,8 +9,8 @@ export class Profile {
   }
 
   setWebhook() {
-    GraphAPi.callSubscriptionsAPI();
-    GraphAPi.callSubscribedApps();
+    GraphAPI.callSubscriptionsAPI();
+    GraphAPI.callSubscribedApps();
   }
 
   setThread() {
@@ -21,7 +21,7 @@ export class Profile {
     };
 
     console.log(JSON.stringify(profilePayload))
-    GraphAPi.callMessengerProfileAPI(profilePayload);
+    GraphAPI.callMessengerProfileAPI(profilePayload);
   }
 
   getGetStarted() {

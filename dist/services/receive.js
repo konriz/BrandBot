@@ -35,7 +35,7 @@ class Receive {
             },
             message: response
         };
-        graph_api_1.GraphAPi.callSendAPI(requestBody);
+        graph_api_1.GraphAPI.callSendAPI(requestBody);
     }
 }
 exports.Receive = Receive;

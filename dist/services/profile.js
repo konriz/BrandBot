@@ -14,13 +14,13 @@ class Profile {
     constructor() {
     }
     setWebhook() {
-        graph_api_1.GraphAPi.callSubscriptionsAPI();
-        graph_api_1.GraphAPi.callSubscribedApps();
+        graph_api_1.GraphAPI.callSubscriptionsAPI();
+        graph_api_1.GraphAPI.callSubscribedApps();
     }
     setThread() {
         let profilePayload = Object.assign({}, this.getGetStarted(), this.getGreeting(), this.getPersistentMenu());
         console.log(JSON.stringify(profilePayload));
-        graph_api_1.GraphAPi.callMessengerProfileAPI(profilePayload);
+        graph_api_1.GraphAPI.callMessengerProfileAPI(profilePayload);
     }
     getGetStarted() {
         return {

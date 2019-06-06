@@ -1,82 +1,64 @@
 import data from "./nodes.json";
-import * as Nodes from "./node";
+import * as Nodes from "./node.js";
 
-export class NodesParser{
+export interface NodesParser {
+    getNodes(): Map<string, Nodes.BotNode>;
+}
 
-    private static nodes: Map<string, Nodes.BotNode>;
+export class NodesTreeParser implements NodesParser{
 
-    static getNodes() : Map<string, Nodes.BotNode> {
+    private nodes: Map<string,  Nodes.BotNode>;
+
+    getNodes() : Map<string, Nodes.BotNode> {
         if(!this.nodes) {
             this.populateNodes();
         }
         return this.nodes;
     }
 
-    private static populateNodes() {
-        let nodes: Map<string, Nodes.BotNode> = new Map();
+    private populateNodes() {
+        let tree: Nodes.BotNode[] = [];
+
         for(let nodeData of data["nodes"]) {
-
-            let node = new Nodes.SimpleNode(
-                nodeData["name"],
-                nodeData["buttonText"],
-                nodeData["message"]
-            )
-            nodes.set(node.getName(), node);
-            console.log(`Node named : '${node.getName()}' saved.`);
+            let node = this.createNode(nodeData);
+            tree.push(node);
+            console.log(`Root node ${nodeData["name"]} created.`)
         }
-        this.nodes = nodes;
 
-        this.nodes.forEach( (node) => {
-            this.assignParents(node);
-            this.assignChildren(node);
-        })
-    }
-
-    private static assignParents(node: Nodes.BotNode) {
-        let parentName = this.getParentName(node);
-        if(parentName) {
-            let parent = this.findNode(parentName);
-            node.setParent(parent);
-            console.log(`Node named : '${node.getName()}' parent assigned.`);
-        } else {
-            console.log(`Node named : '${node.getName()}' has no parrent.`);
-        }
-    }
-
-    private static getParentName(node: Nodes.BotNode): string {
-        for(let nodeData of data["nodes"]) {
-            if(nodeData["name"] == node.getName()){
-                return nodeData["parent"];
-            }
-        }
-    }
-
-    private static assignChildren(node: Nodes.BotNode) {
-        let childrenNames = this.getChildrenNames(node);
-        if(childrenNames) {
-            let children: Nodes.BotNode[] = [];
-            childrenNames.forEach( (name) => {
-                let child = this.findNode(name);
-                children.push(child);
+        this.nodes = new Map();
+        tree.forEach( (node) => 
+            node.getMap().forEach( (value, key) => {
+                this.nodes.set(key, value);
             })
-            
-            node.setChildren(children);
-            console.log(`Node named : '${node.getName()}' children assigned.`);
-        } else {
-            console.log(`Node named : '${node.getName()}' has no children.`);
-        }
+        )
+
     }
 
-    private static getChildrenNames(node: Nodes.BotNode): string[] {
-        for(let nodeData of data["nodes"]) {
-            if(nodeData["name"] == node.getName()){
-                return nodeData["children"];
-            }
-        }
-    }
+    private createNode(nodeData: any, parent?: Nodes.BotNode): Nodes.BotNode {
+        let node = new Nodes.SimpleNode(
+            nodeData["name"],
+            nodeData["buttonText"],
+            nodeData["message"]
+        );
 
-    private static findNode(name: string): Nodes.BotNode {
-        let node = this.nodes.get(name);
+        console.log(`Node ${node.getName()} initialised.`)
+
+        if(parent) {
+            console.log(`Node ${node.getName()} - setting parent ${parent.getName()}.`);
+            node.setParent(parent);
+        }
+        
+        if(nodeData["children"]) {
+            console.log(`Node ${node.getName()} - setting children.`)
+            let childrenNodes: Nodes.BotNode[] = [];
+            let data = nodeData["children"];
+            data.forEach( (childData: any) => {
+                childrenNodes.push(this.createNode(childData, node));
+            } );
+            node.setChildren(childrenNodes);
+        }
+
         return node;
     }
+
 }

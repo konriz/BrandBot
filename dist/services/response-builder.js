@@ -1,9 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const nodes_1 = require("../data/nodes");
+const app_1 = require("../app");
 class ResponseBuilder {
     constructor() {
-        this.nodes = new nodes_1.NodesTable();
     }
     getErrorMessage() {
         return this.getNodeView("ERROR");
@@ -12,7 +11,7 @@ class ResponseBuilder {
         return this.getNodeView("HOME");
     }
     getNodeView(name) {
-        return this.nodes.getView(name);
+        return app_1.nodesTable.getView(name);
     }
 }
 exports.ResponseBuilder = ResponseBuilder;

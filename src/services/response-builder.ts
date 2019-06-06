@@ -1,11 +1,8 @@
-import { NodesTable } from "../data/nodes";
+import { nodesTable } from "../app";
 
 export class ResponseBuilder {
 
-    nodes: NodesTable;
-
     constructor() {
-        this.nodes = new NodesTable();
     }
     
     getErrorMessage() {
@@ -17,6 +14,6 @@ export class ResponseBuilder {
     }
 
     getNodeView(name: string) {
-        return this.nodes.getView(name);
+        return nodesTable.getView(name);
     }
 }
