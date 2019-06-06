@@ -14,11 +14,13 @@
                         "name": "KATEGORIA_1_SAMSUNG",
                         "buttonText": "Samsung",
                         "message": "Szkła Samsung",
+                        "price": "10",
+                        "url": "https://smart-tel.pl/pl/c/Samsung/14",
                         "children": [
                             {
-                            "name": "PRZELEW_KATEGORIA_1_SAMSUNG",
-                            "buttonText": "Przelew",
-                            "message": "Wpłać na konto 12323534647"
+                                "name": "PRZELEW_KATEGORIA_1_SAMSUNG",
+                                "buttonText": "Przelew",
+                                "message": "Wpłać na konto 12323534647"
                             },
                             {
                                 "name": "POBRANIE_KATEGORIA_1_SAMSUNG",

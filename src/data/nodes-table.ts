@@ -1,13 +1,15 @@
-import * as Nodes from "./node";
 import { NodesParser } from "./nodes-parser";
+import { BotNode } from "./nodes/abstract-node";
+import { SimpleNode } from "./nodes/simple-node";
+import { DefinedNodes } from "./nodes/defined-nodes";
 
 export class NodesTable {
 
-    nodes: Map<string, Nodes.BotNode>;
+    nodes: Map<string, BotNode>;
 
     constructor(parser: NodesParser) {
         this.nodes = parser.getNodes();
-        this.nodes.set(Nodes.SimpleNode.errorNode.getName(), Nodes.SimpleNode.errorNode)
+        this.nodes.set(DefinedNodes.ERROR.getName(), DefinedNodes.ERROR)
     }
 
     getView(name: string) {
@@ -15,7 +17,7 @@ export class NodesTable {
     }
 
     getNode(name: string) {
-        let node: Nodes.BotNode = this.nodes.get(name);
+        let node: BotNode = this.nodes.get(name);
         if (node) {
             console.log(`Node named : '${name}' found`);
         } else {
@@ -25,7 +27,7 @@ export class NodesTable {
         return node;
     }
 
-    private getError(): Nodes.BotNode {
+    private getError(): BotNode {
         return this.getNode("ERROR");
     }
 

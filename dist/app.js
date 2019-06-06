@@ -11,10 +11,10 @@ const user_1 = require("./services/user");
 const receive_1 = require("./services/receive");
 const profile_1 = require("./services/profile");
 const nodes_parser_1 = require("./data/nodes-parser");
-const nodes_1 = require("./data/nodes");
+const nodes_table_1 = require("./data/nodes-table");
 const app = express_1.default();
 var users = {};
-exports.nodesTable = new nodes_1.NodesTable(new nodes_parser_1.NodesTreeParser());
+exports.nodesTable = new nodes_table_1.NodesTable(new nodes_parser_1.NodesTreeParser());
 app.use(body_parser_1.urlencoded({
     extended: true
 }));

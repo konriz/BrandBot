@@ -2,16 +2,9 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const nodes_json_1 = __importDefault(require("./nodes.json"));
-const Nodes = __importStar(require("./node.js"));
+const node_factory_js_1 = require("./node-factory.js");
 class NodesTreeParser {
     getNodes() {
         if (!this.nodes) {
@@ -32,8 +25,7 @@ class NodesTreeParser {
         }));
     }
     createNode(nodeData, parent) {
-        let node = new Nodes.SimpleNode(nodeData["name"], nodeData["buttonText"], nodeData["message"]);
-        console.log(`Node ${node.getName()} initialised.`);
+        let node = node_factory_js_1.NodesFactory.createNode(nodeData);
         if (parent) {
             console.log(`Node ${node.getName()} - setting parent ${parent.getName()}.`);
             node.setParent(parent);

@@ -12,6 +12,7 @@ const response_api_1 = require("../services/response-api");
 const res = __importStar(require("../locales/resources.json"));
 class SimpleNode {
     constructor(name, buttonText, message, parent, children) {
+        this.type = "Simple";
         this.name = name;
         this.buttonText = buttonText;
         this.message = message;
@@ -53,6 +54,9 @@ class SimpleNode {
             });
         });
         return result;
+    }
+    getType() {
+        return this.type;
     }
     getQuickReplies() {
         let quickReplies = [];

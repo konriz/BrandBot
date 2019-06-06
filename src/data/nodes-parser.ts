@@ -1,15 +1,16 @@
 import data from "./nodes.json";
-import * as Nodes from "./node.js";
+import { NodesFactory } from "./node-factory.js";
+import { BotNode } from "./nodes/abstract-node.js";
 
 export interface NodesParser {
-    getNodes(): Map<string, Nodes.BotNode>;
+    getNodes(): Map<string, BotNode>;
 }
 
 export class NodesTreeParser implements NodesParser{
 
-    private nodes: Map<string,  Nodes.BotNode>;
+    private nodes: Map<string,  BotNode>;
 
-    getNodes() : Map<string, Nodes.BotNode> {
+    getNodes() : Map<string, BotNode> {
         if(!this.nodes) {
             this.populateNodes();
         }
@@ -17,7 +18,7 @@ export class NodesTreeParser implements NodesParser{
     }
 
     private populateNodes() {
-        let tree: Nodes.BotNode[] = [];
+        let tree: BotNode[] = [];
 
         for(let nodeData of data["nodes"]) {
             let node = this.createNode(nodeData);
@@ -31,17 +32,11 @@ export class NodesTreeParser implements NodesParser{
                 this.nodes.set(key, value);
             })
         )
-
     }
 
-    private createNode(nodeData: any, parent?: Nodes.BotNode): Nodes.BotNode {
-        let node = new Nodes.SimpleNode(
-            nodeData["name"],
-            nodeData["buttonText"],
-            nodeData["message"]
-        );
+    private createNode(nodeData: any, parent?: BotNode): BotNode {
 
-        console.log(`Node ${node.getName()} initialised.`)
+        let node = NodesFactory.createNode(nodeData);
 
         if(parent) {
             console.log(`Node ${node.getName()} - setting parent ${parent.getName()}.`);
@@ -50,14 +45,13 @@ export class NodesTreeParser implements NodesParser{
         
         if(nodeData["children"]) {
             console.log(`Node ${node.getName()} - setting children.`)
-            let childrenNodes: Nodes.BotNode[] = [];
+            let childrenNodes: BotNode[] = [];
             let data = nodeData["children"];
             data.forEach( (childData: any) => {
                 childrenNodes.push(this.createNode(childData, node));
             } );
             node.setChildren(childrenNodes);
         }
-
         return node;
     }
 

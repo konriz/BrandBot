@@ -7,7 +7,7 @@ import { Receive } from "./services/receive";
 import { Profile } from "./services/profile";
 import { AddressInfo } from "net";
 import { NodesTreeParser } from "./data/nodes-parser";
-import { NodesTable } from "./data/nodes";
+import { NodesTable } from "./data/nodes-table";
 
 const app = express();
 var users: any = {};
