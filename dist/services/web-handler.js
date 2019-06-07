@@ -59,6 +59,9 @@ class WebHandler {
                 res.sendStatus(403);
             }
         }
+        else {
+            res.sendStatus(404);
+        }
     }
     static postWebhook(req, res) {
         let body = req.body;
