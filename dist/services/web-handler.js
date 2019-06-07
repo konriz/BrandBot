@@ -27,15 +27,11 @@ class WebHandler {
             if (token === config_1.config.verifyToken) {
                 profile.setWebhook();
                 profile.setThread();
-                let pageId = config_1.config.pageId;
-                let getStarted = JSON.stringify(profile.getGetStarted());
-                let greeting = JSON.stringify(profile.getGreetingText());
-                let menu = JSON.stringify(profile.getPersistentMenu());
                 res.render("profile", {
-                    pageId: pageId,
-                    getStarted: getStarted,
-                    greeting: greeting,
-                    menu: menu
+                    pageId: config_1.config.pageId,
+                    getStarted: JSON.stringify(profile.getGetStarted()),
+                    greeting: JSON.stringify(profile.getGreetingText()),
+                    menu: JSON.stringify(profile.getPersistentMenu())
                 });
             }
             else {
@@ -71,6 +67,7 @@ class WebHandler {
             res.sendStatus(404);
         }
     }
+    ;
     static postWebhook(req, res) {
         let body = req.body;
         // Checks if this is an event from a page subscription
@@ -78,7 +75,7 @@ class WebHandler {
             // Returns a '200 OK' response to all requests
             res.status(200).send("EVENT_RECEIVED");
             // Iterates over each entry - there may be multiple if batched
-            body.entry.forEach(function (entry) {
+            body.entry.forEach((entry) => {
                 // Gets the body of the webhook event
                 let webhookEvent = entry.messaging[0];
                 // console.log(webhookEvent);
@@ -101,17 +98,17 @@ class WebHandler {
                     })
                         .catch(error => {
                         // The profile is unavailable
-                        console.log("Profile is unavailable:", error);
+                        console.log(`Profile is unavailable: ${error}`);
                     })
                         .finally(() => {
                         app_1.users[senderPsid] = user;
-                        console.log("New Profile PSID:", senderPsid);
+                        console.log(`New Profile PSID: ${senderPsid}`);
                         let receiveMessage = new receive_1.Receive(app_1.users[senderPsid], webhookEvent);
                         return receiveMessage.handleMessage();
                     });
                 }
                 else {
-                    console.log("Profile already exists PSID:", senderPsid);
+                    console.log(`Profile already exists PSID: ${senderPsid}`);
                     let receiveMessage = new receive_1.Receive(app_1.users[senderPsid], webhookEvent);
                     return receiveMessage.handleMessage();
                 }
@@ -123,8 +120,14 @@ class WebHandler {
         }
     }
     static getNodes(req, res) {
-        res.send(nodesFile);
+        if (nodesFile) {
+            res.send(nodesFile);
+        }
+        else {
+            res.sendStatus(404);
+        }
     }
+    ;
 }
 exports.WebHandler = WebHandler;
 //# sourceMappingURL=web-handler.js.map

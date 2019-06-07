@@ -24,16 +24,12 @@ export class WebHandler {
             
             profile.setWebhook();
             profile.setThread();
-      
-            let pageId = config.pageId;
-            let getStarted = JSON.stringify(profile.getGetStarted());
-            let greeting = JSON.stringify(profile.getGreetingText());
-            let menu = JSON.stringify(profile.getPersistentMenu());
+            
             res.render("profile", {
-              pageId: pageId,
-              getStarted: getStarted,
-              greeting: greeting,
-              menu: menu
+              pageId: config.pageId,
+              getStarted: JSON.stringify(profile.getGetStarted()),
+              greeting: JSON.stringify(profile.getGreetingText()),
+              menu: JSON.stringify(profile.getPersistentMenu())
             });
           } else {
             // Responds with '403 Forbidden' if verify tokens do not match
@@ -43,9 +39,9 @@ export class WebHandler {
           // Returns a '404 Not Found' if token are missing
           res.sendStatus(404);
         }
-      };
+    };
 
-      static getWebhook(req: express.Request, res: express.Response) {
+    static getWebhook(req: express.Request, res: express.Response) {
         // Parse the query params
         let mode = req.query["hub.mode"];
         let token = req.query["hub.verify_token"];
@@ -65,9 +61,9 @@ export class WebHandler {
         } else {
             res.sendStatus(404);
         }
-      }
+    };
 
-      static postWebhook(req: express.Request, res: express.Response) {
+    static postWebhook(req: express.Request, res: express.Response) {
         let body = req.body;
         
         // Checks if this is an event from a page subscription
@@ -76,7 +72,7 @@ export class WebHandler {
           res.status(200).send("EVENT_RECEIVED");
       
           // Iterates over each entry - there may be multiple if batched
-          body.entry.forEach(function(entry: any) {
+          body.entry.forEach( (entry: any) => {
             // Gets the body of the webhook event
             let webhookEvent = entry.messaging[0];
             // console.log(webhookEvent);
@@ -104,22 +100,16 @@ export class WebHandler {
                 })
                 .catch(error => {
                   // The profile is unavailable
-                  console.log("Profile is unavailable:", error);
+                  console.log(`Profile is unavailable: ${error}`);
                 })
                 .finally(() => {
                   users[senderPsid] = user;
-                  console.log(
-                    "New Profile PSID:",
-                    senderPsid
-                  );
+                  console.log(`New Profile PSID: ${senderPsid}`);
                   let receiveMessage = new Receive(users[senderPsid], webhookEvent);
                   return receiveMessage.handleMessage();
                 });
             } else {
-              console.log(
-                "Profile already exists PSID:",
-                senderPsid
-              );
+              console.log(`Profile already exists PSID: ${senderPsid}`);
               let receiveMessage = new Receive(users[senderPsid], webhookEvent);
               return receiveMessage.handleMessage();
             }
@@ -128,9 +118,13 @@ export class WebHandler {
           // Returns a '404 Not Found' if event is not from a page subscription
           res.sendStatus(404);
         }
-      }
+    }
 
-      static getNodes(req: express.Request, res: express.Response) {
+    static getNodes(req: express.Request, res: express.Response) {
+        if(nodesFile) {
         res.send(nodesFile);
-      } 
+        } else {
+        res.sendStatus(404);
+        }
+    };
 }
