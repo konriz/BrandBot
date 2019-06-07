@@ -1,6 +1,7 @@
 import { AbstractNode } from "./abstract-node";
 import { ItemNode } from "./item-node";
 import * as res from "../../locales/resources.json";
+import { MessageBuilder } from "../../services/message-builder";
 
 export class BuyNode extends AbstractNode {
 
@@ -15,9 +16,6 @@ export class BuyNode extends AbstractNode {
     }
 
     getView() {
-        return {
-            text: this.getMessage(),
-            quick_replies: this.getQuickReplies()
-        };
+        return MessageBuilder.getQuickReplyMessage(this.getMessage(), this.getQuickReplies());
     }
 }

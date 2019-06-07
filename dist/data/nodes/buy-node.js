@@ -10,6 +10,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const abstract_node_1 = require("./abstract-node");
 const item_node_1 = require("./item-node");
 const res = __importStar(require("../../locales/resources.json"));
+const message_builder_1 = require("../../services/message-builder");
 class BuyNode extends abstract_node_1.AbstractNode {
     constructor(data) {
         super({
@@ -21,10 +22,7 @@ class BuyNode extends abstract_node_1.AbstractNode {
         this.setParent(new item_node_1.ItemNode(data));
     }
     getView() {
-        return {
-            text: this.getMessage(),
-            quick_replies: this.getQuickReplies()
-        };
+        return message_builder_1.MessageBuilder.getQuickReplyMessage(this.getMessage(), this.getQuickReplies());
     }
 }
 exports.BuyNode = BuyNode;

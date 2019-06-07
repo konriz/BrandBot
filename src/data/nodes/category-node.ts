@@ -1,5 +1,6 @@
 import { AbstractNode } from "./abstract-node";
 import * as res from "../../locales/resources.json";
+import { MessageBuilder } from "../../services/message-builder";
 
 
 export class LinkNode extends AbstractNode {
@@ -14,29 +15,6 @@ export class LinkNode extends AbstractNode {
     }
 
     getView() {
-
-        let message = {
-            quick_replies: this.getQuickReplies(),
-            attachment: this.getAttachment()
-        };
-
-        return message;
-    }
-
-    private getAttachment(): any {
-        return {
-            type: "template",
-            payload: {
-                template_type: "button",
-                text: this.getMessage(),
-                buttons: [
-                    {
-                        type: "web_url",
-                        title: res.nodes.site,
-                        url: this.url
-                    }
-                ]
-            }
-        }
+        return MessageBuilder.getItemReplyMessage(this.getMessage(), this.getQuickReplies(), this.url);
     }
 }

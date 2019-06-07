@@ -1,4 +1,5 @@
 import { AbstractNode } from "./abstract-node";
+import { MessageBuilder } from "../../services/message-builder";
 
 export class SimpleNode extends AbstractNode {
 
@@ -6,13 +7,9 @@ export class SimpleNode extends AbstractNode {
         super(data);
         this.setType("Simple");
     }
-
-    getView() {
-        return {
-            text: this.getMessage(),
-            quick_replies: this.getQuickReplies()
-        };
-    }
     
+    getView() {
+        return MessageBuilder.getQuickReplyMessage(this.getMessage(), this.getQuickReplies());
+    }
 }
 

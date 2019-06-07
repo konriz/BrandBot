@@ -1,14 +1,7 @@
 "use strict";
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const abstract_node_1 = require("./abstract-node");
-const res = __importStar(require("../../locales/resources.json"));
+const message_builder_1 = require("../../services/message-builder");
 class ItemNode extends abstract_node_1.AbstractNode {
     constructor(data) {
         super(data);
@@ -23,27 +16,7 @@ class ItemNode extends abstract_node_1.AbstractNode {
         return `${super.getMessage()} - cena : ${this.price}`;
     }
     getView() {
-        let message = {
-            quick_replies: this.getQuickReplies(),
-            attachment: this.getAttachment()
-        };
-        return message;
-    }
-    getAttachment() {
-        return {
-            type: "template",
-            payload: {
-                template_type: "button",
-                text: this.getMessage(),
-                buttons: [
-                    {
-                        type: "web_url",
-                        title: res.nodes.site,
-                        url: this.url
-                    }
-                ]
-            }
-        };
+        return message_builder_1.MessageBuilder.getItemReplyMessage(this.getMessage(), this.getQuickReplies(), this.url);
     }
 }
 exports.ItemNode = ItemNode;
