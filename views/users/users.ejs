@@ -1,0 +1,10 @@
+<%- include('../header'); -%>
+
+<h1>List of users:</h1>
+<ul class="list-group">
+    <% users.forEach(function(user){ %>
+        <%- include('user', {user:user}); %>
+    <% }) %>
+</ul>
+
+<%- include('../footer'); -%>

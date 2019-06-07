@@ -10,7 +10,7 @@ const nodes_parser_1 = require("./data/nodes-parser");
 const nodes_table_1 = require("./data/nodes-table");
 const web_handler_1 = require("./services/web-handler");
 const app = express_1.default();
-exports.users = {};
+exports.users = new Map();
 var nodesParser = new nodes_parser_1.NodesTreeParser();
 exports.nodesTable = new nodes_table_1.NodesTable(nodesParser);
 app.use(body_parser_1.urlencoded({

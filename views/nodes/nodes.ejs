@@ -1,0 +1,10 @@
+<%- include('../header'); -%>
+
+<h1>List of nodes:</h1>
+<ul class="list-group">
+    <% nodes.forEach(function(node){ %>
+        <%- include('node', {node:node}); %>
+    <% }) %>
+</ul>
+
+<%- include('../footer'); -%>

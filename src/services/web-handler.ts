@@ -4,8 +4,7 @@ import express = require("express");
 import { User } from "./user";
 import { GraphAPI } from "./graph-api";
 import { Receive } from "./receive";
-import { users } from "../app";
-import * as nodesFile from "../data/nodes.json";
+import { users, nodesTable } from "../app";
 
 export class WebHandler {
 
@@ -101,14 +100,14 @@ export class WebHandler {
                 .catch(error => {console.log(`Profile is unavailable: ${error}`);
                 })
                 .finally(() => {
-                  users[senderPsid] = user;
+                  users.set(senderPsid, user);
                   console.log(`New Profile PSID: ${senderPsid}`);
-                  let receiveMessage = new Receive(users[senderPsid], webhookEvent);
+                  let receiveMessage = new Receive(users.get(senderPsid), webhookEvent);
                   return receiveMessage.handleMessage();
                 });
             } else {
               console.log(`Profile already exists PSID: ${senderPsid}`);
-              let receiveMessage = new Receive(users[senderPsid], webhookEvent);
+              let receiveMessage = new Receive(users.get(senderPsid), webhookEvent);
               return receiveMessage.handleMessage();
             }
           });
@@ -119,10 +118,18 @@ export class WebHandler {
     }
 
   static getNodes(req: express.Request, res: express.Response) {
-      nodesFile ? res.send(nodesFile) : res.sendStatus(404);
+    if(nodesTable.nodes.size > 0){
+      res.render("nodes/nodes", {nodes: Array.from(nodesTable.nodes.values())})
+    } else {
+      res.render("nodes/nonodes");
+    }
   };
 
   static getUsers(req: express.Request, res: express.Response) {
-      users ? res.send(users) : res.sendStatus(404);
+    if(users.size > 0){
+      res.render("users/users", {users: Array.from(users.values())})
+    } else {
+      res.render("users/nousers");
+    }
   };
 }

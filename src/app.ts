@@ -5,9 +5,10 @@ import { AddressInfo } from "net";
 import { NodesTreeParser } from "./data/nodes-parser";
 import { NodesTable } from "./data/nodes-table";
 import { WebHandler } from "./services/web-handler";
+import { User } from "./services/user";
 
 const app = express();
-export var users: any = {};
+export var users: Map<string, User> = new Map();
 var nodesParser = new NodesTreeParser();
 export var nodesTable = new NodesTable(nodesParser);
 

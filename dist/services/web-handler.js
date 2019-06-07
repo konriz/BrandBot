@@ -1,11 +1,4 @@
 "use strict";
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const config_1 = require("./config");
 const profile_1 = require("./profile");
@@ -13,7 +6,6 @@ const user_1 = require("./user");
 const graph_api_1 = require("./graph-api");
 const receive_1 = require("./receive");
 const app_1 = require("../app");
-const nodesFile = __importStar(require("../data/nodes.json"));
 class WebHandler {
     static getProfile(req, res) {
         let token = req.query["verify_token"];
@@ -100,15 +92,15 @@ class WebHandler {
                         console.log(`Profile is unavailable: ${error}`);
                     })
                         .finally(() => {
-                        app_1.users[senderPsid] = user;
+                        app_1.users.set(senderPsid, user);
                         console.log(`New Profile PSID: ${senderPsid}`);
-                        let receiveMessage = new receive_1.Receive(app_1.users[senderPsid], webhookEvent);
+                        let receiveMessage = new receive_1.Receive(app_1.users.get(senderPsid), webhookEvent);
                         return receiveMessage.handleMessage();
                     });
                 }
                 else {
                     console.log(`Profile already exists PSID: ${senderPsid}`);
-                    let receiveMessage = new receive_1.Receive(app_1.users[senderPsid], webhookEvent);
+                    let receiveMessage = new receive_1.Receive(app_1.users.get(senderPsid), webhookEvent);
                     return receiveMessage.handleMessage();
                 }
             });
@@ -119,11 +111,21 @@ class WebHandler {
         }
     }
     static getNodes(req, res) {
-        nodesFile ? res.send(nodesFile) : res.sendStatus(404);
+        if (app_1.nodesTable.nodes.size > 0) {
+            res.render("nodes/nodes", { nodes: Array.from(app_1.nodesTable.nodes.values()) });
+        }
+        else {
+            res.render("nodes/nonodes");
+        }
     }
     ;
     static getUsers(req, res) {
-        app_1.users ? res.send(app_1.users) : res.sendStatus(404);
+        if (app_1.users.size > 0) {
+            res.render("users/users", { users: Array.from(app_1.users.values()) });
+        }
+        else {
+            res.render("users/nousers");
+        }
     }
     ;
 }
