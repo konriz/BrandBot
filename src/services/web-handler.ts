@@ -5,6 +5,7 @@ import { User } from "./user";
 import { GraphAPI } from "./graph-api";
 import { Receive } from "./receive";
 import { users } from "../app";
+import * as nodesFile from "../data/nodes.json";
 
 export class WebHandler {
 
@@ -128,4 +129,8 @@ export class WebHandler {
           res.sendStatus(404);
         }
       }
+
+      static getNodes(req: express.Request, res: express.Response) {
+        res.send(nodesFile);
+      } 
 }

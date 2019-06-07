@@ -33,6 +33,8 @@ app.post("/webhook", WebHandler.postWebhook);
 
   // Set up your App's Messenger Profile
 app.get("/profile", WebHandler.getProfile);
+
+app.get("/nodes", WebHandler.getNodes);
   
 var listener = app.listen(config.port, function() {
   let address = <AddressInfo>listener.address();

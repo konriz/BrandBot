@@ -1,4 +1,11 @@
 "use strict";
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const config_1 = require("./config");
 const profile_1 = require("./profile");
@@ -6,6 +13,7 @@ const user_1 = require("./user");
 const graph_api_1 = require("./graph-api");
 const receive_1 = require("./receive");
 const app_1 = require("../app");
+const nodesFile = __importStar(require("../data/nodes.json"));
 class WebHandler {
     static getProfile(req, res) {
         let token = req.query["verify_token"];
@@ -113,6 +121,9 @@ class WebHandler {
             // Returns a '404 Not Found' if event is not from a page subscription
             res.sendStatus(404);
         }
+    }
+    static getNodes(req, res) {
+        res.send(nodesFile);
     }
 }
 exports.WebHandler = WebHandler;
