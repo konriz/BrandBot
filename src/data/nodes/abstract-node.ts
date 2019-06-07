@@ -1,4 +1,4 @@
-import { QuickReply } from "../../services/quick-reply";
+import { QuickReply } from "../quick-reply";
 import * as res from "../../locales/resources.json";
 
 export interface BotNode {

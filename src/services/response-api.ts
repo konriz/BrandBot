@@ -1,4 +1,4 @@
-import { QuickReply } from "./quick-reply";
+import { QuickReply } from "../data/quick-reply";
 
 export class ResponseApi {
 

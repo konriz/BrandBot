@@ -7,7 +7,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const quick_reply_1 = require("../../services/quick-reply");
+const quick_reply_1 = require("../quick-reply");
 const res = __importStar(require("../../locales/resources.json"));
 class AbstractNode {
     constructor(data) {
