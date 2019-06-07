@@ -28,6 +28,7 @@ app.post("/webhook", web_handler_1.WebHandler.postWebhook);
 // Set up your App's Messenger Profile
 app.get("/profile", web_handler_1.WebHandler.getProfile);
 app.get("/nodes", web_handler_1.WebHandler.getNodes);
+app.get("/users", web_handler_1.WebHandler.getUsers);
 var listener = app.listen(config_1.config.port, function () {
     let address = listener.address();
     console.log(`Your app is listening on port: ${address.port}`);

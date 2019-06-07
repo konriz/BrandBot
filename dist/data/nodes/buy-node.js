@@ -8,16 +8,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const abstract_node_1 = require("./abstract-node");
+const item_node_1 = require("./item-node");
 const res = __importStar(require("../../locales/resources.json"));
 class BuyNode extends abstract_node_1.AbstractNode {
-    constructor(item) {
+    constructor(data) {
         super({
-            name: `BUY_${item.getName()}`,
-            buttonText: `Kup za ${item.getPrice()}`,
+            name: `BUY_${data["name"]}`,
+            buttonText: `Kup za ${data["price"]}`,
             message: res.nodes.thanks
         });
         this.setType("Buy");
-        this.setParent(item);
+        this.setParent(new item_node_1.ItemNode(data));
     }
     getView() {
         return {

@@ -9,7 +9,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const abstract_node_1 = require("./abstract-node");
 const res = __importStar(require("../../locales/resources.json"));
-class CategoryNode extends abstract_node_1.AbstractNode {
+class LinkNode extends abstract_node_1.AbstractNode {
     constructor(data) {
         super(data);
         this.setType("Link");
@@ -39,5 +39,5 @@ class CategoryNode extends abstract_node_1.AbstractNode {
         };
     }
 }
-exports.CategoryNode = CategoryNode;
+exports.LinkNode = LinkNode;
 //# sourceMappingURL=category-node.js.map

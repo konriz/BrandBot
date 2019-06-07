@@ -5,8 +5,8 @@ import { config } from "./config";
 
 export class Receive {
 
-  user: User;
-  webhookEvent: any;
+  private user: User;
+  private webhookEvent: any;
 
   constructor(user: User, webhookEvent: any) {
     this.user = user;
@@ -14,47 +14,38 @@ export class Receive {
   }
 
   handleMessage() {
-    let event = this.webhookEvent;
     let response;
 
     try {
-      response = this.handleEvent(event);
+      response = this.handleEvent();
     } catch (error) {
       console.error(error);
       response = {
-        text: `An error has occured: '${error}'. We have been notified and \
-        will fix the issue shortly!`
+        text: `An error has occured: '${error}'. We have been notified and will fix the issue shortly!`
       };
     }
     if(response){
       this.sendMessage(response);
     }
-    
   }
 
-  handleEvent(event: any) {
-    console.log(
-      "Received event:",
-      `${JSON.stringify(event)} for ${this.user.psid}`
-    );
-    let eventHandler = new EventHandler(event);
+  private handleEvent() {
+    console.log(`Received event: ${JSON.stringify(this.webhookEvent)} for ${this.user.psid}`);
+    let eventHandler = new EventHandler(this.webhookEvent);
     return eventHandler.handle();
   }
 
-  sendMessage(response: any) {
+  private sendMessage(response: any) {
 
-    // Construct the message body
     let requestBody = {
       recipient: {
         id: this.user.psid
       },
       message: response
     };
-
     if(config.messageDebug){
       console.log(`Sending : ${JSON.stringify(requestBody)}`);
     }
-    
     GraphAPI.callSendAPI(requestBody);
   }
 };

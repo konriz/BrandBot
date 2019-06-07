@@ -28,7 +28,7 @@ export class WebHandler {
             res.render("profile", {
               pageId: config.pageId,
               getStarted: JSON.stringify(profile.getGetStarted()),
-              greeting: JSON.stringify(profile.getGreetingText()),
+              greeting: JSON.stringify(profile.getGreeting()),
               menu: JSON.stringify(profile.getPersistentMenu())
             });
           } else {
@@ -98,9 +98,7 @@ export class WebHandler {
                 .then(userProfile => {
                   user.setProfile(userProfile);
                 })
-                .catch(error => {
-                  // The profile is unavailable
-                  console.log(`Profile is unavailable: ${error}`);
+                .catch(error => {console.log(`Profile is unavailable: ${error}`);
                 })
                 .finally(() => {
                   users[senderPsid] = user;
@@ -120,11 +118,11 @@ export class WebHandler {
         }
     }
 
-    static getNodes(req: express.Request, res: express.Response) {
-        if(nodesFile) {
-        res.send(nodesFile);
-        } else {
-        res.sendStatus(404);
-        }
-    };
+  static getNodes(req: express.Request, res: express.Response) {
+      nodesFile ? res.send(nodesFile) : res.sendStatus(404);
+  };
+
+  static getUsers(req: express.Request, res: express.Response) {
+      users ? res.send(users) : res.sendStatus(404);
+  };
 }

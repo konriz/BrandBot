@@ -38,10 +38,10 @@ class GraphAPI {
             json: requestBody
         }, (error, _res, body) => {
             if (!error) {
-                console.log("Request sent:", body);
+                console.log(`Request sent: ${body}`);
             }
             else {
-                console.error("Unable to send message:", error);
+                console.error(`Unable to send message: ${error}`);
             }
         });
     }
@@ -58,17 +58,16 @@ class GraphAPI {
                 object: "page",
                 callback_url: config_1.config.webhookUrl,
                 verify_token: config_1.config.verifyToken,
-                fields: "messages, messaging_postbacks, messaging_optins, \
-          message_deliveries, messaging_referrals ",
+                fields: "messages, messaging_postbacks, messaging_optins, message_deliveries, messaging_referrals ",
                 include_values: "true"
             },
             method: "POST"
         }, (error, _res, body) => {
             if (!error) {
-                console.log("Request sent:", body);
+                console.log(`Request sent: ${body}`);
             }
             else {
-                console.error("Unable to send message:", error);
+                console.error(`Unable to send message: ${error}`);
             }
         });
     }
@@ -82,13 +81,12 @@ class GraphAPI {
             uri: `${config_1.config.mPlatfom}/${config_1.config.pageId}/subscribed_apps`,
             qs: {
                 access_token: config_1.config.pageAccesToken,
-                subscribed_fields: "messages, messaging_postbacks, messaging_optins, \
-          message_deliveries, messaging_referrals "
+                subscribed_fields: "messages, messaging_postbacks, messaging_optins, message_deliveries, messaging_referrals "
             },
             method: "POST"
         }, (error, _res, body) => {
             if (error) {
-                console.error("Unable to send message:", error);
+                console.error(`Unable to send message: ${error}`);
             }
         });
     }
@@ -96,17 +94,11 @@ class GraphAPI {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const userProfile = yield this.callUserProfileAPI(senderPsid);
-                // for (var key in userProfile) {
-                //   const camelizedKey = camelCase(key);
-                //   const value = userProfile[key];
-                //   delete userProfile[key];
-                //   userProfile[camelizedKey] = value;
-                // }
                 console.log(`User profile: ${JSON.stringify(userProfile)}`);
                 return userProfile;
             }
             catch (err) {
-                console.log("Fetch failed:", err);
+                console.log(`Fetch failed: ${err}`);
             }
         });
     }
@@ -122,8 +114,7 @@ class GraphAPI {
                 },
                 method: "GET"
             })
-                .on("response", function (response) {
-                // console.log(response.statusCode);
+                .on("response", (response) => {
                 if (response.statusCode !== 200) {
                     reject(Error(response.statusCode.toString()));
                 }
@@ -132,12 +123,11 @@ class GraphAPI {
                 body.push(chunk);
             })
                 .on("error", function (error) {
-                console.error("Unable to fetch profile:" + error);
+                console.error(`Unable to fetch profile: ${error}`);
                 reject(Error("Network Error"));
             })
                 .on("end", () => {
                 let result = Buffer.concat(body).toString();
-                // console.log(JSON.parse(body));
                 resolve(JSON.parse(result));
             });
         });
@@ -169,7 +159,7 @@ class GraphAPI {
                 console.log(`FBA event '${eventName}'`);
             }
             else {
-                console.error(`Unable to send FBA event '${eventName}':` + error);
+                console.error(`Unable to send FBA event '${eventName}' ${error}`);
             }
         });
     }

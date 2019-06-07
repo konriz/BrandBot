@@ -4,14 +4,14 @@ import * as res from "../../locales/resources.json";
 
 export class BuyNode extends AbstractNode {
 
-    constructor(item: ItemNode) {
+    constructor(data: any) {
         super({
-            name: `BUY_${item.getName()}`,
-            buttonText: `Kup za ${item.getPrice()}`,
+            name: `BUY_${data["name"]}`,
+            buttonText: `Kup za ${data["price"]}`,
             message: res.nodes.thanks
         });
         this.setType("Buy");
-        this.setParent(item);
+        this.setParent(new ItemNode(data));
     }
 
     getView() {

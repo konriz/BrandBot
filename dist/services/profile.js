@@ -11,8 +11,6 @@ const graph_api_1 = require("./graph-api");
 const config_1 = require("./config");
 const res = __importStar(require("../locales/resources.json"));
 class Profile {
-    constructor() {
-    }
     setWebhook() {
         graph_api_1.GraphAPI.callSubscriptionsAPI();
         graph_api_1.GraphAPI.callSubscribedApps();
@@ -31,42 +29,33 @@ class Profile {
     }
     getGreeting() {
         return {
-            greeting: [this.getGreetingText()]
+            greeting: [{
+                    locale: "default",
+                    text: res.profile.greeting
+                }]
         };
     }
     getPersistentMenu() {
         return {
-            persistent_menu: [this.getMenuItems()]
+            persistent_menu: [{
+                    locale: "default",
+                    composer_input_disabled: false,
+                    call_to_actions: [
+                        {
+                            type: "postback",
+                            title: res.menu.home,
+                            payload: "HOME"
+                        },
+                        {
+                            type: "web_url",
+                            title: res.menu.shop,
+                            url: config_1.config.shopUrl,
+                            webview_height_ratio: "full"
+                        }
+                    ]
+                }]
         };
-    }
-    getGreetingText() {
-        let greeting = {
-            locale: "default",
-            text: res.profile.greeting
-        };
-        return greeting;
-    }
-    getMenuItems() {
-        let menu = {
-            locale: "default",
-            composer_input_disabled: false,
-            call_to_actions: [
-                {
-                    type: "postback",
-                    title: res.menu.home,
-                    payload: "HOME"
-                },
-                {
-                    type: "web_url",
-                    title: res.menu.shop,
-                    url: config_1.config.shopUrl,
-                    webview_height_ratio: "full"
-                }
-            ]
-        };
-        return menu;
     }
 }
 exports.Profile = Profile;
-;
 //# sourceMappingURL=profile.js.map

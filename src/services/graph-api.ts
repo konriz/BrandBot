@@ -36,9 +36,9 @@ export class GraphAPI {
       },
       (error, _res, body) => {
         if (!error) {
-          console.log("Request sent:", body);
+          console.log(`Request sent: ${body}`);
         } else {
-          console.error("Unable to send message:", error);
+          console.error(`Unable to send message: ${error}`);
         }
       }
     );
@@ -49,9 +49,7 @@ export class GraphAPI {
     // You can use the Graph API's /{app-id}/subscriptions edge to configure and
     // manage your app's Webhooks product
     // https://developers.facebook.com/docs/graph-api/webhooks/subscriptions-edge
-    console.log(
-      `Setting app ${config.appId} callback url to ${config.webhookUrl}`
-    );
+    console.log(`Setting app ${config.appId} callback url to ${config.webhookUrl}`);
     request(
       {
         uri: `${config.mPlatfom}/${config.appId}/subscriptions`,
@@ -61,17 +59,16 @@ export class GraphAPI {
           callback_url: config.webhookUrl,
           verify_token: config.verifyToken,
           fields:
-            "messages, messaging_postbacks, messaging_optins, \
-          message_deliveries, messaging_referrals ",
+            "messages, messaging_postbacks, messaging_optins, message_deliveries, messaging_referrals ",
           include_values: "true"
         },
         method: "POST"
       },
       (error, _res, body) => {
         if (!error) {
-          console.log("Request sent:", body);
+          console.log(`Request sent: ${body}`);
         } else {
-          console.error("Unable to send message:", error);
+          console.error(`Unable to send message: ${error}`);
         }
       }
     );
@@ -89,14 +86,13 @@ export class GraphAPI {
         qs: {
           access_token: config.pageAccesToken,
           subscribed_fields:
-            "messages, messaging_postbacks, messaging_optins, \
-          message_deliveries, messaging_referrals "
+            "messages, messaging_postbacks, messaging_optins, message_deliveries, messaging_referrals "
         },
         method: "POST"
       },
       (error, _res, body) => {
         if (error) {
-          console.error("Unable to send message:", error);
+          console.error(`Unable to send message: ${error}`);
         }
       }
     );
@@ -105,17 +101,10 @@ export class GraphAPI {
   static async getUserProfile(senderPsid: string) {
     try {
       const userProfile = await this.callUserProfileAPI(senderPsid);
-      
-      // for (var key in userProfile) {
-      //   const camelizedKey = camelCase(key);
-      //   const value = userProfile[key];
-      //   delete userProfile[key];
-      //   userProfile[camelizedKey] = value;
-      // }
       console.log(`User profile: ${JSON.stringify(userProfile)}`);
       return userProfile;
     } catch (err) {
-      console.log("Fetch failed:", err);
+      console.log(`Fetch failed: ${err}`);
     }
   }
 
@@ -132,9 +121,7 @@ export class GraphAPI {
         },
         method: "GET"
       })
-        .on("response", function(response) {
-          // console.log(response.statusCode);
-
+        .on("response", (response) => {
           if (response.statusCode !== 200) {
             reject(Error(response.statusCode.toString()));
           }
@@ -143,13 +130,11 @@ export class GraphAPI {
           body.push(chunk);
         })
         .on("error", function(error) {
-          console.error("Unable to fetch profile:" + error);
+          console.error(`Unable to fetch profile: ${error}`);
           reject(Error("Network Error"));
         })
         .on("end", () => {
           let result = Buffer.concat(body).toString();
-          // console.log(JSON.parse(body));
-
           resolve(JSON.parse(result));
         });
     });
@@ -184,7 +169,7 @@ export class GraphAPI {
         if (!error) {
           console.log(`FBA event '${eventName}'`);
         } else {
-          console.error(`Unable to send FBA event '${eventName}':` + error);
+          console.error(`Unable to send FBA event '${eventName}' ${error}`);
         }
       }
     );

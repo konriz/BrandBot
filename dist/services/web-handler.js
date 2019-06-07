@@ -30,7 +30,7 @@ class WebHandler {
                 res.render("profile", {
                     pageId: config_1.config.pageId,
                     getStarted: JSON.stringify(profile.getGetStarted()),
-                    greeting: JSON.stringify(profile.getGreetingText()),
+                    greeting: JSON.stringify(profile.getGreeting()),
                     menu: JSON.stringify(profile.getPersistentMenu())
                 });
             }
@@ -97,7 +97,6 @@ class WebHandler {
                         user.setProfile(userProfile);
                     })
                         .catch(error => {
-                        // The profile is unavailable
                         console.log(`Profile is unavailable: ${error}`);
                     })
                         .finally(() => {
@@ -120,12 +119,11 @@ class WebHandler {
         }
     }
     static getNodes(req, res) {
-        if (nodesFile) {
-            res.send(nodesFile);
-        }
-        else {
-            res.sendStatus(404);
-        }
+        nodesFile ? res.send(nodesFile) : res.sendStatus(404);
+    }
+    ;
+    static getUsers(req, res) {
+        app_1.users ? res.send(app_1.users) : res.sendStatus(404);
     }
     ;
 }

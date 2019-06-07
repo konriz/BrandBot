@@ -35,6 +35,8 @@ app.post("/webhook", WebHandler.postWebhook);
 app.get("/profile", WebHandler.getProfile);
 
 app.get("/nodes", WebHandler.getNodes);
+
+app.get("/users", WebHandler.getUsers)
   
 var listener = app.listen(config.port, function() {
   let address = <AddressInfo>listener.address();

@@ -2,7 +2,7 @@ import { AbstractNode } from "./abstract-node";
 import * as res from "../../locales/resources.json";
 
 
-export class CategoryNode extends AbstractNode {
+export class LinkNode extends AbstractNode {
 
     private url: string;
 
