@@ -23,7 +23,7 @@ export class ItemNode extends AbstractNode {
         return `${super.getMessage()} - cena : ${this.price}`;
     }
 
-    getView() {
+    getView(): any {
         return MessageBuilder.getItemReplyMessage(this.getMessage(), this.getQuickReplies(), this.url);
     }
 }

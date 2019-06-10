@@ -1,6 +1,7 @@
 import { QuickReply } from "../quick-reply";
 import * as images from "../../resources/images";
 import * as res from "../../resources/locales/resources.json"
+import { MessageBuilder } from "../../services/message-builder";
 
 export interface BotNode {
     getName(): string;
@@ -117,7 +118,7 @@ export abstract class AbstractNode implements BotNode {
         return this.type;
     }
 
-    getView(): any {
-        throw new Error("Not implemented!");
+    getView() {
+        return MessageBuilder.getQuickReplyMessage(this.getMessage(), this.getQuickReplies());
     }
 }

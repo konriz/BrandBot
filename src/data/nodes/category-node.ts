@@ -13,7 +13,7 @@ export class LinkNode extends AbstractNode {
         this.url = data["url"];
     }
 
-    getView() {
+    getView(): any {
         return MessageBuilder.getItemReplyMessage(this.getMessage(), this.getQuickReplies(), this.url);
     }
 }

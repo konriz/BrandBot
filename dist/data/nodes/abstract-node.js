@@ -10,6 +10,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const quick_reply_1 = require("../quick-reply");
 const images = __importStar(require("../../resources/images"));
 const res = __importStar(require("../../resources/locales/resources.json"));
+const message_builder_1 = require("../../services/message-builder");
 class AbstractNode {
     constructor(data) {
         this.name = data["name"];
@@ -81,7 +82,7 @@ class AbstractNode {
         return this.type;
     }
     getView() {
-        throw new Error("Not implemented!");
+        return message_builder_1.MessageBuilder.getQuickReplyMessage(this.getMessage(), this.getQuickReplies());
     }
 }
 exports.AbstractNode = AbstractNode;

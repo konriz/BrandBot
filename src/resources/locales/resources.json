@@ -11,6 +11,12 @@
     "back": "Wróć",
     "home": "Start",
     "site": "Zobacz na stronie",
-    "thanks": "Napisz, na jaki adres chcesz otrzymać towar."
+
+    "send": "Wybierz sposób wysyłki:",
+    "pay": "Wybierz sposób zapłaty:",
+    "address": "Podaj adres wysyłki.",
+    "confirmBtn": "Zatwierdź",
+    "confirm": "Czy zatwierdzasz zamówienie?",
+    "thanks": "Zamówienie przyjęte, oczekuj realizacji. Dziękujemy i zapraszamy do dalszych zakupów."
   }
 }
