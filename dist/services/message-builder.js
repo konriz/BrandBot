@@ -7,7 +7,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const res = __importStar(require("../locales/resources.json"));
+const res = __importStar(require("../resources/locales/resources.json"));
 class MessageBuilder {
     static getQuickReplyMessage(text, buttons) {
         return {

@@ -1,6 +1,6 @@
 import { GraphAPI } from "./graph-api";
 import { config } from "./config";
-import * as res from "../locales/resources.json"
+import * as res from "../resources/locales/resources.json"
 
 export class Profile {
 

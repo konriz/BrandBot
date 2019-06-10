@@ -1,5 +1,4 @@
 import { AbstractNode } from "./abstract-node";
-import * as res from "../../locales/resources.json";
 import { MessageBuilder } from "../../services/message-builder";
 
 

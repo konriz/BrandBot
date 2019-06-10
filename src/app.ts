@@ -20,6 +20,8 @@ app.use(
 
 app.use(json());
 
+app.use(express.static('static'));
+
 app.set("view engine", "ejs");
 
 app.get("/", function(_req, res) {

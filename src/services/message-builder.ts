@@ -1,5 +1,5 @@
 import { QuickReply } from "../data/quick-reply";
-import * as res from "../locales/resources.json";
+import * as res from "../resources/locales/resources.json";
 
 export class MessageBuilder {
 

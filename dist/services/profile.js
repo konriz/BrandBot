@@ -9,7 +9,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const graph_api_1 = require("./graph-api");
 const config_1 = require("./config");
-const res = __importStar(require("../locales/resources.json"));
+const res = __importStar(require("../resources/locales/resources.json"));
 class Profile {
     setWebhook() {
         graph_api_1.GraphAPI.callSubscriptionsAPI();

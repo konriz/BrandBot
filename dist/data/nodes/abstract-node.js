@@ -8,7 +8,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const quick_reply_1 = require("../quick-reply");
-const res = __importStar(require("../../locales/resources.json"));
+const images = __importStar(require("../../resources/images"));
+const res = __importStar(require("../../resources/locales/resources.json"));
 class AbstractNode {
     constructor(data) {
         this.name = data["name"];
@@ -44,11 +45,11 @@ class AbstractNode {
         }
         // Add "back" button leading to parent node
         if (this.getParent()) {
-            quickReplies.push(new quick_reply_1.QuickReply(res.nodes.back, this.getParent().getName()));
+            quickReplies.push(new quick_reply_1.QuickReply(res.nodes.back, this.getParent().getName(), images.back));
         }
         // Add "home" button leading to home node if this is not home node.
         if (this.getName() != "HOME") {
-            let homeReply = new quick_reply_1.QuickReply(res.nodes.home, "HOME");
+            let homeReply = new quick_reply_1.QuickReply(res.nodes.home, "HOME", images.home);
             quickReplies.push(homeReply);
         }
         return quickReplies;

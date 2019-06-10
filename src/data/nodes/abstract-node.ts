@@ -1,5 +1,6 @@
 import { QuickReply } from "../quick-reply";
-import * as res from "../../locales/resources.json";
+import * as images from "../../resources/images";
+import * as res from "../../resources/locales/resources.json"
 
 export interface BotNode {
     getName(): string;
@@ -71,12 +72,12 @@ export abstract class AbstractNode implements BotNode {
             
         // Add "back" button leading to parent node
         if(this.getParent()) {
-            quickReplies.push(new QuickReply(res.nodes.back, this.getParent().getName()));
+            quickReplies.push(new QuickReply(res.nodes.back, this.getParent().getName(), images.back));
         }
 
         // Add "home" button leading to home node if this is not home node.
         if(this.getName() != "HOME"){
-            let homeReply = new QuickReply(res.nodes.home, "HOME");
+            let homeReply = new QuickReply(res.nodes.home, "HOME", images.home);
             quickReplies.push(homeReply);
         }
         

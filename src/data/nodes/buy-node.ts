@@ -1,6 +1,6 @@
 import { AbstractNode } from "./abstract-node";
 import { ItemNode } from "./item-node";
-import * as res from "../../locales/resources.json";
+import * as res from "../../resources/locales/resources.json";
 import { MessageBuilder } from "../../services/message-builder";
 
 export class BuyNode extends AbstractNode {

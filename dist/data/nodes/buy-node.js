@@ -9,7 +9,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const abstract_node_1 = require("./abstract-node");
 const item_node_1 = require("./item-node");
-const res = __importStar(require("../../locales/resources.json"));
+const res = __importStar(require("../../resources/locales/resources.json"));
 const message_builder_1 = require("../../services/message-builder");
 class BuyNode extends abstract_node_1.AbstractNode {
     constructor(data) {

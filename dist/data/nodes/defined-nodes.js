@@ -8,7 +8,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const simple_node_1 = require("./simple-node");
-const res = __importStar(require("../../locales/resources.json"));
+const res = __importStar(require("../../resources/locales/resources.json"));
 class DefinedNodes {
 }
 DefinedNodes.ERROR = new simple_node_1.SimpleNode({

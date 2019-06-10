@@ -17,6 +17,7 @@ app.use(body_parser_1.urlencoded({
     extended: true
 }));
 app.use(body_parser_1.json());
+app.use(express_1.default.static('static'));
 app.set("view engine", "ejs");
 app.get("/", function (_req, res) {
     res.render("index");
