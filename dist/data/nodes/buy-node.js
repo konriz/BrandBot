@@ -64,7 +64,7 @@ class ConfirmNode extends abstract_node_1.AbstractNode {
         super({
             name: `CONFIRM_${data["name"]}`,
             buttonText: `Zatwierdź`,
-            message: res.nodes.confirm
+            message: res.nodes.thanks
         });
         this.setType("Buy");
         this.setParent(parent);
