@@ -88,11 +88,11 @@ class ConfirmNode extends OrderNode {
             prefix: res.nodes.confirm.prefix,
             btn: `${order.payment.name} (${order.payment.price})`,
             message: 
-                `${res.nodes.confirm.message}\n 
-                Przedmiot : ${order.item.name}\n 
-                Cena : ${order.item.price}\n 
-                Przesyłka : ${order.delivery.name} - ${order.delivery.price}\n 
-                Sposób zapłaty : ${order.payment.name} - ${order.payment.price}\n`
+`${res.nodes.confirm.message}
+Przedmiot : ${order.item.name} 
+Cena : ${order.item.price} 
+Przesyłka : ${order.delivery.name} - ${order.delivery.price} 
+Sposób zapłaty : ${order.payment.name} - ${order.payment.price}`
         });
         this.parent = parent;
         this.type = "Pay";
