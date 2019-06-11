@@ -45,40 +45,46 @@ class SendNode extends OrderNode {
         this._deliveries = delivery_1.Send.getDeliveries();
         this.children = [];
         this._deliveries.forEach((delivery) => {
-            this.children.push(new PayNode(parent, this, delivery));
+            let order = this.order;
+            order.delivery = delivery;
+            this.children.push(new PayNode(parent, this, order));
         });
     }
 }
+exports.SendNode = SendNode;
 class PayNode extends OrderNode {
-    constructor(item, parent, delivery) {
+    constructor(item, parent, order) {
         super(item, {
             prefix: res.nodes.pay.prefix,
-            btn: `${delivery.name} (${delivery.price})`,
+            btn: `${order.delivery.name} (${order.delivery.price})`,
             message: `${res.nodes.pay.message}`
         });
         this.parent = parent;
         this.type = "Pay";
         this.order = parent.order;
-        this.order.delivery = delivery;
         this._payments = payment_1.Payment.getPayments();
         this.children = [];
         this._payments.forEach((payment) => {
-            this.children.push(new ConfirmNode(item, this, payment));
+            let order = this.order;
+            order.payment = payment;
+            this.children.push(new ConfirmNode(item, this, order));
         });
     }
 }
 class ConfirmNode extends OrderNode {
-    constructor(item, parent, payment) {
+    constructor(item, parent, order) {
         super(item, {
-            prefix: res.nodes.pay.prefix,
-            btn: `${payment.name} (${payment.price})`,
-            message: `${res.nodes.pay.message}`
+            prefix: res.nodes.confirm.prefix,
+            btn: `${order.payment.name} (${order.payment.price})`,
+            message: `${res.nodes.confirm.message}\n 
+                Przedmiot : ${order.item.name}\n 
+                Cena : ${order.item.price}\n 
+                Przesyłka : ${order.delivery.name} - ${order.delivery.price}\n 
+                Sposób zapłaty : ${order.payment.name} - ${order.payment.price}\n`
         });
         this.parent = parent;
         this.type = "Pay";
         this.order = parent.order;
-        this.order.payment = payment;
-        console.log(JSON.stringify(this.order));
     }
 }
-//# sourceMappingURL=buy-node.js.map
+//# sourceMappingURL=order-nodes.js.map

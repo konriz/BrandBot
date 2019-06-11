@@ -12,6 +12,7 @@
         "home": "Start",
         "site": "Zobacz na stronie",
         "buy": {
+            "message": "Kupiono ",
             "btn": "Kup",
             "prefix": "BUY"
         },
@@ -36,5 +37,15 @@
             "prefix": "CONFIRM"
         },
         "thanks": "Zamówienie przyjęte, oczekuj realizacji. Dziękujemy i zapraszamy do dalszych zakupów."
+    },
+    "deliveries": {
+        "send": {
+            "Kurier": "15,00",
+            "Poczta": "9,00"
+        },
+        "pay": {
+            "Przelew": "0,00",
+            "Pobranie": "10,00"
+        }
     }
 }

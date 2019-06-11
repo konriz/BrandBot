@@ -1,6 +1,7 @@
 import { AbstractNode } from "./abstract-node";
 import { MessageBuilder } from "../../services/message-builder";
 import { Item } from "../../item/item";
+import { SendNode } from "./order-nodes";
 
 
 export class ItemNode extends AbstractNode {
@@ -15,7 +16,8 @@ export class ItemNode extends AbstractNode {
         this.type = "Item";
         this._url = data["url"];
         this._price = data["price"];
-        this._item = new Item(super.message, this._price, this._url)
+        this._item = new Item(super.message, this._price, this._url);
+        this.children = [new SendNode(this)];
     }
 
     get price(): string {
@@ -27,7 +29,7 @@ export class ItemNode extends AbstractNode {
     }
 
     getMessage(): string {
-        return `${super.message} - cena : ${this.price}`;
+        return `${this.item.name} - cena : ${this.item.price}`;
     }
 
     getView(): any {
