@@ -1,4 +1,4 @@
-import { User } from "./user";
+import { User } from "../user/user";
 import { GraphAPI } from "./graph-api";
 import { EventHandler } from "./event-handler";
 import { config } from "./config";

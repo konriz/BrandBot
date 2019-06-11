@@ -2,10 +2,10 @@ import express from "express";
 import { urlencoded, json } from "body-parser";
 import { config } from "./services/config";
 import { AddressInfo } from "net";
-import { NodesTreeParser } from "./data/nodes-parser";
-import { NodesTable } from "./data/nodes-table";
+import { NodesTreeParser } from "./nodesTree/nodes-parser";
+import { NodesTable } from "./nodesTree/nodes-table";
 import { WebHandler } from "./services/web-handler";
-import { User } from "./services/user";
+import { User } from "./user/user";
 
 const app = express();
 export var users: Map<string, User> = new Map();

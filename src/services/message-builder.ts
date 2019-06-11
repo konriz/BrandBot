@@ -1,4 +1,4 @@
-import { QuickReply } from "../data/quick-reply";
+import { QuickReply } from "../nodesTree/quick-reply";
 import * as res from "../resources/locales/resources.json";
 
 export class MessageBuilder {

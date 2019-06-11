@@ -1,7 +1,7 @@
 import { config } from "./config";
 import { Profile } from "./profile";
 import express = require("express");
-import { User } from "./user";
+import { User } from "../user/user";
 import { GraphAPI } from "./graph-api";
 import { Receive } from "./receive";
 import { users, nodesTable } from "../app";

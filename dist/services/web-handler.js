@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const config_1 = require("./config");
 const profile_1 = require("./profile");
-const user_1 = require("./user");
+const user_1 = require("../user/user");
 const graph_api_1 = require("./graph-api");
 const receive_1 = require("./receive");
 const app_1 = require("../app");

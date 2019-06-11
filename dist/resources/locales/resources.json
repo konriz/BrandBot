@@ -11,11 +11,30 @@
         "back": "Wróć",
         "home": "Start",
         "site": "Zobacz na stronie",
-        "send": "Wybierz sposób wysyłki:",
-        "pay": "Wybierz sposób zapłaty:",
-        "address": "Podaj adres wysyłki.",
-        "confirmBtn": "Zatwierdź",
-        "confirm": "Czy zatwierdzasz zamówienie?",
+        "buy": {
+            "btn": "Kup",
+            "prefix": "BUY"
+        },
+        "send": {
+            "message": "Wybierz sposób wysyłki:",
+            "btn": "Kup",
+            "prefix": "SEND"
+        },
+        "pay": {
+            "message": "Wybierz sposób zapłaty:",
+            "btn": "Wysyłka",
+            "prefix": "PAY"
+        },
+        "address": {
+            "message": "Podaj adres wysyłki.",
+            "btn": "*Podano adres*",
+            "prefix": "ADDRESS"
+        },
+        "confirm": {
+            "message": "Czy zatwierdzasz zamówienie?",
+            "btn": "Zatwierdź",
+            "prefix": "CONFIRM"
+        },
         "thanks": "Zamówienie przyjęte, oczekuj realizacji. Dziękujemy i zapraszamy do dalszych zakupów."
     }
 }
