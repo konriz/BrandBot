@@ -16,4 +16,8 @@ export class ResponseBuilder {
     getNodeView(name: string) {
         return nodesTable.getView(name);
     }
+
+    getNode(name: string) {
+        return nodesTable.getNode(name);
+    }
 }

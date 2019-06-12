@@ -13,6 +13,9 @@ class ResponseBuilder {
     getNodeView(name) {
         return app_1.nodesTable.getView(name);
     }
+    getNode(name) {
+        return app_1.nodesTable.getNode(name);
+    }
 }
 exports.ResponseBuilder = ResponseBuilder;
 //# sourceMappingURL=response-builder.js.map

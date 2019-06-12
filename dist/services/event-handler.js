@@ -2,9 +2,19 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const response_builder_1 = require("./response-builder");
 class EventHandler {
-    constructor(event) {
-        this.event = event;
-        this.responseBuilder = new response_builder_1.ResponseBuilder();
+    constructor(user, event) {
+        this._user = user;
+        this._event = event;
+        this._responseBuilder = new response_builder_1.ResponseBuilder();
+    }
+    get user() {
+        return this._user;
+    }
+    get event() {
+        return this._event;
+    }
+    get responseBuilder() {
+        return this._responseBuilder;
     }
     handle() {
         try {
@@ -55,7 +65,8 @@ class EventHandler {
         return this.responseBuilder.getErrorMessage();
     }
     handleQuickReply(message) {
-        return this.responseBuilder.getNodeView(message.quick_reply.payload);
+        let node = this.responseBuilder.getNode(message.quick_reply.payload);
+        return node.getView();
     }
     handlePostback() {
         return this.responseBuilder.getHomeNode();

@@ -1,13 +1,29 @@
 import { ResponseBuilder } from "./response-builder";
+import { User } from "../user/user";
+import { BotNode } from "../nodesTree/nodes/abstract-node";
 
 export class EventHandler {
 
-    event: any;
-    responseBuilder : ResponseBuilder;
+    private _user: User;
+    private _event: any;
+    private _responseBuilder : ResponseBuilder;
 
-    constructor(event: any) {
-        this.event = event;
-        this.responseBuilder = new ResponseBuilder();
+    constructor(user: User, event: any) {
+        this._user = user;
+        this._event = event;
+        this._responseBuilder = new ResponseBuilder();
+    }
+
+    get user(): User {
+        return this._user;
+    }
+
+    get event(): any {
+        return this._event;
+    }
+
+    get responseBuilder(): ResponseBuilder {
+        return this._responseBuilder;
     }
     
     handle() {
@@ -58,7 +74,8 @@ export class EventHandler {
     }
 
     private handleQuickReply(message: any){
-        return this.responseBuilder.getNodeView(message.quick_reply.payload);
+        let node: BotNode = this.responseBuilder.getNode(message.quick_reply.payload);
+        return node.getView();
     }
 
     private handlePostback() {

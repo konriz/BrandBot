@@ -31,7 +31,7 @@ export class Receive {
 
   private handleEvent() {
     console.log(`Received event: ${JSON.stringify(this.webhookEvent)} for ${this.user.psid}`);
-    let eventHandler = new EventHandler(this.webhookEvent);
+    let eventHandler = new EventHandler(this.user, this.webhookEvent);
     return eventHandler.handle();
   }
 
