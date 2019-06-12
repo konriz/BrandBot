@@ -21,7 +21,10 @@ export class Receive {
     } catch (error) {
       console.error(error);
       response = {
-        text: `An error has occured: '${error}'. We have been notified and will fix the issue shortly!`
+        recipient: {
+          id: this.user.psid
+        },
+        message: `An error has occured: '${error}'. We have been notified and will fix the issue shortly!`
       };
     }
     if(response){
@@ -37,15 +40,9 @@ export class Receive {
 
   private sendMessage(response: any) {
 
-    let requestBody = {
-      recipient: {
-        id: this.user.psid
-      },
-      message: response
-    };
     if(config.messageDebug){
-      console.log(`Sending : ${JSON.stringify(requestBody)}`);
+      console.log(`Sending : ${JSON.stringify(response)}`);
     }
-    GraphAPI.callSendAPI(requestBody);
+    GraphAPI.callSendAPI(response);
   }
 };

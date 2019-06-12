@@ -16,7 +16,10 @@ class Receive {
         catch (error) {
             console.error(error);
             response = {
-                text: `An error has occured: '${error}'. We have been notified and will fix the issue shortly!`
+                recipient: {
+                    id: this.user.psid
+                },
+                message: `An error has occured: '${error}'. We have been notified and will fix the issue shortly!`
             };
         }
         if (response) {
@@ -29,16 +32,10 @@ class Receive {
         return eventHandler.handle();
     }
     sendMessage(response) {
-        let requestBody = {
-            recipient: {
-                id: this.user.psid
-            },
-            message: response
-        };
         if (config_1.config.messageDebug) {
-            console.log(`Sending : ${JSON.stringify(requestBody)}`);
+            console.log(`Sending : ${JSON.stringify(response)}`);
         }
-        graph_api_1.GraphAPI.callSendAPI(requestBody);
+        graph_api_1.GraphAPI.callSendAPI(response);
     }
 }
 exports.Receive = Receive;

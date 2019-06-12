@@ -11,7 +11,7 @@ export class EventHandler {
     constructor(user: User, event: any) {
         this._user = user;
         this._event = event;
-        this._responseBuilder = new ResponseBuilder();
+        this._responseBuilder = new ResponseBuilder(user);
     }
 
     get user(): User {
@@ -70,19 +70,18 @@ export class EventHandler {
     }
 
     private handleAttachment(message: any){
-        return this.responseBuilder.getErrorMessage();
+        return this.responseBuilder.getResponse("ERROR");
     }
 
     private handleQuickReply(message: any){
-        let node: BotNode = this.responseBuilder.getNode(message.quick_reply.payload);
-        return node.getView();
+        return this.responseBuilder.getResponse(message.quick_reply.payload);
     }
 
     private handlePostback() {
-        return this.responseBuilder.getHomeNode();
+        return this.responseBuilder.getResponse("HOME");
     }
 
     private handleRefferal() {
-        return this.responseBuilder.getErrorMessage();
+        return this.responseBuilder.getResponse("ERROR");
     }
 }

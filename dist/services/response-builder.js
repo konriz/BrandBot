@@ -2,19 +2,20 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = require("../app");
 class ResponseBuilder {
-    constructor() {
-    }
-    getErrorMessage() {
-        return this.getNodeView("ERROR");
-    }
-    getHomeNode() {
-        return this.getNodeView("HOME");
+    constructor(user) {
+        this._user = user;
     }
     getNodeView(name) {
         return app_1.nodesTable.getView(name);
     }
-    getNode(name) {
-        return app_1.nodesTable.getNode(name);
+    getResponse(name) {
+        let message = this.getNodeView(name);
+        return {
+            recipient: {
+                id: this._user.psid
+            },
+            message: message
+        };
     }
 }
 exports.ResponseBuilder = ResponseBuilder;

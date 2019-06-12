@@ -1,23 +1,25 @@
 import { nodesTable } from "../app";
+import { User } from "../user/user";
 
 export class ResponseBuilder {
 
-    constructor() {
+    private _user: User;
+
+    constructor(user: User) {
+        this._user = user;
     }
     
-    getErrorMessage() {
-        return this.getNodeView("ERROR");
-    }
-
-    getHomeNode() {
-        return this.getNodeView("HOME");
-    }
-
-    getNodeView(name: string) {
+    private getNodeView(name: string) {
         return nodesTable.getView(name);
     }
 
-    getNode(name: string) {
-        return nodesTable.getNode(name);
+    getResponse(name: string) {
+        let message = this.getNodeView(name);
+        return {
+            recipient: {
+              id: this._user.psid
+            },
+            message: message
+          };
     }
 }

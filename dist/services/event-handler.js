@@ -5,7 +5,7 @@ class EventHandler {
     constructor(user, event) {
         this._user = user;
         this._event = event;
-        this._responseBuilder = new response_builder_1.ResponseBuilder();
+        this._responseBuilder = new response_builder_1.ResponseBuilder(user);
     }
     get user() {
         return this._user;
@@ -62,17 +62,16 @@ class EventHandler {
         return;
     }
     handleAttachment(message) {
-        return this.responseBuilder.getErrorMessage();
+        return this.responseBuilder.getResponse("ERROR");
     }
     handleQuickReply(message) {
-        let node = this.responseBuilder.getNode(message.quick_reply.payload);
-        return node.getView();
+        return this.responseBuilder.getResponse(message.quick_reply.payload);
     }
     handlePostback() {
-        return this.responseBuilder.getHomeNode();
+        return this.responseBuilder.getResponse("HOME");
     }
     handleRefferal() {
-        return this.responseBuilder.getErrorMessage();
+        return this.responseBuilder.getResponse("ERROR");
     }
 }
 exports.EventHandler = EventHandler;
