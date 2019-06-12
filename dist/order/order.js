@@ -21,9 +21,9 @@ class Order {
         this._address = address;
     }
     sum() {
-        let price = +this.item.price;
-        let delivery = +this.delivery.price;
-        let payment = +this.payment.price;
+        let price = +((this.item.price).replace(",", "."));
+        let delivery = +((this.delivery.price).replace(",", "."));
+        let payment = +((this.payment.price).replace(",", "."));
         return (price + delivery + payment);
     }
     getMessage() {
