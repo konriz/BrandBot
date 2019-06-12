@@ -45,11 +45,11 @@ export class Order {
 
     getMessage() : string {
 
-        let item = `Przedmiot : ${this.item.name}`;
-        let price = `Cena : ${this.item.price}`;
-        let delivery = `Przesyłka : ${this.delivery.string}`;
-        let payment = `Sposób zapłaty : ${this.payment.string}`;
-        let sum = `Do zapłaty : ${this.sum()}`
+        let item = `Przedmiot - ${this.item.name}`;
+        let price = `Cena - ${this.item.price}`;
+        let delivery = `Przesyłka - ${this.delivery.string}`;
+        let payment = `Sposób zapłaty - ${this.payment.string}`;
+        let sum = `Do zapłaty - ${this.sum().toFixed(2).replace(".",",")}`
         return [item, price, delivery, payment, sum].join("\n");
     }
 }

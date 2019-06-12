@@ -36,7 +36,7 @@ class SendNode extends OrderNode {
     constructor(parent) {
         super(parent, {
             prefix: res.nodes.send.prefix,
-            btn: `${res.nodes.buy.btn} - ${parent.item.price}`,
+            btn: `${res.nodes.buy.btn} : ${parent.item.price}`,
             message: `${res.nodes.send.message}`
         });
         this.parent = parent;
@@ -55,7 +55,7 @@ exports.SendNode = SendNode;
 class PayNode extends OrderNode {
     constructor(item, parent, order) {
         super(item, {
-            prefix: res.nodes.pay.prefix,
+            prefix: `${res.nodes.pay.prefix}_${parent.order.delivery.name}`,
             btn: `${order.delivery.string}`,
             message: `${res.nodes.pay.message}`
         });
@@ -74,12 +74,12 @@ class PayNode extends OrderNode {
 class ConfirmNode extends OrderNode {
     constructor(item, parent, order) {
         super(item, {
-            prefix: res.nodes.confirm.prefix,
+            prefix: `${parent.order.payment.name}_${parent.order.delivery.name}`,
             btn: `${order.payment.string}`,
             message: order.getMessage()
         });
         this.parent = parent;
-        this.type = "Pay";
+        this.type = "Confirm";
         this.order = parent.order;
     }
 }

@@ -31,6 +31,7 @@ abstract class OrderNode extends AbstractNode {
     get itemNode() {
         return this._itemNode;
     }
+
 }
 
 export class SendNode extends OrderNode {
@@ -40,7 +41,7 @@ export class SendNode extends OrderNode {
     constructor(parent: ItemNode) {
         super(parent, {
             prefix: res.nodes.send.prefix,
-            btn: `${res.nodes.buy.btn} - ${parent.item.price}`,
+            btn: `${res.nodes.buy.btn} : ${parent.item.price}`,
             message: `${res.nodes.send.message}`
         });
         this.parent = parent;
@@ -63,7 +64,7 @@ class PayNode extends OrderNode {
 
     constructor(item: ItemNode, parent: SendNode, order: Order) {
         super(item, {
-            prefix: res.nodes.pay.prefix,
+            prefix: `${res.nodes.pay.prefix}_${parent.order.delivery.name}`,
             btn: `${order.delivery.string}`,
             message: `${res.nodes.pay.message}`
         });
@@ -85,13 +86,12 @@ class ConfirmNode extends OrderNode {
 
     constructor(item: ItemNode, parent: PayNode, order: Order) {
         super(item, {
-            prefix: res.nodes.confirm.prefix,
+            prefix: `${parent.order.payment.name}_${parent.order.delivery.name}`,
             btn: `${order.payment.string}`,
             message: order.getMessage()
         });
         this.parent = parent;
-        this.type = "Pay";
+        this.type = "Confirm";
         this.order = parent.order;
-
     }
 }
