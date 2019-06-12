@@ -8,7 +8,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const res = __importStar(require("../resources/locales/resources.json"));
-class Send {
+class Delivery {
     constructor(name, price) {
         this._name = name;
         this._price = price;
@@ -19,15 +19,18 @@ class Send {
     get price() {
         return this._price;
     }
+    get string() {
+        return `${this._name} : ${this._price}`;
+    }
     static getDeliveries() {
         let deliveries = [];
-        let options = res.deliveries.send;
+        let options = res.deliveries.delivery;
         for (let option in options) {
-            let delivery = new Send(option, options[option]);
+            let delivery = new Delivery(option, options[option]);
             deliveries.push(delivery);
         }
         return deliveries;
     }
 }
-exports.Send = Send;
+exports.Delivery = Delivery;
 //# sourceMappingURL=delivery.js.map

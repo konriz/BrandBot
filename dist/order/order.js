@@ -20,6 +20,20 @@ class Order {
     set address(address) {
         this._address = address;
     }
+    sum() {
+        let price = +this.item.price;
+        let delivery = +this.delivery.price;
+        let payment = +this.payment.price;
+        return (price + delivery + payment);
+    }
+    getMessage() {
+        let item = `Przedmiot : ${this.item.name}`;
+        let price = `Cena : ${this.item.price}`;
+        let delivery = `Przesyłka : ${this.delivery.string}`;
+        let payment = `Sposób zapłaty : ${this.payment.string}`;
+        let sum = `Do zapłaty : ${this.sum()}`;
+        return [item, price, delivery, payment, sum].join("\n");
+    }
 }
 exports.Order = Order;
 //# sourceMappingURL=order.js.map

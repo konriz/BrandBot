@@ -39,7 +39,7 @@
         "thanks": "Zamówienie przyjęte, oczekuj realizacji. Dziękujemy i zapraszamy do dalszych zakupów."
     },
     "deliveries": {
-        "send": {
+        "delivery": {
             "Kurier": "15,00",
             "Poczta": "9,00"
         },

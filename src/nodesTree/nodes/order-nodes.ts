@@ -2,7 +2,7 @@ import { AbstractNode } from "./abstract-node";
 import { ItemNode } from "./item-node";
 import { Order } from "../../order/order";
 import * as res from "../../resources/locales/resources.json";
-import { Send } from "../../order/delivery";
+import { Delivery } from "../../order/delivery";
 import { Payment } from "../../order/payment";
 
 abstract class OrderNode extends AbstractNode {
@@ -35,7 +35,7 @@ abstract class OrderNode extends AbstractNode {
 
 export class SendNode extends OrderNode {
 
-    private _deliveries: Send[];
+    private _deliveries: Delivery[];
 
     constructor(parent: ItemNode) {
         super(parent, {
@@ -47,7 +47,7 @@ export class SendNode extends OrderNode {
         this.type = "Send";
         this.order = new Order(null, parent.item);
 
-        this._deliveries = Send.getDeliveries();
+        this._deliveries = Delivery.getDeliveries();
         this.children = [];
         this._deliveries.forEach( (delivery) => {
             let order = this.order;
@@ -64,7 +64,7 @@ class PayNode extends OrderNode {
     constructor(item: ItemNode, parent: SendNode, order: Order) {
         super(item, {
             prefix: res.nodes.pay.prefix,
-            btn: `${order.delivery.name} (${order.delivery.price})`,
+            btn: `${order.delivery.string})`,
             message: `${res.nodes.pay.message}`
         });
         this.parent = parent;
@@ -86,13 +86,8 @@ class ConfirmNode extends OrderNode {
     constructor(item: ItemNode, parent: PayNode, order: Order) {
         super(item, {
             prefix: res.nodes.confirm.prefix,
-            btn: `${order.payment.name} (${order.payment.price})`,
-            message: 
-`${res.nodes.confirm.message}
-Przedmiot : ${order.item.name} 
-Cena : ${order.item.price} 
-Przesyłka : ${order.delivery.name} - ${order.delivery.price} 
-Sposób zapłaty : ${order.payment.name} - ${order.payment.price}`
+            btn: `${order.payment.string}`,
+            message: order.getMessage()
         });
         this.parent = parent;
         this.type = "Pay";

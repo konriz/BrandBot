@@ -17,6 +17,10 @@ export class Payment {
         return this._price;
     }
 
+    get string(): string {
+        return `${this._name} : ${this._price}`
+    }
+
     static getPayments(): Payment[] {
         let payments: Payment[] = [];
         let options: any = res.deliveries.pay;

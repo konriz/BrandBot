@@ -1,6 +1,6 @@
 import * as res from "../resources/locales/resources.json"
 
-export class Send {
+export class Delivery {
     private _name: string;
     private _price: string;
 
@@ -17,11 +17,15 @@ export class Send {
         return this._price;
     }
 
-    static getDeliveries(): Send[] {
-        let deliveries: Send[] = [];
-        let options: any = res.deliveries.send;
+    get string(): string {
+        return `${this._name} : ${this._price}`
+    }
+
+    static getDeliveries(): Delivery[] {
+        let deliveries: Delivery[] = [];
+        let options: any = res.deliveries.delivery;
         for(let option in options) {
-            let delivery = new Send(option, options[option]);
+            let delivery = new Delivery(option, options[option]);
             deliveries.push(delivery);
         }
         return deliveries;

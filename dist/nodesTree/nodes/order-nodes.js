@@ -42,7 +42,7 @@ class SendNode extends OrderNode {
         this.parent = parent;
         this.type = "Send";
         this.order = new order_1.Order(null, parent.item);
-        this._deliveries = delivery_1.Send.getDeliveries();
+        this._deliveries = delivery_1.Delivery.getDeliveries();
         this.children = [];
         this._deliveries.forEach((delivery) => {
             let order = this.order;
@@ -56,7 +56,7 @@ class PayNode extends OrderNode {
     constructor(item, parent, order) {
         super(item, {
             prefix: res.nodes.pay.prefix,
-            btn: `${order.delivery.name} (${order.delivery.price})`,
+            btn: `${order.delivery.string})`,
             message: `${res.nodes.pay.message}`
         });
         this.parent = parent;
@@ -75,12 +75,8 @@ class ConfirmNode extends OrderNode {
     constructor(item, parent, order) {
         super(item, {
             prefix: res.nodes.confirm.prefix,
-            btn: `${order.payment.name} (${order.payment.price})`,
-            message: `${res.nodes.confirm.message}
-Przedmiot : ${order.item.name} 
-Cena : ${order.item.price} 
-Przesyłka : ${order.delivery.name} - ${order.delivery.price} 
-Sposób zapłaty : ${order.payment.name} - ${order.payment.price}`
+            btn: `${order.payment.string}`,
+            message: order.getMessage()
         });
         this.parent = parent;
         this.type = "Pay";

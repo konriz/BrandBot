@@ -19,6 +19,9 @@ class Payment {
     get price() {
         return this._price;
     }
+    get string() {
+        return `${this._name} : ${this._price}`;
+    }
     static getPayments() {
         let payments = [];
         let options = res.deliveries.pay;
