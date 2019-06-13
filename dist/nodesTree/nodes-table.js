@@ -20,6 +20,9 @@ class NodesTable {
         }
         return node;
     }
+    getAll() {
+        return this.nodes;
+    }
     getError() {
         return this.getNode("ERROR");
     }

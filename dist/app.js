@@ -6,13 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = require("body-parser");
 const config_1 = require("./services/config");
-const nodes_parser_1 = require("./nodesTree/nodes-parser");
-const nodes_table_1 = require("./nodesTree/nodes-table");
 const web_handler_1 = require("./services/web-handler");
+const users_repository_1 = require("./user/users-repository");
+const nodes_repository_1 = require("./nodesTree/nodes-repository");
 const app = express_1.default();
-exports.users = new Map();
-var nodesParser = new nodes_parser_1.NodesTreeParser();
-exports.nodesTable = new nodes_table_1.NodesTable(nodesParser);
+exports.users = new users_repository_1.UsersMemoryRepository();
+exports.nodes = new nodes_repository_1.NodesMemoryRepository();
 app.use(body_parser_1.urlencoded({
     extended: true
 }));

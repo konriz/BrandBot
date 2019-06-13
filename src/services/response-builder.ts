@@ -1,4 +1,4 @@
-import { nodesTable } from "../app";
+import { nodes } from "../app";
 import { User } from "../user/user";
 
 export class ResponseBuilder {
@@ -8,13 +8,9 @@ export class ResponseBuilder {
     constructor(user: User) {
         this._user = user;
     }
-    
-    private getNodeView(name: string) {
-        return nodesTable.getView(name);
-    }
 
     getResponse(name: string) {
-        let message = this.getNodeView(name);
+        let message = nodes.getNode(name).getView();
         return {
             recipient: {
               id: this._user.psid

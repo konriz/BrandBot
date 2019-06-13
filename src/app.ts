@@ -2,15 +2,13 @@ import express from "express";
 import { urlencoded, json } from "body-parser";
 import { config } from "./services/config";
 import { AddressInfo } from "net";
-import { NodesTreeParser } from "./nodesTree/nodes-parser";
-import { NodesTable } from "./nodesTree/nodes-table";
 import { WebHandler } from "./services/web-handler";
-import { User } from "./user/user";
+import { UsersRepository, UsersMemoryRepository } from "./user/users-repository";
+import { NodesRepository, NodesMemoryRepository } from "./nodesTree/nodes-repository";
 
 const app = express();
-export var users: Map<string, User> = new Map();
-var nodesParser = new NodesTreeParser();
-export var nodesTable = new NodesTable(nodesParser);
+export var users: UsersRepository = new UsersMemoryRepository();
+export var nodes: NodesRepository = new NodesMemoryRepository();
 
 app.use(
     urlencoded({

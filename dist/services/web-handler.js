@@ -92,15 +92,15 @@ class WebHandler {
                         console.log(`Profile is unavailable: ${error}`);
                     })
                         .finally(() => {
-                        app_1.users.set(senderPsid, user);
+                        app_1.users.addUser(user);
                         console.log(`New Profile PSID: ${senderPsid}`);
-                        let receiveMessage = new receive_1.Receive(app_1.users.get(senderPsid), webhookEvent);
+                        let receiveMessage = new receive_1.Receive(app_1.users.getUser(senderPsid), webhookEvent);
                         return receiveMessage.handleMessage();
                     });
                 }
                 else {
                     console.log(`Profile already exists PSID: ${senderPsid}`);
-                    let receiveMessage = new receive_1.Receive(app_1.users.get(senderPsid), webhookEvent);
+                    let receiveMessage = new receive_1.Receive(app_1.users.getUser(senderPsid), webhookEvent);
                     return receiveMessage.handleMessage();
                 }
             });
@@ -111,8 +111,9 @@ class WebHandler {
         }
     }
     static getNodes(req, res) {
-        if (app_1.nodesTable.nodes.size > 0) {
-            res.render("nodes/nodes", { nodes: Array.from(app_1.nodesTable.nodes.values()) });
+        let nodesList = app_1.nodes.getAll();
+        if (nodesList.length > 0) {
+            res.render("nodes/nodes", { nodes: nodesList });
         }
         else {
             res.render("nodes/nonodes");
@@ -120,8 +121,9 @@ class WebHandler {
     }
     ;
     static getUsers(req, res) {
-        if (app_1.users.size > 0) {
-            res.render("users/users", { users: Array.from(app_1.users.values()) });
+        let usersList = app_1.users.getAllUsers();
+        if (usersList.length > 0) {
+            res.render("users/users", { users: usersList });
         }
         else {
             res.render("users/nousers");

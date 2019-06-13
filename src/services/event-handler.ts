@@ -1,6 +1,5 @@
 import { ResponseBuilder } from "./response-builder";
 import { User } from "../user/user";
-import { BotNode } from "../nodesTree/nodes/abstract-node";
 
 export class EventHandler {
 

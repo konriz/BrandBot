@@ -1,6 +1,5 @@
 import { NodesParser } from "./nodes-parser";
 import { BotNode } from "./nodes/abstract-node";
-import { SimpleNode } from "./nodes/simple-node";
 import { DefinedNodes } from "./nodes/defined-nodes";
 
 export class NodesTable {
@@ -25,6 +24,10 @@ export class NodesTable {
             node = this.getError();
         }
         return node;
+    }
+
+    getAll(): Map<string, BotNode> {
+        return this.nodes;
     }
 
     private getError(): BotNode {

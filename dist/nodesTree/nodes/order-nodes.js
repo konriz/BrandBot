@@ -8,10 +8,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const abstract_node_1 = require("./abstract-node");
-const order_1 = require("../../order/order");
+const order_1 = require("../../orders/order");
 const res = __importStar(require("../../resources/locales/resources.json"));
-const delivery_1 = require("../../order/delivery");
-const payment_1 = require("../../order/payment");
+const delivery_1 = require("../../orders/delivery");
+const payment_1 = require("../../orders/payment");
 class OrderNode extends abstract_node_1.AbstractNode {
     constructor(parent, resources) {
         super({

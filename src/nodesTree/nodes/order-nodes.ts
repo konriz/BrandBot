@@ -1,9 +1,9 @@
 import { AbstractNode } from "./abstract-node";
 import { ItemNode } from "./item-node";
-import { Order } from "../../order/order";
+import { Order } from "../../orders/order";
 import * as res from "../../resources/locales/resources.json";
-import { Delivery } from "../../order/delivery";
-import { Payment } from "../../order/payment";
+import { Delivery } from "../../orders/delivery";
+import { Payment } from "../../orders/payment";
 
 abstract class OrderNode extends AbstractNode {
 

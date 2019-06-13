@@ -43,9 +43,4 @@ export class NodesTreeParser implements NodesParser{
         }
         return node;
     }
-
-    
-
-    
-
 }

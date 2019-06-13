@@ -5,11 +5,8 @@ class ResponseBuilder {
     constructor(user) {
         this._user = user;
     }
-    getNodeView(name) {
-        return app_1.nodesTable.getView(name);
-    }
     getResponse(name) {
-        let message = this.getNodeView(name);
+        let message = app_1.nodes.getNode(name).getView();
         return {
             recipient: {
                 id: this._user.psid
