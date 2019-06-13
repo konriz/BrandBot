@@ -9,9 +9,11 @@ const config_1 = require("./services/config");
 const web_handler_1 = require("./services/web-handler");
 const users_repository_1 = require("./user/users-repository");
 const nodes_repository_1 = require("./nodesTree/nodes-repository");
+const orders_repository_1 = require("./orders/orders-repository");
 const app = express_1.default();
 exports.users = new users_repository_1.UsersMemoryRepository();
 exports.nodes = new nodes_repository_1.NodesMemoryRepository();
+exports.orders = new orders_repository_1.OrdersMemoryRepository();
 app.use(body_parser_1.urlencoded({
     extended: true
 }));
@@ -29,6 +31,7 @@ app.post("/webhook", web_handler_1.WebHandler.postWebhook);
 app.get("/profile", web_handler_1.WebHandler.getProfile);
 app.get("/nodes", web_handler_1.WebHandler.getNodes);
 app.get("/users", web_handler_1.WebHandler.getUsers);
+app.get("/orders", web_handler_1.WebHandler.getOrders);
 var listener = app.listen(config_1.config.port, function () {
     let address = listener.address();
     console.log(`Your app is listening on port: ${address.port}`);

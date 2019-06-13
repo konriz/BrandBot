@@ -5,10 +5,12 @@ import { AddressInfo } from "net";
 import { WebHandler } from "./services/web-handler";
 import { UsersRepository, UsersMemoryRepository } from "./user/users-repository";
 import { NodesRepository, NodesMemoryRepository } from "./nodesTree/nodes-repository";
+import { OrdersRepository, OrdersMemoryRepository } from "./orders/orders-repository";
 
 const app = express();
 export var users: UsersRepository = new UsersMemoryRepository();
 export var nodes: NodesRepository = new NodesMemoryRepository();
+export var orders: OrdersRepository = new OrdersMemoryRepository();
 
 app.use(
     urlencoded({
@@ -37,11 +39,11 @@ app.get("/profile", WebHandler.getProfile);
 
 app.get("/nodes", WebHandler.getNodes);
 
-app.get("/users", WebHandler.getUsers)
+app.get("/users", WebHandler.getUsers);
+
+app.get("/orders", WebHandler.getOrders);
   
 var listener = app.listen(config.port, function() {
   let address = <AddressInfo>listener.address();
   console.log(`Your app is listening on port: ${address.port}`);
 });
-
-

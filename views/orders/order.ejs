@@ -1,0 +1,8 @@
+<li class="list-group-item">
+    <h6><%= order.oid %></h6>
+    <p><%= order.user.firstName + " " + order.user.lastName %></p> 
+    <p>Przedmiot: <%= order.item.name %> / <%= order.item.price %> zł</p>
+    <p>Wysyłka: <%= order.delivery.name %> / <%= order.delivery.price %> zł</p>
+    <p>Płatność: <%= order.payment.name %> / <%= order.payment.price %> zł</p>
+    <p>Suma: <%= order.sum() %></p>
+</li>

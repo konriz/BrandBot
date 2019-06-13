@@ -130,6 +130,15 @@ class WebHandler {
         }
     }
     ;
+    static getOrders(req, res) {
+        let ordersList = app_1.orders.getAllOrders();
+        if (ordersList.length > 0) {
+            res.render("orders/orders", { orders: ordersList });
+        }
+        else {
+            res.render("orders/noorders");
+        }
+    }
 }
 exports.WebHandler = WebHandler;
 //# sourceMappingURL=web-handler.js.map

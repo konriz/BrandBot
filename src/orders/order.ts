@@ -4,7 +4,7 @@ import { Delivery } from "./delivery";
 import { Payment } from "./payment";
 
 export class Order {
-    id: string;
+    oid: string;
     user: User;
     item: Item;
     private _delivery: Delivery;

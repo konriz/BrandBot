@@ -4,7 +4,7 @@ import express = require("express");
 import { User } from "../user/user";
 import { GraphAPI } from "./graph-api";
 import { Receive } from "./receive";
-import { users, nodes } from "../app";
+import { users, nodes, orders } from "../app";
 
 export class WebHandler {
 
@@ -129,9 +129,18 @@ export class WebHandler {
   static getUsers(req: express.Request, res: express.Response) {
     let usersList = users.getAllUsers();
     if(usersList.length > 0){
-      res.render("users/users", {users: usersList})
+      res.render("users/users", {users: usersList});
     } else {
       res.render("users/nousers");
     }
   };
+
+  static getOrders(req: express.Request, res: express.Response) {
+    let ordersList = orders.getAllOrders();
+    if(ordersList.length > 0){
+      res.render("orders/orders", {orders: ordersList});
+    } else {
+      res.render("orders/noorders");
+    }
+  }
 }
