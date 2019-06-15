@@ -1,5 +1,6 @@
 import { nodes } from "../app";
 import { User } from "../user/user";
+import { BotNode } from "../nodesTree/nodes/abstract-node";
 
 export class ResponseBuilder {
 
@@ -10,12 +11,13 @@ export class ResponseBuilder {
     }
 
     getResponse(name: string) {
-        let message = nodes.getNode(name).getView();
+      let responseNode: BotNode = nodes.getNode(name);
+      responseNode.setUser(this._user);
         return {
             recipient: {
               id: this._user.psid
             },
-            message: message
+            message: responseNode.getView()
           };
     }
 }

@@ -3,11 +3,14 @@ import * as images from "../../resources/images";
 import * as res from "../../resources/locales/resources.json"
 import { MessageBuilder } from "../../services/message-builder";
 import { NodesFactory } from "../node-factory";
+import { User } from "../../user/user";
 
 export interface BotNode {
     getMap(): Map<string, BotNode>;
     getView(): any;
     getQuickReplies(): QuickReply[];
+    setUser(user: User): void;
+    getUser(): User;
 }
 
 export abstract class AbstractNode implements BotNode {
@@ -17,6 +20,7 @@ export abstract class AbstractNode implements BotNode {
     private _parent: AbstractNode;
     private _children: AbstractNode[];
     private _type: string;
+    private _user: User;
 
     constructor(data: any, parent?: AbstractNode){
         this._name = data["name"];
@@ -36,6 +40,10 @@ export abstract class AbstractNode implements BotNode {
 
     get message() {
         return this._message;
+    }
+
+    set message(message: string) {
+        this._message = message;
     }
 
     get parent(): AbstractNode {
@@ -70,6 +78,14 @@ export abstract class AbstractNode implements BotNode {
             });
         }
         return children;
+    }
+
+    setUser(user: User) {
+        this._user = user;
+    }
+
+    getUser(): User {
+        return this._user;
     }
 
     getQuickReplies() {

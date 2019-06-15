@@ -3,6 +3,7 @@ import { urlencoded, json } from "body-parser";
 import { config } from "./services/config";
 import { AddressInfo } from "net";
 import { WebHandler } from "./services/web-handler";
+import { WebhookHandler } from "./services/webhook-handler";
 import { UsersRepository, UsersMemoryRepository } from "./user/users-repository";
 import { NodesRepository, NodesMemoryRepository } from "./nodesTree/nodes-repository";
 import { OrdersRepository, OrdersMemoryRepository } from "./orders/orders-repository";
@@ -29,10 +30,10 @@ app.get("/", function(_req, res) {
 });
 
 // Adds support for GET requests to our webhook
-app.get("/webhook", WebHandler.getWebhook);
+app.get("/webhook", WebhookHandler.getWebhook);
 
   // Creates the endpoint for your webhook
-app.post("/webhook", WebHandler.postWebhook);
+app.post("/webhook", WebhookHandler.postWebhook);
 
   // Set up your App's Messenger Profile
 app.get("/profile", WebHandler.getProfile);
@@ -42,6 +43,8 @@ app.get("/nodes", WebHandler.getNodes);
 app.get("/users", WebHandler.getUsers);
 
 app.get("/orders", WebHandler.getOrders);
+
+app.get("/settings", WebHandler.getSettings);
   
 var listener = app.listen(config.port, function() {
   let address = <AddressInfo>listener.address();

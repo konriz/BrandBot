@@ -6,12 +6,13 @@ class ResponseBuilder {
         this._user = user;
     }
     getResponse(name) {
-        let message = app_1.nodes.getNode(name).getView();
+        let responseNode = app_1.nodes.getNode(name);
+        responseNode.setUser(this._user);
         return {
             recipient: {
                 id: this._user.psid
             },
-            message: message
+            message: responseNode.getView()
         };
     }
 }

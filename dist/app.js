@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const body_parser_1 = require("body-parser");
 const config_1 = require("./services/config");
 const web_handler_1 = require("./services/web-handler");
+const webhook_handler_1 = require("./services/webhook-handler");
 const users_repository_1 = require("./user/users-repository");
 const nodes_repository_1 = require("./nodesTree/nodes-repository");
 const orders_repository_1 = require("./orders/orders-repository");
@@ -24,14 +25,15 @@ app.get("/", function (_req, res) {
     res.render("index");
 });
 // Adds support for GET requests to our webhook
-app.get("/webhook", web_handler_1.WebHandler.getWebhook);
+app.get("/webhook", webhook_handler_1.WebhookHandler.getWebhook);
 // Creates the endpoint for your webhook
-app.post("/webhook", web_handler_1.WebHandler.postWebhook);
+app.post("/webhook", webhook_handler_1.WebhookHandler.postWebhook);
 // Set up your App's Messenger Profile
 app.get("/profile", web_handler_1.WebHandler.getProfile);
 app.get("/nodes", web_handler_1.WebHandler.getNodes);
 app.get("/users", web_handler_1.WebHandler.getUsers);
 app.get("/orders", web_handler_1.WebHandler.getOrders);
+app.get("/settings", web_handler_1.WebHandler.getSettings);
 var listener = app.listen(config_1.config.port, function () {
     let address = listener.address();
     console.log(`Your app is listening on port: ${address.port}`);

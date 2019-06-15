@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const response_builder_1 = require("./response-builder");
+const app_1 = require("../app");
 class EventHandler {
-    constructor(user, event) {
-        this._user = user;
+    constructor(event) {
+        this._user = app_1.users.getUser(event.sender.id);
         this._event = event;
-        this._responseBuilder = new response_builder_1.ResponseBuilder(user);
+        this._responseBuilder = new response_builder_1.ResponseBuilder(this._user);
     }
     get user() {
         return this._user;

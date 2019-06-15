@@ -1,5 +1,6 @@
 import { ResponseBuilder } from "./response-builder";
 import { User } from "../user/user";
+import { users } from "../app";
 
 export class EventHandler {
 
@@ -7,10 +8,10 @@ export class EventHandler {
     private _event: any;
     private _responseBuilder : ResponseBuilder;
 
-    constructor(user: User, event: any) {
-        this._user = user;
+    constructor(event: any) {
+        this._user = users.getUser(event.sender.id);
         this._event = event;
-        this._responseBuilder = new ResponseBuilder(user);
+        this._responseBuilder = new ResponseBuilder(this._user);
     }
 
     get user(): User {

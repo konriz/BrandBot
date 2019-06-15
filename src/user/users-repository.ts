@@ -2,6 +2,7 @@ import { User } from "./user";
 
 export interface UsersRepository {
     getUser(psid: string): User;
+    isUser(psid: string): boolean;
     getAllUsers(): User[];
     addUser(user: User): string;
     updateUser(user: User): string;
@@ -22,6 +23,11 @@ export class UsersMemoryRepository implements UsersRepository {
 
     getUser(psid: string): User {
         return this._users.get(psid);
+    }
+
+    isUser(psid: string): boolean {
+        let user = this.getUser(psid);
+        return user ? true : false;
     }
 
     getAllUsers(): User[] {

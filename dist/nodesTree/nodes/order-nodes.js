@@ -19,17 +19,7 @@ class OrderNode extends abstract_node_1.AbstractNode {
             buttonText: resources.btn,
             message: resources.message
         });
-        this._itemNode = parent;
         this.parent = parent;
-    }
-    get order() {
-        return this._order;
-    }
-    set order(order) {
-        this._order = order;
-    }
-    get itemNode() {
-        return this._itemNode;
     }
 }
 class SendNode extends OrderNode {
@@ -41,46 +31,48 @@ class SendNode extends OrderNode {
         });
         this.parent = parent;
         this.type = "Send";
-        this.order = new order_1.Order(null, parent.item);
-        this._deliveries = delivery_1.Delivery.getDeliveries();
         this.children = [];
-        this._deliveries.forEach((delivery) => {
-            let order = this.order;
-            order.delivery = delivery;
-            this.children.push(new PayNode(parent, this, order));
+        delivery_1.Delivery.getDeliveries().forEach((delivery) => {
+            this.children.push(new PayNode(this, parent, delivery));
         });
     }
 }
 exports.SendNode = SendNode;
 class PayNode extends OrderNode {
-    constructor(item, parent, order) {
-        super(item, {
-            prefix: `${res.nodes.pay.prefix}_${parent.order.delivery.name}`,
-            btn: `${order.delivery.string}`,
+    constructor(parent, itemNode, delivery) {
+        super(itemNode, {
+            prefix: `${res.nodes.pay.prefix}_${delivery.name}`,
+            btn: `${delivery.string}`,
             message: `${res.nodes.pay.message}`
         });
         this.parent = parent;
         this.type = "Pay";
-        this.order = parent.order;
-        this._payments = payment_1.Payment.getPayments();
+        this._delivery = delivery;
         this.children = [];
-        this._payments.forEach((payment) => {
-            let order = this.order;
-            order.payment = payment;
-            this.children.push(new ConfirmNode(item, this, order));
+        payment_1.Payment.getPayments().forEach((payment) => {
+            this.children.push(new ConfirmNode(this, itemNode, delivery, payment));
         });
     }
 }
 class ConfirmNode extends OrderNode {
-    constructor(item, parent, order) {
-        super(item, {
-            prefix: `${parent.order.payment.name}_${parent.order.delivery.name}`,
-            btn: `${order.payment.string}`,
+    constructor(parent, itemNode, delivery, payment) {
+        let order = new order_1.Order(null, itemNode.item);
+        order.delivery = delivery;
+        order.payment = payment;
+        super(itemNode, {
+            prefix: `${payment.name}_${delivery.name}`,
+            btn: `${payment.string}`,
             message: order.getMessage()
         });
+        this._order = order;
         this.parent = parent;
         this.type = "Confirm";
-        this.order = parent.order;
+    }
+    setUser(user) {
+        super.setUser(user);
+        this._order.user = user;
+        this.message = this._order.getMessage();
+        console.log(`Order node DEBUG: ${JSON.stringify(this._order)}`);
     }
 }
 //# sourceMappingURL=order-nodes.js.map

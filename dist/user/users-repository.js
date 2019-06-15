@@ -12,6 +12,10 @@ class UsersMemoryRepository {
     getUser(psid) {
         return this._users.get(psid);
     }
+    isUser(psid) {
+        let user = this.getUser(psid);
+        return user ? true : false;
+    }
     getAllUsers() {
         let users = [];
         this._users.forEach((user) => users.push(user));

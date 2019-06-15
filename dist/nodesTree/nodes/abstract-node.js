@@ -29,6 +29,9 @@ class AbstractNode {
     get message() {
         return this._message;
     }
+    set message(message) {
+        this._message = message;
+    }
     get parent() {
         return this._parent;
     }
@@ -55,6 +58,12 @@ class AbstractNode {
             });
         }
         return children;
+    }
+    setUser(user) {
+        this._user = user;
+    }
+    getUser() {
+        return this._user;
     }
     getQuickReplies() {
         let quickReplies = [];
