@@ -1,9 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const app_1 = require("../app");
 class Order {
     constructor(user, item) {
+        this._confirmed = false;
         this.user = user;
         this.item = item;
+    }
+    get oid() {
+        return this._oid;
     }
     get delivery() {
         return this._delivery;
@@ -19,6 +24,9 @@ class Order {
     }
     set address(address) {
         this._address = address;
+    }
+    get confirmed() {
+        return this._confirmed;
     }
     sum() {
         let price = +((this.item.price).replace(",", "."));
@@ -37,6 +45,12 @@ class Order {
         let payment = `Sposób zapłaty - ${this.payment.string}`;
         let sum = `Do zapłaty - ${this.sum().toFixed(2).replace(".", ",")}`;
         return [user, item, price, delivery, payment, sum].join("\n");
+    }
+    confirm() {
+        this._confirmed = true;
+        this._oid = Date.now().toString();
+        app_1.orders.addOrder(this);
+        console.log(`Order ${this._oid} confirmed`);
     }
 }
 exports.Order = Order;

@@ -17,19 +17,20 @@ export class OrdersMemoryRepository implements OrdersRepository {
 
     constructor() {
         this._orders = new Map();
+        this._orders.set("-1", this.testOrder());
+    }
 
+    private testOrder() {
         let user = new User("2");
         user.firstName = "Test";
         user.lastName = "User";
         let item = new Item("test item", "1", "www");
         let order = new Order(user, item);
-        order.oid = "1";
         order.delivery = new Delivery("test delivery", "1");
         order.payment = new Payment("test payment", "1");
-
-        this._orders.set(order.oid, order);
+        return order;
     }
-
+ 
     getOrder(oid: string): Order {
         return this._orders.get(oid);
     }
