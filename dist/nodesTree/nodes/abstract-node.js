@@ -8,7 +8,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const quick_reply_1 = require("../quick-reply");
-const images = __importStar(require("../../resources/images"));
+const images_1 = require("../../resources/images");
 const res = __importStar(require("../../resources/locales/resources.json"));
 const message_builder_1 = require("../../services/message-builder");
 const node_factory_1 = require("../node-factory");
@@ -73,11 +73,11 @@ class AbstractNode {
         }
         // Add "back" button leading to parent node
         if (this.parent) {
-            quickReplies.push(new quick_reply_1.QuickReply(res.nodes.back, this.parent.name, images.back));
+            quickReplies.push(new quick_reply_1.QuickReply(res.nodes.back, this.parent.name, images_1.images.back));
         }
         // Add "home" button leading to home node if this is not home node.
         if (this.name != "HOME") {
-            let homeReply = new quick_reply_1.QuickReply(res.nodes.home, "HOME", images.home);
+            let homeReply = new quick_reply_1.QuickReply(res.nodes.home, "HOME", images_1.images.home);
             quickReplies.push(homeReply);
         }
         return quickReplies;

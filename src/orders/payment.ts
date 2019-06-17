@@ -1,4 +1,4 @@
-import * as res from "../resources/locales/resources.json";
+import * as res from "../resources/payments.json";
 
 export class Payment {
     private _name: string;
@@ -23,7 +23,7 @@ export class Payment {
 
     static getPayments(): Payment[] {
         let payments: Payment[] = [];
-        let options: any = res.deliveries.pay;
+        let options: any = res.payment;
         for(let option in options) {
             let payment = new Payment(option, options[option]);
             payments.push(payment);

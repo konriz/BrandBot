@@ -42,17 +42,11 @@
       "prefix": "CONFIRM"
     },
 
-    "thanks": "Zamówienie przyjęte, oczekuj realizacji. Dziękujemy i zapraszamy do dalszych zakupów."
-  },
-  "deliveries" : {
-    "delivery" : {
-      "Kurier": "15,00",
-      "Poczta": "9,00"
+    "confirmed": {
+      "message": "Zatwierdzono zamówienie : ",
+      "prefix": "CONFIRMED"
     },
-    "pay" : {
-      "Przelew": "0,00",
-      "Pobranie": "10,00"
-    }
-  }
 
+    "thanks": "Zamówienie przyjęte, oczekuj realizacji. Dziękujemy i zapraszamy do dalszych zakupów."
+  }
 }

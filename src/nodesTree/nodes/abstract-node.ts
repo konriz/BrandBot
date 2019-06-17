@@ -1,5 +1,5 @@
 import { QuickReply } from "../quick-reply";
-import * as images from "../../resources/images";
+import { images } from "../../resources/images";
 import * as res from "../../resources/locales/resources.json"
 import { MessageBuilder } from "../../services/message-builder";
 import { NodesFactory } from "../node-factory";

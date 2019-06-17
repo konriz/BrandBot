@@ -7,7 +7,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const res = __importStar(require("../resources/locales/resources.json"));
+const res = __importStar(require("../resources/deliveries.json"));
 class Delivery {
     constructor(name, price) {
         this._name = name;
@@ -24,7 +24,7 @@ class Delivery {
     }
     static getDeliveries() {
         let deliveries = [];
-        let options = res.deliveries.delivery;
+        let options = res.delivery;
         for (let option in options) {
             let delivery = new Delivery(option, options[option]);
             deliveries.push(delivery);

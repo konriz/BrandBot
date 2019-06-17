@@ -1,4 +1,4 @@
-import * as res from "../resources/locales/resources.json"
+import * as res from "../resources/deliveries.json"
 
 export class Delivery {
     private _name: string;
@@ -23,7 +23,7 @@ export class Delivery {
 
     static getDeliveries(): Delivery[] {
         let deliveries: Delivery[] = [];
-        let options: any = res.deliveries.delivery;
+        let options: any = res.delivery;
         for(let option in options) {
             let delivery = new Delivery(option, options[option]);
             deliveries.push(delivery);

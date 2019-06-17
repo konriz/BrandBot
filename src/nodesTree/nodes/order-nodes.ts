@@ -2,11 +2,10 @@ import { AbstractNode } from "./abstract-node";
 import { ItemNode } from "./item-node";
 import { Order } from "../../orders/order";
 import * as res from "../../resources/locales/resources.json";
-import * as images from "../../resources/images";
+import { images } from "../../resources/images";
 import { Delivery } from "../../orders/delivery";
 import { Payment } from "../../orders/payment";
 import { User } from "../../user/user";
-import { orders } from "../../app";
 import { QuickReply } from "../quick-reply";
 
 abstract class OrderNode extends AbstractNode {
@@ -19,7 +18,6 @@ abstract class OrderNode extends AbstractNode {
         });
         this.parent = parent;
     }
-
 }
 
 export class SendNode extends OrderNode {
@@ -31,7 +29,7 @@ export class SendNode extends OrderNode {
             message: `${res.nodes.send.message}`
         });
         this.parent = parent;
-        this.type = "Send";
+        this.type = res.nodes.send.prefix;
 
         this.children = [];
         Delivery.getDeliveries().forEach( (delivery) => {
@@ -49,7 +47,7 @@ class PayNode extends OrderNode {
             message: `${res.nodes.pay.message}`
         });
         this.parent = parent;
-        this.type = "Pay";
+        this.type = res.nodes.pay.prefix;
 
         this.children = [];
         Payment.getPayments().forEach( (payment) => {
@@ -75,7 +73,7 @@ class ConfirmNode extends OrderNode {
         this._itemNode = itemNode;
         this._order = order;
         this.parent = parent;
-        this.type = "Confirm";
+        this.type = res.nodes.confirm.prefix;
         this.children.push(new ConfirmedNode(this));
     }
 
@@ -96,7 +94,7 @@ class ConfirmNode extends OrderNode {
     }
 
     getView() {
-        this.message = `Czy zatwierdzić zamówienie : \n${this._order.getMessage()}`;
+        this.message = `${res.nodes.confirm.message} \n${this._order.getMessage()}`;
         console.log(`Order node DEBUG: ${JSON.stringify(this._order)}`);
         return super.getView();
     }
@@ -108,17 +106,17 @@ class ConfirmedNode extends OrderNode {
 
     constructor(parent: ConfirmNode) {
         super(parent.itemNode, {
-            prefix: `CONFIRMED_${parent.order.payment.name}_${parent.order.delivery.name}`,
-            btn: `ZATWIERDZAM`,
+            prefix: `${res.nodes.confirmed.prefix}_${parent.order.payment.name}_${parent.order.delivery.name}`,
+            btn: `${res.nodes.confirm.btn}`,
             message: `Zatwierdzenie zamówienia`
         });
         this._order = parent.order;
-        this.type = "Confirmed";
+        this.type = res.nodes.confirmed.prefix;
     }
 
     getView() {
         this._order.confirm();
-        this.message = `Zatwierdzono zamówienie : \n${this._order.getMessage()}`;
+        this.message = `${res.nodes.confirm.message} \n${this._order.getMessage()}`;
         console.log(`Order node DEBUG: ${JSON.stringify(this._order)}`);
         return super.getView();
     }
