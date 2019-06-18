@@ -101,7 +101,7 @@ class ConfirmedNode extends OrderNode {
     }
     getView() {
         this._order.confirm();
-        this.message = `${res.nodes.confirm.message} \n${this._order.getMessage()}`;
+        this.message = `${res.nodes.confirmed.message} \n${this._order.getMessage()}`;
         console.log(`Order node DEBUG: ${JSON.stringify(this._order)}`);
         return super.getView();
     }
