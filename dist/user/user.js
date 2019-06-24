@@ -10,6 +10,7 @@ class User {
         this.address = "";
         this.botOffUntil = null;
         this.psid = psid;
+        this._lastSeen = new Date();
     }
     setProfile(profile) {
         this.firstName = profile.first_name;
@@ -34,6 +35,12 @@ class User {
     }
     get lastSeenNodeName() {
         return this._lastSeenNodeName;
+    }
+    set lastSeen(date) {
+        this._lastSeen = date;
+    }
+    get lastSeen() {
+        return this._lastSeen;
     }
 }
 exports.User = User;

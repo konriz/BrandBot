@@ -11,9 +11,12 @@ export class User {
   address = "";
   botOffUntil: Date = null;
   private _lastSeenNodeName: string;
+  private _lastSeen: Date;
+
 
   constructor(psid: string) {
     this.psid = psid;
+    this._lastSeen = new Date();
   }
   
   setProfile(profile: any) {
@@ -44,5 +47,13 @@ export class User {
 
   get lastSeenNodeName(): string {
     return this._lastSeenNodeName;
+  }
+
+  set lastSeen(date: Date) {
+    this._lastSeen = date;
+  }
+
+  get lastSeen(): Date {
+    return this._lastSeen;
   }
 };
