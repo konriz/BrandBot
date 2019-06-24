@@ -8,6 +8,8 @@ class ResponseBuilder {
     getResponse(name) {
         let responseNode = app_1.nodes.getNode(name);
         responseNode.setUser(this._user);
+        this._user.lastSeenNode = responseNode;
+        app_1.users.updateUser(this._user);
         return {
             recipient: {
                 id: this._user.psid

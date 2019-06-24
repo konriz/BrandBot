@@ -29,6 +29,12 @@ class User {
     setBotOn() {
         this.botOffUntil = null;
     }
+    set lastSeenNode(node) {
+        this._lastSeenNode = node;
+    }
+    get lastSeenNode() {
+        return this._lastSeenNode;
+    }
 }
 exports.User = User;
 ;

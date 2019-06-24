@@ -1,3 +1,5 @@
+import { BotNode } from "../nodesTree/nodes/abstract-node";
+
 export class User {
 
   psid: string;
@@ -8,6 +10,7 @@ export class User {
   gender = "neutral";
   address = "";
   botOffUntil: Date = null;
+  private _lastSeenNode: BotNode;
 
   constructor(psid: string) {
     this.psid = psid;
@@ -33,5 +36,13 @@ export class User {
 
   setBotOn() {
     this.botOffUntil = null;
+  }
+
+  set lastSeenNode(node: BotNode) {
+    this._lastSeenNode = node;
+  }
+
+  get lastSeenNode() {
+    return this._lastSeenNode;
   }
 };

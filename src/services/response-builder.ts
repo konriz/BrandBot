@@ -1,4 +1,4 @@
-import { nodes } from "../app";
+import { nodes, users } from "../app";
 import { User } from "../user/user";
 import { BotNode } from "../nodesTree/nodes/abstract-node";
 
@@ -13,6 +13,8 @@ export class ResponseBuilder {
     getResponse(name: string) {
       let responseNode: BotNode = nodes.getNode(name);
       responseNode.setUser(this._user);
+      this._user.lastSeenNode = responseNode;
+      users.updateUser(this._user);
         return {
             recipient: {
               id: this._user.psid
