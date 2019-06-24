@@ -1,6 +1,6 @@
 <li class="list-group-item">
     <div>User ID : <%= user.psid %></div>
     <div>User name : <%= user.firstName %> <%= user.lastName %></div>
-    <div>Last seen : <%= user.lastSeen %></div>
+    <div>Last seen : <%= user.lastSeen.toLocaleTimeString() %></div>
     <div>Last seen node : <%= user.lastSeenNodeName %></div>
 </li>

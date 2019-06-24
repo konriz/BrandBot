@@ -43,7 +43,6 @@ export class UsersMemoryRepository implements UsersRepository {
 
     updateUser(user: User): string {
         this._users.set(user.psid, user);
-        console.log("Updated user:", JSON.stringify(user));
         return user.psid;
     }
 

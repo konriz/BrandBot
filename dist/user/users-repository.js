@@ -27,7 +27,6 @@ class UsersMemoryRepository {
     }
     updateUser(user) {
         this._users.set(user.psid, user);
-        console.log("Updated user:", JSON.stringify(user));
         return user.psid;
     }
 }
