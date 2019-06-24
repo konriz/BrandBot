@@ -10,7 +10,7 @@ export class User {
   gender = "neutral";
   address = "";
   botOffUntil: Date = null;
-  private _lastSeenNode: BotNode;
+  private _lastSeenNodeName: string;
 
   constructor(psid: string) {
     this.psid = psid;
@@ -38,11 +38,11 @@ export class User {
     this.botOffUntil = null;
   }
 
-  set lastSeenNode(node: BotNode) {
-    this._lastSeenNode = node;
+  set lastSeenNodeName(nodeName: string) {
+    this._lastSeenNodeName = nodeName;
   }
 
-  get lastSeenNode() {
-    return this._lastSeenNode;
+  get lastSeenNodeName(): string {
+    return this._lastSeenNodeName;
   }
 };

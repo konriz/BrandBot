@@ -8,7 +8,7 @@ class ResponseBuilder {
     getResponse(name) {
         let responseNode = app_1.nodes.getNode(name);
         responseNode.setUser(this._user);
-        this._user.lastSeenNode = responseNode;
+        this._user.lastSeenNodeName = responseNode.getName();
         app_1.users.updateUser(this._user);
         return {
             recipient: {

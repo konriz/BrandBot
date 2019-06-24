@@ -29,11 +29,11 @@ class User {
     setBotOn() {
         this.botOffUntil = null;
     }
-    set lastSeenNode(node) {
-        this._lastSeenNode = node;
+    set lastSeenNodeName(nodeName) {
+        this._lastSeenNodeName = nodeName;
     }
-    get lastSeenNode() {
-        return this._lastSeenNode;
+    get lastSeenNodeName() {
+        return this._lastSeenNodeName;
     }
 }
 exports.User = User;

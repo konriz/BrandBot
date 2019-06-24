@@ -13,7 +13,7 @@ export class ResponseBuilder {
     getResponse(name: string) {
       let responseNode: BotNode = nodes.getNode(name);
       responseNode.setUser(this._user);
-      this._user.lastSeenNode = responseNode;
+      this._user.lastSeenNodeName = responseNode.getName();
       users.updateUser(this._user);
         return {
             recipient: {

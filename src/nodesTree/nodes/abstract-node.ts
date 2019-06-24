@@ -11,6 +11,7 @@ export interface BotNode {
     getQuickReplies(): QuickReply[];
     setUser(user: User): void;
     getUser(): User;
+    getName(): string;
 }
 
 export abstract class AbstractNode implements BotNode {
@@ -32,6 +33,10 @@ export abstract class AbstractNode implements BotNode {
 
     get name(): string {
         return this._name;
+    }
+
+    getName(): string {
+        return this.name;
     }
 
     get buttonText(): string {

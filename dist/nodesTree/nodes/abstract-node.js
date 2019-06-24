@@ -23,6 +23,9 @@ class AbstractNode {
     get name() {
         return this._name;
     }
+    getName() {
+        return this.name;
+    }
     get buttonText() {
         return this._buttonText;
     }
