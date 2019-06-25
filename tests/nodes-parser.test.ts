@@ -1,9 +1,8 @@
-import { NodesTreeParser } from "../src/data/nodes-parser.tree"
+import { User } from "../src/user/user";
 
 describe('Parser', function() {
     it('parse nodes', function() {
-        NodesTreeParser.getNodes();
-        let nodes = NodesTreeParser.getNodes();
-        console.log("Nodes parsed");
+        let user = new User("psid");
+        console.log(`User ${user.psid} created.`);
     })
 })

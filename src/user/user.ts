@@ -1,5 +1,3 @@
-import { BotNode } from "../nodesTree/nodes/abstract-node";
-
 export class User {
 
   psid: string;
