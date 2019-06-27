@@ -6,7 +6,7 @@ export class User {
   locale = "";
   timezone = "";
   gender = "neutral";
-  address = "";
+  private _address = "";
   botOffUntil: Date = null;
   private _lastSeenNodeName: string;
   private _lastSeen: Date;
@@ -27,8 +27,12 @@ export class User {
     }
   }
 
-  setAddress(address: any) {
-    this.address = address;
+  set address(address: string) {
+    this._address = address;
+  }
+
+  get address(): string {
+    return this._address;
   }
 
   setBotOffDate(date: Date) {
