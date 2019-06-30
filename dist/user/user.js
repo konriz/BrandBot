@@ -7,7 +7,7 @@ class User {
         this.locale = "";
         this.timezone = "";
         this.gender = "neutral";
-        this.address = "";
+        this._address = "";
         this.botOffUntil = null;
         this.psid = psid;
         this._lastSeen = new Date();
@@ -21,8 +21,11 @@ class User {
             this.gender = profile.gender;
         }
     }
-    setAddress(address) {
-        this.address = address;
+    set address(address) {
+        this._address = address;
+    }
+    get address() {
+        return this._address;
     }
     setBotOffDate(date) {
         this.botOffUntil = date;
