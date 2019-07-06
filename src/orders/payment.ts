@@ -1,4 +1,3 @@
-import * as res from "../resources/payments.json";
 
 export class Payment {
     private _name: string;
@@ -21,13 +20,4 @@ export class Payment {
         return `${this._name} : ${this._price}`
     }
 
-    static getPayments(): Payment[] {
-        let payments: Payment[] = [];
-        let options: any = res.payment;
-        for(let option in options) {
-            let payment = new Payment(option, options[option]);
-            payments.push(payment);
-        }
-        return payments;
-    }
 }

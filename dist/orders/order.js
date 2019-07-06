@@ -1,14 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = require("../app");
-class Order {
+class OrderImpl {
     constructor(user, item) {
         this._confirmed = false;
-        this.user = user;
-        this.item = item;
+        this._user = user;
+        this._item = item;
     }
     get oid() {
         return this._oid;
+    }
+    get user() {
+        return this._user;
+    }
+    set user(user) {
+        this._user = user;
+    }
+    get item() {
+        return this._item;
     }
     get delivery() {
         return this._delivery;
@@ -16,11 +25,14 @@ class Order {
     set delivery(delivery) {
         this._delivery = delivery;
     }
+    get payment() {
+        return this._payment;
+    }
     set payment(payment) {
         this._payment = payment;
     }
-    get payment() {
-        return this._payment;
+    get address() {
+        return this._address;
     }
     set address(address) {
         this._address = address;
@@ -49,9 +61,12 @@ class Order {
     confirm() {
         this._confirmed = true;
         this._oid = Date.now().toString();
+        // FIXME this is VERY BAD - side effects.
+        // adding order should be moved elsewhere
+        // no repository in DTO!
         app_1.orders.addOrder(this);
         console.log(`Order ${this._oid} confirmed`);
     }
 }
-exports.Order = Order;
+exports.OrderImpl = OrderImpl;
 //# sourceMappingURL=order.js.map

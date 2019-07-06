@@ -7,7 +7,7 @@ export interface NodesRepository {
     getAll(): BotNode[];
 }
 
-export class NodesMemoryRepository implements NodesRepository {
+export class MemoryNodesRepository implements NodesRepository {
 
     private _nodesTable: NodesTable;
 

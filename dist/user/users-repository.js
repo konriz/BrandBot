@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_1 = require("./user");
-class UsersMemoryRepository {
+class MemoryUsersRepository {
     constructor() {
         this._users = new Map();
         let user = new user_1.User("1");
@@ -30,5 +30,5 @@ class UsersMemoryRepository {
         return user.psid;
     }
 }
-exports.UsersMemoryRepository = UsersMemoryRepository;
+exports.MemoryUsersRepository = MemoryUsersRepository;
 //# sourceMappingURL=users-repository.js.map

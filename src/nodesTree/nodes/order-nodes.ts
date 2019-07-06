@@ -1,12 +1,15 @@
 import { AbstractNode } from "./abstract-node";
 import { ItemNode } from "./item-node";
-import { Order } from "../../orders/order";
+import { Order, OrderImpl } from "../../orders/order";
 import * as res from "../../resources/locales/resources.json";
 import { images } from "../../resources/images";
-import { Delivery } from "../../orders/delivery";
 import { Payment } from "../../orders/payment";
 import { User } from "../../user/user";
 import { QuickReply } from "../quick-reply";
+import { deliveries } from "../../app";
+import { payments } from "../../app";
+import { Delivery } from "../../orders/delivery";
+
 
 abstract class OrderNode extends AbstractNode {
 
@@ -32,7 +35,7 @@ export class SendNode extends OrderNode {
         this.type = res.nodes.send.prefix;
 
         this.children = [];
-        Delivery.getDeliveries().forEach( (delivery) => {
+        deliveries.getDeliveries().forEach( (delivery) => {
             this.children.push(new PayNode(this, parent, delivery));
         } );
     }
@@ -50,7 +53,7 @@ class PayNode extends OrderNode {
         this.type = res.nodes.pay.prefix;
 
         this.children = [];
-        Payment.getPayments().forEach( (payment) => {
+        payments.getPayments().forEach( (payment) => {
             this.children.push(new ConfirmNode(this, itemNode, delivery, payment));
         } );
     }
@@ -62,7 +65,7 @@ class ConfirmNode extends OrderNode {
     private _itemNode: ItemNode;
 
     constructor(parent: PayNode, itemNode: ItemNode, delivery: Delivery, payment: Payment) {
-        let order = new Order(null, itemNode.item);
+        let order = new OrderImpl(null, itemNode.item);
         order.delivery = delivery;
         order.payment = payment;
         super(itemNode, {

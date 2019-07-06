@@ -4,14 +4,18 @@ import { config } from "./services/config";
 import { AddressInfo } from "net";
 import { WebHandler } from "./services/web-handler";
 import { WebhookHandler } from "./services/webhook-handler";
-import { UsersRepository, UsersMemoryRepository } from "./user/users-repository";
-import { NodesRepository, NodesMemoryRepository } from "./nodesTree/nodes-repository";
-import { OrdersRepository, OrdersMemoryRepository } from "./orders/orders-repository";
+import { UsersRepository, MemoryUsersRepository } from "./user/users-repository";
+import { NodesRepository, MemoryNodesRepository } from "./nodesTree/nodes-repository";
+import { OrdersRepository, MemoryOrdersRepository } from "./orders/orders-repository";
+import { DeliveriesRepository, FileDeliveriesRepository } from "./orders/deliveries-repository";
+import { PaymentsRepository, FilePaymentsRepository } from "./orders/payments-repository";
 
 const app = express();
-export var users: UsersRepository = new UsersMemoryRepository();
-export var nodes: NodesRepository = new NodesMemoryRepository();
-export var orders: OrdersRepository = new OrdersMemoryRepository();
+export var deliveries: DeliveriesRepository = new FileDeliveriesRepository();
+export var payments: PaymentsRepository = new FilePaymentsRepository();
+export var users: UsersRepository = new MemoryUsersRepository();
+export var nodes: NodesRepository = new MemoryNodesRepository();
+export var orders: OrdersRepository = new MemoryOrdersRepository();
 
 app.use(
     urlencoded({

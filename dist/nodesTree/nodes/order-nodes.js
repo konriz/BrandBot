@@ -11,9 +11,9 @@ const abstract_node_1 = require("./abstract-node");
 const order_1 = require("../../orders/order");
 const res = __importStar(require("../../resources/locales/resources.json"));
 const images_1 = require("../../resources/images");
-const delivery_1 = require("../../orders/delivery");
-const payment_1 = require("../../orders/payment");
 const quick_reply_1 = require("../quick-reply");
+const app_1 = require("../../app");
+const app_2 = require("../../app");
 class OrderNode extends abstract_node_1.AbstractNode {
     constructor(parent, resources) {
         super({
@@ -34,7 +34,7 @@ class SendNode extends OrderNode {
         this.parent = parent;
         this.type = res.nodes.send.prefix;
         this.children = [];
-        delivery_1.Delivery.getDeliveries().forEach((delivery) => {
+        app_1.deliveries.getDeliveries().forEach((delivery) => {
             this.children.push(new PayNode(this, parent, delivery));
         });
     }
@@ -50,14 +50,14 @@ class PayNode extends OrderNode {
         this.parent = parent;
         this.type = res.nodes.pay.prefix;
         this.children = [];
-        payment_1.Payment.getPayments().forEach((payment) => {
+        app_2.payments.getPayments().forEach((payment) => {
             this.children.push(new ConfirmNode(this, itemNode, delivery, payment));
         });
     }
 }
 class ConfirmNode extends OrderNode {
     constructor(parent, itemNode, delivery, payment) {
-        let order = new order_1.Order(null, itemNode.item);
+        let order = new order_1.OrderImpl(null, itemNode.item);
         order.delivery = delivery;
         order.payment = payment;
         super(itemNode, {

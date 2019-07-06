@@ -8,7 +8,7 @@ export interface UsersRepository {
     updateUser(user: User): string;
 }
 
-export class UsersMemoryRepository implements UsersRepository {
+export class MemoryUsersRepository implements UsersRepository {
 
     private _users: Map<string, User>;
 

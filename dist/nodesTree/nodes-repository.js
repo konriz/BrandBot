@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const nodes_parser_1 = require("./nodes-parser");
 const nodes_table_1 = require("./nodes-table");
-class NodesMemoryRepository {
+class MemoryNodesRepository {
     constructor() {
         let nodesParser = new nodes_parser_1.NodesTreeParser();
         this._nodesTable = new nodes_table_1.NodesTable(nodesParser);
@@ -16,5 +16,5 @@ class NodesMemoryRepository {
         return nodes;
     }
 }
-exports.NodesMemoryRepository = NodesMemoryRepository;
+exports.MemoryNodesRepository = MemoryNodesRepository;
 //# sourceMappingURL=nodes-repository.js.map

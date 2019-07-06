@@ -11,10 +11,14 @@ const webhook_handler_1 = require("./services/webhook-handler");
 const users_repository_1 = require("./user/users-repository");
 const nodes_repository_1 = require("./nodesTree/nodes-repository");
 const orders_repository_1 = require("./orders/orders-repository");
+const deliveries_repository_1 = require("./orders/deliveries-repository");
+const payments_repository_1 = require("./orders/payments-repository");
 const app = express_1.default();
-exports.users = new users_repository_1.UsersMemoryRepository();
-exports.nodes = new nodes_repository_1.NodesMemoryRepository();
-exports.orders = new orders_repository_1.OrdersMemoryRepository();
+exports.deliveries = new deliveries_repository_1.FileDeliveriesRepository();
+exports.payments = new payments_repository_1.FilePaymentsRepository();
+exports.users = new users_repository_1.MemoryUsersRepository();
+exports.nodes = new nodes_repository_1.MemoryNodesRepository();
+exports.orders = new orders_repository_1.MemoryOrdersRepository();
 app.use(body_parser_1.urlencoded({
     extended: true
 }));
