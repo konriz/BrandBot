@@ -23,9 +23,6 @@ class AbstractNode {
     get name() {
         return this._name;
     }
-    getName() {
-        return this.name;
-    }
     get buttonText() {
         return this._buttonText;
     }
@@ -62,11 +59,11 @@ class AbstractNode {
         }
         return children;
     }
-    setUser(user) {
-        this._user = user;
-    }
-    getUser() {
+    get user() {
         return this._user;
+    }
+    set user(user) {
+        this._user = user;
     }
     getQuickReplies() {
         let quickReplies = [];

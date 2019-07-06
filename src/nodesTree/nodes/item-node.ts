@@ -1,4 +1,4 @@
-import { AbstractNode } from "./abstract-node";
+import { AbstractNode, BotNode } from "./abstract-node";
 import { MessageBuilder } from "../../services/message-builder";
 import { Item } from "../../item/item";
 import { SendNode } from "./order-nodes";
@@ -10,7 +10,7 @@ export class ItemNode extends AbstractNode {
     private _price: string;
     private _item: Item;
 
-    constructor(data: any, parent?: AbstractNode)
+    constructor(data: any, parent?: BotNode)
     {
         super(data, parent);
         this.type = "Item";

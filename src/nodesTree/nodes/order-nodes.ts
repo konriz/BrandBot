@@ -88,8 +88,8 @@ class ConfirmNode extends OrderNode {
         return this._itemNode;
     }
 
-    setUser(user: User) {
-        super.setUser(user);
+    set user(user: User) {
+        super.user = user;
         this._order.user = user;
         this.message = this._order.getMessage();
 

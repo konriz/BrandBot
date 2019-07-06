@@ -12,8 +12,8 @@ export class ResponseBuilder {
 
     getResponse(name: string) {
       let responseNode: BotNode = nodes.getNode(name);
-      responseNode.setUser(this._user);
-      this._user.lastSeenNodeName = responseNode.getName();
+      responseNode.user = this._user;
+      this._user.lastSeenNodeName = responseNode.name;
       this._user.lastSeen = new Date();
       users.updateUser(this._user);
         return {

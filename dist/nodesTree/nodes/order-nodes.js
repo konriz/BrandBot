@@ -77,8 +77,8 @@ class ConfirmNode extends OrderNode {
     get itemNode() {
         return this._itemNode;
     }
-    setUser(user) {
-        super.setUser(user);
+    set user(user) {
+        super.user = user;
         this._order.user = user;
         this.message = this._order.getMessage();
         console.log(`Order node DEBUG: ${JSON.stringify(this._order)}`);

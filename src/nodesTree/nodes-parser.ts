@@ -1,6 +1,6 @@
 import data from "./nodes.json";
 import { NodesFactory } from "./node-factory";
-import { BotNode, AbstractNode } from "./nodes/abstract-node";
+import { BotNode } from "./nodes/abstract-node";
 
 export interface NodesParser {
     getNodes(): Map<string, BotNode>;
@@ -32,9 +32,9 @@ export class NodesTreeParser implements NodesParser{
         )
     }
 
-    private createNode(nodeData: any, parent?: AbstractNode): BotNode {
+    private createNode(nodeData: any, parent?: BotNode): BotNode {
 
-        let node: AbstractNode;
+        let node: BotNode;
         if(parent) {
             console.log(`Node '${node.name}' - setting parent '${parent.name}'.`);
             node = NodesFactory.createNode(nodeData, parent);

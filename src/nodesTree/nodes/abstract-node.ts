@@ -6,24 +6,25 @@ import { NodesFactory } from "../node-factory";
 import { User } from "../../user/user";
 
 export interface BotNode {
+    name: string;
+    user: User;
+    type: string;
+    buttonText: string;
     getMap(): Map<string, BotNode>;
     getView(): any;
     getQuickReplies(): QuickReply[];
-    setUser(user: User): void;
-    getUser(): User;
-    getName(): string;
 }
 
 export abstract class AbstractNode implements BotNode {
     private _name: string;
     private _buttonText: string;
     private _message: string;
-    private _parent: AbstractNode;
-    private _children: AbstractNode[];
+    private _parent: BotNode;
+    private _children: BotNode[];
     private _type: string;
     private _user: User;
 
-    constructor(data: any, parent?: AbstractNode){
+    constructor(data: any, parent?: BotNode){
         this._name = data["name"];
         this._buttonText = data["buttonText"];
         this._message = data["message"];
@@ -33,10 +34,6 @@ export abstract class AbstractNode implements BotNode {
 
     get name(): string {
         return this._name;
-    }
-
-    getName(): string {
-        return this.name;
     }
 
     get buttonText(): string {
@@ -51,19 +48,19 @@ export abstract class AbstractNode implements BotNode {
         this._message = message;
     }
 
-    get parent(): AbstractNode {
+    get parent(): BotNode {
         return this._parent;
     }
 
-    set parent(parent: AbstractNode) {
+    set parent(parent: BotNode) {
         this._parent = parent;
     }
 
-    get children(): AbstractNode[] {
+    get children(): BotNode[] {
         return this._children;
     }
 
-    set children(children: AbstractNode[]) {
+    set children(children: BotNode[]) {
         this._children = children;
     }
 
@@ -75,8 +72,8 @@ export abstract class AbstractNode implements BotNode {
         return this._type;
     }
 
-    private getChildren(nodeData: any): AbstractNode[] {
-        let children: AbstractNode[] = [];
+    private getChildren(nodeData: any): BotNode[] {
+        let children: BotNode[] = [];
         if(nodeData["children"]) {
             nodeData["children"].forEach( (child: any) => {
                 children.push(NodesFactory.createNode(child, this));
@@ -85,13 +82,14 @@ export abstract class AbstractNode implements BotNode {
         return children;
     }
 
-    setUser(user: User) {
+    get user(): User {
+        return this._user;
+    }
+
+    set user(user: User) {
         this._user = user;
     }
 
-    getUser(): User {
-        return this._user;
-    }
 
     getQuickReplies() {
 

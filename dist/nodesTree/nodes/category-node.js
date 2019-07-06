@@ -6,10 +6,10 @@ class LinkNode extends abstract_node_1.AbstractNode {
     constructor(data, parent) {
         super(data, parent);
         this.type = "Link";
-        this.url = data["url"];
+        this._url = data["url"];
     }
     getView() {
-        return message_builder_1.MessageBuilder.getItemReplyMessage(this.message, this.getQuickReplies(), this.url);
+        return message_builder_1.MessageBuilder.getItemReplyMessage(this.message, this.getQuickReplies(), this._url);
     }
 }
 exports.LinkNode = LinkNode;

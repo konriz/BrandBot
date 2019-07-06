@@ -1,13 +1,13 @@
-import { AbstractNode } from "./nodes/abstract-node";
+import { BotNode } from "./nodes/abstract-node";
 import { SimpleNode } from "./nodes/simple-node";
 import { ItemNode } from "./nodes/item-node";
 import { LinkNode } from "./nodes/category-node";
 
 export class NodesFactory {
 
-    public static createNode(nodeData: any, parent?: AbstractNode): AbstractNode {
+    public static createNode(nodeData: any, parent?: BotNode): BotNode {
 
-        let node: AbstractNode;
+        let node: BotNode;
 
         if(nodeData["url"] && nodeData["price"]){
             node = new ItemNode(nodeData, parent);
