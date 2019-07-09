@@ -6,11 +6,11 @@ class ResponseBuilder {
         this._user = user;
     }
     getResponse(name) {
-        let responseNode = app_1.nodes.getNode(name);
+        let responseNode = app_1.nodesRepository.findNode(name);
         responseNode.user = this._user;
         this._user.lastSeenNodeName = responseNode.name;
         this._user.lastSeen = new Date();
-        app_1.users.updateUser(this._user);
+        app_1.usersRepository.updateUser(this._user);
         return {
             recipient: {
                 id: this._user.psid

@@ -10,7 +10,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const payment_1 = require("./payment");
 const res = __importStar(require("../resources/payments.json"));
 class FilePaymentsRepository {
-    getPayments() {
+    get payments() {
         let payments = [];
         let options = res.payment;
         for (let option in options) {

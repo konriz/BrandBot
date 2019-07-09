@@ -51,7 +51,7 @@ class WebhookHandler {
                 }
                 // Get the sender PSID
                 let senderPsid = webhookEvent.sender.id;
-                if (!(app_1.users.isUser(senderPsid))) {
+                if (!(app_1.usersRepository.isUser(senderPsid))) {
                     let user = new user_1.User(senderPsid);
                     graph_api_1.GraphAPI.getUserProfile(senderPsid)
                         .then(userProfile => {
@@ -61,7 +61,7 @@ class WebhookHandler {
                         console.log(`Profile is unavailable: ${error}`);
                     })
                         .finally(() => {
-                        app_1.users.addUser(user);
+                        app_1.usersRepository.addUser(user);
                         console.log(`New Profile PSID: ${senderPsid}`);
                         let receiveMessage = new receive_1.Receive(webhookEvent);
                         return receiveMessage.handleMessage();

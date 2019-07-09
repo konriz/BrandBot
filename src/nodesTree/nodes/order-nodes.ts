@@ -6,8 +6,8 @@ import { images } from "../../resources/images";
 import { Payment } from "../../orders/payment";
 import { User } from "../../user/user";
 import { QuickReply } from "../quick-reply";
-import { deliveries } from "../../app";
-import { payments } from "../../app";
+import { deliveriesRepository } from "../../app";
+import { paymentsRepository } from "../../app";
 import { Delivery } from "../../orders/delivery";
 
 
@@ -35,7 +35,7 @@ export class SendNode extends OrderNode {
         this.type = res.nodes.send.prefix;
 
         this.children = [];
-        deliveries.getDeliveries().forEach( (delivery) => {
+        deliveriesRepository.deliveries.forEach( (delivery) => {
             this.children.push(new PayNode(this, parent, delivery));
         } );
     }
@@ -53,7 +53,7 @@ class PayNode extends OrderNode {
         this.type = res.nodes.pay.prefix;
 
         this.children = [];
-        payments.getPayments().forEach( (payment) => {
+        paymentsRepository.payments.forEach( (payment) => {
             this.children.push(new ConfirmNode(this, itemNode, delivery, payment));
         } );
     }

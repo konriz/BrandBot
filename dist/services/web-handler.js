@@ -35,7 +35,7 @@ class WebHandler {
     }
     ;
     static getNodes(req, res) {
-        let nodesList = app_1.nodes.getAll();
+        let nodesList = app_1.nodesRepository.nodes;
         if (nodesList.length > 0) {
             res.render("nodes/nodes", { nodes: nodesList });
         }
@@ -45,7 +45,7 @@ class WebHandler {
     }
     ;
     static getUsers(req, res) {
-        let usersList = app_1.users.getAllUsers();
+        let usersList = app_1.usersRepository.users;
         if (usersList.length > 0) {
             res.render("users/users", { users: usersList });
         }
@@ -55,7 +55,7 @@ class WebHandler {
     }
     ;
     static getOrders(req, res) {
-        let ordersList = app_1.orders.getAllOrders();
+        let ordersList = app_1.ordersRepository.orders;
         if (ordersList.length > 0) {
             res.render("orders/orders", { orders: ordersList });
         }

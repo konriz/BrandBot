@@ -7,10 +7,10 @@ class MemoryNodesRepository {
         let nodesParser = new nodes_parser_1.NodesTreeParser();
         this._nodesTable = new nodes_table_1.NodesTable(nodesParser);
     }
-    getNode(name) {
+    findNode(name) {
         return this._nodesTable.getNode(name);
     }
-    getAll() {
+    get nodes() {
         let nodes = [];
         this._nodesTable.getAll().forEach(node => nodes.push(node));
         return nodes;

@@ -2,12 +2,12 @@ import { Delivery } from "./delivery";
 import * as res from "../resources/deliveries.json"
 
 export interface DeliveriesRepository {
-    getDeliveries(): Delivery[];
+    deliveries: Delivery[];
 }
 
 export class FileDeliveriesRepository implements DeliveriesRepository{
 
-    getDeliveries(): Delivery[] {
+    get deliveries(): Delivery[] {
         let deliveries: Delivery[] = [];
         let options: any = res.delivery;
         for(let option in options) {

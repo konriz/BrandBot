@@ -18,7 +18,16 @@ class AbstractNode {
         this._buttonText = data["buttonText"];
         this._message = data["message"];
         this._parent = parent;
-        this._children = this.getChildren(data);
+        this._children = this.populateChildren(data);
+    }
+    populateChildren(nodeData) {
+        let children = [];
+        if (nodeData["children"]) {
+            nodeData["children"].forEach((child) => {
+                children.push(node_factory_1.NodesFactory.createNode(child, this));
+            });
+        }
+        return children;
     }
     get name() {
         return this._name;
@@ -49,15 +58,6 @@ class AbstractNode {
     }
     get type() {
         return this._type;
-    }
-    getChildren(nodeData) {
-        let children = [];
-        if (nodeData["children"]) {
-            nodeData["children"].forEach((child) => {
-                children.push(node_factory_1.NodesFactory.createNode(child, this));
-            });
-        }
-        return children;
     }
     get user() {
         return this._user;

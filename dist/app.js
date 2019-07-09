@@ -14,11 +14,11 @@ const orders_repository_1 = require("./orders/orders-repository");
 const deliveries_repository_1 = require("./orders/deliveries-repository");
 const payments_repository_1 = require("./orders/payments-repository");
 const app = express_1.default();
-exports.deliveries = new deliveries_repository_1.FileDeliveriesRepository();
-exports.payments = new payments_repository_1.FilePaymentsRepository();
-exports.users = new users_repository_1.MemoryUsersRepository();
-exports.nodes = new nodes_repository_1.MemoryNodesRepository();
-exports.orders = new orders_repository_1.MemoryOrdersRepository();
+exports.deliveriesRepository = new deliveries_repository_1.FileDeliveriesRepository();
+exports.paymentsRepository = new payments_repository_1.FilePaymentsRepository();
+exports.usersRepository = new users_repository_1.MemoryUsersRepository();
+exports.nodesRepository = new nodes_repository_1.MemoryNodesRepository();
+exports.ordersRepository = new orders_repository_1.MemoryOrdersRepository();
 app.use(body_parser_1.urlencoded({
     extended: true
 }));

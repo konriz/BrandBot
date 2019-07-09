@@ -4,7 +4,7 @@ const response_builder_1 = require("./response-builder");
 const app_1 = require("../app");
 class EventHandler {
     constructor(event) {
-        this._user = app_1.users.getUser(event.sender.id);
+        this._user = app_1.usersRepository.findUser(event.sender.id);
         this._event = event;
         this._responseBuilder = new response_builder_1.ResponseBuilder(this._user);
     }

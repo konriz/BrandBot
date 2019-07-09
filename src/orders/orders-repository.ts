@@ -1,8 +1,8 @@
 import { Order } from "./order";
 
 export interface OrdersRepository {
-    getOrder(oid: string): Order;
-    getAllOrders(): Order[];
+    findOrder(oid: string): Order;
+    orders: Order[];
     addOrder(order: Order): string;
     updateOrder(order: Order): string;
 }
@@ -15,11 +15,11 @@ export class MemoryOrdersRepository implements OrdersRepository {
         this._orders = new Map();
     }
  
-    getOrder(oid: string): Order {
+    findOrder(oid: string): Order {
         return this._orders.get(oid);
     }
 
-    getAllOrders(): Order[] {
+    get orders(): Order[] {
         let orders: Order[] = [];
         this._orders.forEach((order) => orders.push(order));
         return orders;

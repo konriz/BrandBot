@@ -1,9 +1,9 @@
 import { User } from "./user";
 
 export interface UsersRepository {
-    getUser(psid: string): User;
+    findUser(psid: string): User;
     isUser(psid: string): boolean;
-    getAllUsers(): User[];
+    users: User[];
     addUser(user: User): string;
     updateUser(user: User): string;
 }
@@ -21,16 +21,16 @@ export class MemoryUsersRepository implements UsersRepository {
         this._users.set(user.psid, user);
     }
 
-    getUser(psid: string): User {
+    findUser(psid: string): User {
         return this._users.get(psid);
     }
 
     isUser(psid: string): boolean {
-        let user = this.getUser(psid);
+        let user = this.findUser(psid);
         return user ? true : false;
     }
 
-    getAllUsers(): User[] {
+    get users(): User[] {
         let users: User[] = [];
         this._users.forEach((user) => users.push(user));
         return users;

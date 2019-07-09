@@ -64,7 +64,7 @@ class OrderImpl {
         // FIXME this is VERY BAD - side effects.
         // adding order should be moved elsewhere
         // no repository in DTO!
-        app_1.orders.addOrder(this);
+        app_1.ordersRepository.addOrder(this);
         console.log(`Order ${this._oid} confirmed`);
     }
 }

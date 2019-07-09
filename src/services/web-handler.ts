@@ -1,7 +1,7 @@
 import { config } from "./config";
 import { Profile } from "./profile";
 import express = require("express");
-import { users, nodes, orders } from "../app";
+import { usersRepository, nodesRepository, ordersRepository } from "../app";
 
 export class WebHandler {
 
@@ -40,7 +40,7 @@ export class WebHandler {
     
 
   static getNodes(req: express.Request, res: express.Response) {
-    let nodesList = nodes.getAll();
+    let nodesList = nodesRepository.nodes;
     if(nodesList.length > 0){
       res.render("nodes/nodes", {nodes: nodesList})
     } else {
@@ -49,7 +49,7 @@ export class WebHandler {
   };
 
   static getUsers(req: express.Request, res: express.Response) {
-    let usersList = users.getAllUsers();
+    let usersList = usersRepository.users;
     if(usersList.length > 0){
       res.render("users/users", {users: usersList});
     } else {
@@ -58,7 +58,7 @@ export class WebHandler {
   };
 
   static getOrders(req: express.Request, res: express.Response) {
-    let ordersList = orders.getAllOrders();
+    let ordersList = ordersRepository.orders;
     if(ordersList.length > 0){
       res.render("orders/orders", {orders: ordersList});
     } else {

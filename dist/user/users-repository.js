@@ -9,14 +9,14 @@ class MemoryUsersRepository {
         user.lastName = "User";
         this._users.set(user.psid, user);
     }
-    getUser(psid) {
+    findUser(psid) {
         return this._users.get(psid);
     }
     isUser(psid) {
-        let user = this.getUser(psid);
+        let user = this.findUser(psid);
         return user ? true : false;
     }
-    getAllUsers() {
+    get users() {
         let users = [];
         this._users.forEach((user) => users.push(user));
         return users;

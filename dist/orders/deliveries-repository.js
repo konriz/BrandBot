@@ -10,7 +10,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const delivery_1 = require("./delivery");
 const res = __importStar(require("../resources/deliveries.json"));
 class FileDeliveriesRepository {
-    getDeliveries() {
+    get deliveries() {
         let deliveries = [];
         let options = res.delivery;
         for (let option in options) {

@@ -3,13 +3,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const nodes_json_1 = __importDefault(require("./nodes.json"));
+const nodes_json_1 = __importDefault(require("../resources/nodes.json"));
 const node_factory_1 = require("./node-factory");
 class NodesTreeParser {
-    getNodes() {
-        if (!this.nodes)
+    get nodes() {
+        if (!this._nodes)
             this.populateNodes();
-        return this.nodes;
+        return this._nodes;
     }
     populateNodes() {
         let tree = [];
@@ -18,9 +18,9 @@ class NodesTreeParser {
             tree.push(node);
             console.log(`Root node '${nodeData["name"]}' created.`);
         });
-        this.nodes = new Map();
+        this._nodes = new Map();
         tree.forEach((node) => node.getMap().forEach((value, key) => {
-            this.nodes.set(key, value);
+            this._nodes.set(key, value);
         }));
     }
     createNode(nodeData, parent) {

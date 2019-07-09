@@ -4,10 +4,10 @@ class MemoryOrdersRepository {
     constructor() {
         this._orders = new Map();
     }
-    getOrder(oid) {
+    findOrder(oid) {
         return this._orders.get(oid);
     }
-    getAllOrders() {
+    get orders() {
         let orders = [];
         this._orders.forEach((order) => orders.push(order));
         return orders;

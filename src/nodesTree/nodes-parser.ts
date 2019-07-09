@@ -1,33 +1,32 @@
-import data from "./nodes.json";
+import data from "../resources/nodes.json";
 import { NodesFactory } from "./node-factory";
 import { BotNode } from "./nodes/abstract-node";
 
 export interface NodesParser {
-    getNodes(): Map<string, BotNode>;
+    nodes: Map<string, BotNode>;
 }
 
 export class NodesTreeParser implements NodesParser{
 
-    private nodes: Map<string,  BotNode>;
+    private _nodes: Map<string,  BotNode>;
 
-    getNodes() : Map<string, BotNode> {
-        if(!this.nodes) this.populateNodes();
-        return this.nodes;
+    get nodes() : Map<string, BotNode> {
+        if(!this._nodes) this.populateNodes();
+        return this._nodes;
     }
 
     private populateNodes() {
         let tree: BotNode[] = [];
-
         data["nodes"].forEach( nodeData => {
             let node = this.createNode(nodeData);
             tree.push(node);
             console.log(`Root node '${nodeData["name"]}' created.`)
         })
             
-        this.nodes = new Map();
+        this._nodes = new Map();
         tree.forEach( (node) => 
             node.getMap().forEach( (value, key) => {
-                this.nodes.set(key, value);
+                this._nodes.set(key, value);
             })
         )
     }

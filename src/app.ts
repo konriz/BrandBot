@@ -11,11 +11,11 @@ import { DeliveriesRepository, FileDeliveriesRepository } from "./orders/deliver
 import { PaymentsRepository, FilePaymentsRepository } from "./orders/payments-repository";
 
 const app = express();
-export var deliveries: DeliveriesRepository = new FileDeliveriesRepository();
-export var payments: PaymentsRepository = new FilePaymentsRepository();
-export var users: UsersRepository = new MemoryUsersRepository();
-export var nodes: NodesRepository = new MemoryNodesRepository();
-export var orders: OrdersRepository = new MemoryOrdersRepository();
+export var deliveriesRepository: DeliveriesRepository = new FileDeliveriesRepository();
+export var paymentsRepository: PaymentsRepository = new FilePaymentsRepository();
+export var usersRepository: UsersRepository = new MemoryUsersRepository();
+export var nodesRepository: NodesRepository = new MemoryNodesRepository();
+export var ordersRepository: OrdersRepository = new MemoryOrdersRepository();
 
 app.use(
     urlencoded({

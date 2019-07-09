@@ -2,11 +2,11 @@ import { Payment } from "./payment";
 import * as res from "../resources/payments.json";
 
 export interface PaymentsRepository {
-    getPayments(): Payment[];
+    payments: Payment[];
 }
 
 export class FilePaymentsRepository implements PaymentsRepository {
-    getPayments(): Payment[] {
+    get payments(): Payment[] {
         let payments: Payment[] = [];
         let options: any = res.payment;
         for(let option in options) {

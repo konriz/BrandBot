@@ -3,8 +3,8 @@ import { NodesTable } from "./nodes-table";
 import { BotNode } from "./nodes/abstract-node";
 
 export interface NodesRepository {
-    getNode(name: string): BotNode;
-    getAll(): BotNode[];
+    findNode(name: string): BotNode;
+    nodes: BotNode[];
 }
 
 export class MemoryNodesRepository implements NodesRepository {
@@ -16,11 +16,11 @@ export class MemoryNodesRepository implements NodesRepository {
         this._nodesTable = new NodesTable(nodesParser);
     }
 
-    getNode(name: string): BotNode {
+    findNode(name: string): BotNode {
         return this._nodesTable.getNode(name);
     }
 
-    getAll(): BotNode[] {
+    get nodes(): BotNode[] {
         let nodes: BotNode[] = [];
         this._nodesTable.getAll().forEach(node => nodes.push(node));
         return nodes;

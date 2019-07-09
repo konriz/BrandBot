@@ -1,4 +1,4 @@
-import { nodes, users } from "../app";
+import { nodesRepository, usersRepository } from "../app";
 import { User } from "../user/user";
 import { BotNode } from "../nodesTree/nodes/abstract-node";
 
@@ -11,11 +11,11 @@ export class ResponseBuilder {
     }
 
     getResponse(name: string) {
-      let responseNode: BotNode = nodes.getNode(name);
+      let responseNode: BotNode = nodesRepository.findNode(name);
       responseNode.user = this._user;
       this._user.lastSeenNodeName = responseNode.name;
       this._user.lastSeen = new Date();
-      users.updateUser(this._user);
+      usersRepository.updateUser(this._user);
         return {
             recipient: {
               id: this._user.psid

@@ -2,7 +2,7 @@ import { User } from "../user/user";
 import { Item } from "../item/item";
 import { Delivery } from "./delivery";
 import { Payment } from "./payment";
-import { orders } from "../app";
+import { ordersRepository } from "../app";
 
 export interface Order {
     oid: string;
@@ -101,7 +101,7 @@ export class OrderImpl implements Order {
         // FIXME this is VERY BAD - side effects.
         // adding order should be moved elsewhere
         // no repository in DTO!
-        orders.addOrder(this);
+        ordersRepository.addOrder(this);
         console.log(`Order ${this._oid} confirmed`);
     }
 }

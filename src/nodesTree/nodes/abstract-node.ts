@@ -29,7 +29,17 @@ export abstract class AbstractNode implements BotNode {
         this._buttonText = data["buttonText"];
         this._message = data["message"];
         this._parent = parent;
-        this._children = this.getChildren(data);
+        this._children = this.populateChildren(data);
+    }
+
+    private populateChildren(nodeData: any): BotNode[] {
+        let children: BotNode[] = [];
+        if(nodeData["children"]) {
+            nodeData["children"].forEach( (child: any) => {
+                children.push(NodesFactory.createNode(child, this));
+            });
+        }
+        return children;
     }
 
     get name(): string {
@@ -70,16 +80,6 @@ export abstract class AbstractNode implements BotNode {
 
     get type(): string {
         return this._type;
-    }
-
-    private getChildren(nodeData: any): BotNode[] {
-        let children: BotNode[] = [];
-        if(nodeData["children"]) {
-            nodeData["children"].forEach( (child: any) => {
-                children.push(NodesFactory.createNode(child, this));
-            });
-        }
-        return children;
     }
 
     get user(): User {

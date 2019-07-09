@@ -34,7 +34,7 @@ class SendNode extends OrderNode {
         this.parent = parent;
         this.type = res.nodes.send.prefix;
         this.children = [];
-        app_1.deliveries.getDeliveries().forEach((delivery) => {
+        app_1.deliveriesRepository.deliveries.forEach((delivery) => {
             this.children.push(new PayNode(this, parent, delivery));
         });
     }
@@ -50,7 +50,7 @@ class PayNode extends OrderNode {
         this.parent = parent;
         this.type = res.nodes.pay.prefix;
         this.children = [];
-        app_2.payments.getPayments().forEach((payment) => {
+        app_2.paymentsRepository.payments.forEach((payment) => {
             this.children.push(new ConfirmNode(this, itemNode, delivery, payment));
         });
     }

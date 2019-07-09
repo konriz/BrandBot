@@ -1,6 +1,6 @@
 import express = require("express");
 import { config } from "./config";
-import { users } from "../app";
+import { usersRepository } from "../app";
 import { User } from "../user/user";
 import { GraphAPI } from "./graph-api";
 import { Receive } from "./receive";
@@ -58,7 +58,7 @@ export class WebhookHandler {
             // Get the sender PSID
             let senderPsid = webhookEvent.sender.id;
       
-            if (!(users.isUser(senderPsid))) {
+            if (!(usersRepository.isUser(senderPsid))) {
               let user = new User(senderPsid);
       
               GraphAPI.getUserProfile(senderPsid)
@@ -68,7 +68,7 @@ export class WebhookHandler {
                 .catch(error => {console.log(`Profile is unavailable: ${error}`);
                 })
                 .finally(() => {
-                  users.addUser(user);
+                  usersRepository.addUser(user);
                   console.log(`New Profile PSID: ${senderPsid}`);
                   let receiveMessage = new Receive(webhookEvent);
                   return receiveMessage.handleMessage();

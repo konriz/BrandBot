@@ -7,12 +7,8 @@ export class NodesTable {
     nodes: Map<string, BotNode>;
 
     constructor(parser: NodesParser) {
-        this.nodes = parser.getNodes();
+        this.nodes = parser.nodes;
         this.nodes.set(DefinedNodes.ERROR.name, DefinedNodes.ERROR)
-    }
-
-    getView(name: string) {
-        return this.getNode(name).getView();
     }
 
     getNode(name: string) {
@@ -21,7 +17,7 @@ export class NodesTable {
             console.log(`Node named : '${name}' found`);
         } else {
             console.log(`Node named : '${name}' not found`);
-            node = this.getError();
+            node = this.getErrorNode();
         }
         return node;
     }
@@ -30,7 +26,7 @@ export class NodesTable {
         return this.nodes;
     }
 
-    private getError(): BotNode {
+    private getErrorNode(): BotNode {
         return this.getNode("ERROR");
     }
 
